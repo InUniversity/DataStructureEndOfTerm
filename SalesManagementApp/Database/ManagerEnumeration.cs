@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace SalesManagementApp.Database
 {
-    internal class ManagerData
+    public enum ManagerEnumeration
     {
+
+        // tạo một cái list gồm cách quản lí (có thể thêm quản lí mới hoặc số quản lí)
     }
 }
