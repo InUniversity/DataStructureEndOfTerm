@@ -39,12 +39,6 @@ namespace SalesManagementApp.DataStructure
             throw new NotImplementedException();
         }
 
-        // lạ
-        public override void Sorted(Func<Product, Product, int> lambda)
-        {
-            throw new NotImplementedException();
-        }
-
         public override int SearchItem(Product item)
         {
             throw new NotImplementedException();
