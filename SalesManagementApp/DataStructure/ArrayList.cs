@@ -39,6 +39,19 @@ namespace SalesManagementApp.DataStructure
             return this.iSize >= iCapacity;
         }
 
+        // Truyền vào một biểu thức lambda để so sánh 2 phần tử trong mảng
+        public void Sorted(Func<T, T, int> compare)
+        {
+            for (int i = 0; i < this.iSize - 1; i++)
+                for (int j = i + 1; j < this.iSize; j++)
+                    if (compare(list_[j], list_[i]) > 0)
+                    {
+                        T temp = list_[j];
+                        list_[j] = list_[i];
+                        list_[i] = temp;
+                    }
+        }
+
         public abstract T Get(int index);
 
         public abstract void AddLast(T item);
@@ -50,9 +63,6 @@ namespace SalesManagementApp.DataStructure
         public abstract void RemoveItem(int index);
 
         public abstract void Print();
-
-        // Truyền vào một biểu thức lambda để so sánh 2 phần tử trong mảng
-        public abstract void Sorted(Func<T, T, int> lambda);
 
         public abstract int SearchItem(T item);
     }
