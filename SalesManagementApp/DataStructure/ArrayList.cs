@@ -41,7 +41,7 @@ namespace SalesManagementApp.DataStructure
                         list_[i] = temp;
                     }
         }
-
+        
         public bool IsEmpty()
         {
             return this.iSize == 0;
