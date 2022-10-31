@@ -10,8 +10,7 @@ namespace SalesManagementApp.DataStructure
     public class ManagerList : ArrayList<Manager>
     {
 
-        public ManagerList() : base(){ }
-        public ManagerList(int count) : base(count){}
+        public ManagerList(int iCapacity) : base(iCapacity) {}
 
         ~ManagerList() { }
 
@@ -30,19 +29,12 @@ namespace SalesManagementApp.DataStructure
         {
            if(base.iSize >= iCapacity) return;
             base.list_[base.iSize++] = item;
-
         }
 
         public override void AddRange(ArrayList<Manager> sourceList)
         {
-            for(int i = 0; i<sourceList.Size; i++)
-            {
-                if (base.iSize>= Capacity) return;
-                else
-                {
-                    base.list_[base.iSize++] = sourceList.Get(i);
-                }
-            }
+            for(int i = 0; i < sourceList.Size; i++)
+                AddLast(sourceList.Get(i));
         }
 
         public override Manager Get(int index)
@@ -70,10 +62,8 @@ namespace SalesManagementApp.DataStructure
         public override int SearchItem(Manager item)
         {
             for(int i = 0; i< base.iSize; i++)
-            {
-                if (base.list_[i] == item)
+                if (item.IsEqual(base.list_[i]))
                     return i;
-            }
             return -1;
         }
     }
