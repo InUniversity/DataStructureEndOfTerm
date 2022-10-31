@@ -6,7 +6,7 @@ namespace SalesManagementApp
     {
         static void Main(string[] args)
         {
-            // 0. SignUpActivity - 1. SignInActivity - 2. MainAcitivty
+            // -1. exit application - 0. SignUpActivity - 1. SignInActivity - 2. MainAcitivty
             try
             {
                 int activityOrder;
