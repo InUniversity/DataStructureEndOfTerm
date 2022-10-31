@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SalesManagementApp.DataStructure;
+using SalesManagementApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +11,8 @@ namespace SalesManagementApp.Database
     public enum ManagerEnumeration
     {
 
+        
+       
         // tạo một cái list gồm cách quản lí (có thể thêm quản lí mới hoặc số quản lí)
     }
 }
