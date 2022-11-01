@@ -8,5 +8,6 @@ namespace SalesManagementApp.DataStructure
 {
     internal class HashTable
     {
+
     }
 }
