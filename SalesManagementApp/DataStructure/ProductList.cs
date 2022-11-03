@@ -11,6 +11,7 @@ namespace SalesManagementApp.DataStructure
 
         }
 
+        // methods
         public override void AddItem(int index, Product item)
         {
             if (base.iSize >= iCapacity) return;
@@ -41,7 +42,8 @@ namespace SalesManagementApp.DataStructure
 
         public override Product Get(int index)
         {
-            return base.list_[index];
+            if (!IsValidIndex(index)) return null;
+            else return base.list_[index];
         }
 
         public override void Print()
@@ -61,7 +63,15 @@ namespace SalesManagementApp.DataStructure
             base.iSize--;
         }
 
-        public override int SearchItem(Product item)
+        public override Product SearchItem(Product item)
+        {
+            for (int i = 0; i < base.iSize; i++)
+                if (item.IsEqual(base.list_[i]))
+                    return base.list_[i];
+            return null;
+        }
+
+        public override int IndexOf(Product item)
         {
             for (int i = 0; i < base.iSize; i++)
                 if (item.IsEqual(base.list_[i]))

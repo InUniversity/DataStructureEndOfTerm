@@ -14,6 +14,7 @@ namespace SalesManagementApp.DataStructure
 
         ~ManagerList() { }
 
+        // methods
         public override void AddItem(int index, Manager item)
         {
             if (base.iSize >= iCapacity) return;
@@ -27,7 +28,7 @@ namespace SalesManagementApp.DataStructure
 
         public override void AddLast(Manager item)
         {
-           if(base.iSize >= iCapacity) return;
+            if (base.iSize >= iCapacity) return;
             base.list_[base.iSize++] = item;
         }
 
@@ -39,7 +40,8 @@ namespace SalesManagementApp.DataStructure
 
         public override Manager Get(int index)
         {
-            return base.list_[index];
+            if (!IsValidIndex(index)) return null;
+            else return base.list_[index];
         }
 
         public override void Print()
@@ -59,9 +61,17 @@ namespace SalesManagementApp.DataStructure
             base.iSize--;
         }
 
-        public override int SearchItem(Manager item)
+        public override Manager SearchItem(Manager item)
         {
             for(int i = 0; i< base.iSize; i++)
+                if (item.IsEqual(base.list_[i]))
+                    return base.list_[i];
+            return null;
+        }
+
+        public override int IndexOf(Manager item)
+        {
+            for(int i = 0; i < base.iSize; i++)
                 if (item.IsEqual(base.list_[i]))
                     return i;
             return -1;

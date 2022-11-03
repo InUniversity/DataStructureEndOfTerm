@@ -13,9 +13,9 @@ namespace SalesManagementApp.Activities
         {
             /*
              * Cho người dùng lựa chọn:
-             * 1. tìm kiếm sản phẩm theo tên sau đó sắp xếp theo giá
-             * 2. in ra tất cả sản phẩm
-             * 3. loại bỏ các sản phẩm hết hạn
+             * 1.
+             * 2.
+             * 3.
              */
             bool over, pressEnter;
             int choose = 1, key, x = 0, y = 0;
@@ -24,15 +24,14 @@ namespace SalesManagementApp.Activities
                 over = false;
                 Console.Clear();
                 Console.Write("=========================MENU=========================\n");
-                Console.Write("|1. Search product and ascending order of price      |\n");
-                Console.Write("|2. Print the whole product                          |\n");
-                Console.Write("|3. Delete expired products                          |\n");
-                Console.Write("|3. Delete expired products                          |\n");
+                Console.Write("|1. Move to product management                       |\n");
+                Console.Write("|2. Move to customer management                      |\n");
+                Console.Write("|3. Move to employee management                      |\n");
                 Console.Write("|4. Quit app                                         |\n");
                 Console.Write("=========================MENU=========================\n");
-                Console.WriteLine("Choose: ");
-                y = Console.CursorLeft;
-                x = Console.CursorTop;
+                Console.Write("Choose: ");
+                x = Console.CursorLeft;
+                y = Console.CursorTop;
                 do
                 {
                     pressEnter = false;
@@ -41,17 +40,17 @@ namespace SalesManagementApp.Activities
                     key = (int)Console.ReadKey().Key;
                     switch (key)
                     {
-                        case Constant.ARROW_UP:
+                        case Constant.UP_ARROW:
                             choose--;
                             if (choose < 0)
                                 choose = 4;
                             break;
-                        case Constant.ARROW_DOWN:
+                        case Constant.DOWN_ARROW:
                             choose++;
                             if (choose > 4)
                                 choose = 0;
                             break;
-                        case Constant.BTN_ENTER:
+                        case Constant.ENTER_KEY:
                             pressEnter = true;
                             break;
                     }

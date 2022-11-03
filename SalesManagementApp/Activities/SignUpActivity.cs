@@ -10,7 +10,7 @@ namespace SalesManagementApp.Activities
 
         public static int RunActivity()
         {
-            return 0;
+            return 2;
         }
     }
 }
