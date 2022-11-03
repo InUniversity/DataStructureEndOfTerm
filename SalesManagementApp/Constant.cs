@@ -3,11 +3,13 @@ namespace SalesManagementApp
 {
     public static class Constant
     {
-        public const int ARROW_UP = 38;
-        public const int ARROW_DOWN = 40;
-        public const int ARROW_RIGHT = 39;
-        public const int ARROW_LEFT = 37;
-        public const int BTN_ENTER = 13;
+        public const int UP_ARROW = 38;
+        public const int DOWN_ARROW = 40;
+        public const int RIGHT_ARROW = 39;
+        public const int LEFT_ARROW = 37;
+        public const int ENTER_KEY = 13;
+
+
     }
 }
 
