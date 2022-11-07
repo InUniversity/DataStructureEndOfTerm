@@ -15,6 +15,7 @@ namespace SalesManagementApp.Models
         // constructor
         public Person()
         {
+            dBirthday = new Date(-1, -1, -1);
         }
 
         public Person(int iID,string sName, string sSex,
@@ -77,7 +78,10 @@ namespace SalesManagementApp.Models
             sName = Console.ReadLine();
             Console.Write("Sex: ");
             sSex = Console.ReadLine();
+            Console.WriteLine("Enter birthday:");
+            Console.WriteLine("{");
             dBirthday.Input();
+            Console.WriteLine("}");
             Console.Write("Address: ");
             sAddress = Console.ReadLine();
             Console.Write("Phone number: ");
