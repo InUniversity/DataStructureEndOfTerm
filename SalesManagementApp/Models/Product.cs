@@ -56,7 +56,7 @@ namespace SalesManagementApp.Models
             this.iID = iID;
             this.sName = sname;
             this.iNumberOfProduct = iNumberOfProduct;
-
+       
             this.DayStartedUsing.Day = dDayStartedUsing.Day;
             this.DayStartedUsing.Month = dDayStartedUsing.Month;
             this.DayStartedUsing.Year = dDayStartedUsing.Year;
@@ -71,8 +71,7 @@ namespace SalesManagementApp.Models
             if (this.iID == item.ID) return true;
             else return false;
         }
-
-
+        
         public bool CheckProduct(Product a, Date Today)
         {
             if (a.DateExpires > Today)
@@ -93,10 +92,13 @@ namespace SalesManagementApp.Models
             Console.WriteLine("iNumberOfProduct:");
             this.iNumberOfProduct = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("dDayStartedUsing:");
-            this.dDayStartedUsing.Input();
-
+            this.dDayStartedUsing.IDay = Convert.ToInt32(Console.ReadLine());
+            this.dDayStartedUsing.IMonth = Convert.ToInt32(Console.ReadLine());
+            this.dDayStartedUsing.IYear = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("dDateExpires:");
-            this.dDateExpires.Input();
+            this.dDateExpires.IDay = Convert.ToInt32(Console.ReadLine());
+            this.dDateExpires.IMonth = Convert.ToInt32(Console.ReadLine());
+            this.dDateExpires.IYear = Convert.ToInt32(Console.ReadLine());
         }
 
         public void Print()
@@ -113,6 +115,5 @@ namespace SalesManagementApp.Models
             Console.WriteLine(this.DateExpires.Month);
             Console.WriteLine(this.DateExpires.Year);
         }
-
     }
 }

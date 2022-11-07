@@ -71,14 +71,6 @@ namespace SalesManagementApp.DataStructure
             return null;
         }
 
-        public override int IndexOf(Product item)
-        {
-            for (int i = 0; i < base.iSize; i++)
-                if (item.IsEqual(base.list_[i]))
-                    return i;
-            return -1;
-        }
-
         public bool SearchByName(Product name, ref string storage)
         {
             for (int i = 0; i < base.iSize; i++)
@@ -89,6 +81,15 @@ namespace SalesManagementApp.DataStructure
                 }
             return false;
         }
+
+        public override int IndexOf(Product item)
+        {
+            for (int i = 0; i < base.iSize; i++)
+                if (item.IsEqual(base.list_[i]))
+                    return i;
+            return -1;
+        }
+        
         public void SortByNumber(Product number)
         {
             for (int i = 1; i < base.iSize; i++)
@@ -104,6 +105,7 @@ namespace SalesManagementApp.DataStructure
             }
 
         }
+        
         //RemoveProductListExpires
         public void RemoveProduct()
         {

@@ -3,98 +3,69 @@ namespace SalesManagementApp.Models
 {
     public class Manager
     {
-        public Manager Manager1 = new Manager(12,"LeTan");
 
-
-
-
-
-        // fields: (iID: int, sName: string, iNumberOfProduct: int,  dDayStartedUsing: Date, dDateExpires: Date)
+        // fields
         private int iID;
-        private string sname;
-        private int iNumberOfProduct;
-        private Date dDayStartedUsing;
-        private Date dDateExpires;
+        private string sName;
+        private int iSalary;
 
+        // properties
         public int ID
         {
-            get { return iID; }
-            set { iID = value; }
+            get { return this.iID; }
+            set { this.iID = value; }
         }
-        public string Sname
-        {
-            get { return sname; }
-            set { sname = value; }
-        }
-        public int INumberOfProduct
-        {
-            get { return iNumberOfProduct; }
-            set { iNumberOfProduct = value; }
-        }
-        public Date DDayStartedUsing
-        {
-            get { return dDayStartedUsing; }
-            set { dDayStartedUsing = value; }
-        }
-        public Date DDateExpires
-        {
-            get { return dDateExpires; }
-            set { dDateExpires = value; }
-        }
-        public Manager(int iID,string sname, int iNumberOfProduct,Date dDayStartedUsing, Date dDateExpires )
-        {
-            this.iID = iID;
-            this.sname = sname;
-            this.iNumberOfProduct = iNumberOfProduct;
-            this.DDayStartedUsing.IDay = dDayStartedUsing.IDay;
-            this.DDayStartedUsing.IMonth = dDayStartedUsing.IMonth;
-            this.DDayStartedUsing.IYear = dDayStartedUsing.IYear;
 
-            this.dDateExpires.IDay= dDayStartedUsing.IDay;
-            this.dDateExpires.IMonth = dDayStartedUsing.IMonth;
-            this.dDateExpires.IYear = dDayStartedUsing.IYear;
-        }
-        public Manager(int iID, string sname)
+        public string Name
         {
-            this.iID = iID;
-            this.sname = sname;
-            
+            get { return this.sName; }
+            set { this.sName = value; }
         }
-        public Manager(int iID)
-        {
-            this.iID = iID;
 
-        }
-        public void nhap()
+        public int Salary
         {
-            Console.WriteLine("ID:");
-            this.iID = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Name:");
-            this.sname = (Console.ReadLine());
-            Console.WriteLine("iNumberOfProduct:");
-            this.iNumberOfProduct = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("dDayStartedUsing:");
-            this.dDayStartedUsing.IDay = Convert.ToInt32(Console.ReadLine());
-            this.dDayStartedUsing.IMonth = Convert.ToInt32(Console.ReadLine());
-            this.dDayStartedUsing.IYear = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("dDateExpires:");
-            this.dDateExpires.IDay = Convert.ToInt32(Console.ReadLine());
-            this.dDateExpires.IMonth = Convert.ToInt32(Console.ReadLine());
-            this.dDateExpires.IYear = Convert.ToInt32(Console.ReadLine());
+            get { return this.iSalary; }
+            set { this.iSalary = value; }
         }
-        public void xuat()
-        {
-            Console.WriteLine("ID:" + this.iID);
-            Console.WriteLine("Name:" + this.sname);
-            Console.WriteLine("iNumberOfProduct:" + this.iNumberOfProduct);
-            Console.WriteLine("dDayStartedUsing:" + this.dDayStartedUsing.IDay);
-            Console.WriteLine("dDayStartedUsing:" + this.dDayStartedUsing.IMonth);
-            Console.WriteLine("dDayStartedUsing:" + this.dDayStartedUsing.IYear);
 
-            Console.WriteLine("dDateExpires:");
-            Console.WriteLine("dDateExpires:" + this.dDateExpires.IDay);
-            Console.WriteLine("dDateExpires:" + this.dDateExpires.IMonth);
-            Console.WriteLine("dDateExpires:" + this.dDateExpires.IYear);
+        // constructor
+        public Manager()
+        {
+        }
+
+        public Manager(int id, string name, int salary)
+        {
+            this.iID = id;
+            this.sName = name;
+            this.iSalary = salary;
+        }
+
+        // destructor
+        ~Manager() { }
+
+        // methods
+        public bool IsEqual(Manager manager)
+        {
+            if (this.iID == manager.ID) return true;
+            else return false;
+        }
+
+        public void Input()
+        {
+            Console.WriteLine("Insert the manager's information: ");
+            Console.WriteLine("Manager's ID     : "); this.iID = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Manager's Name   : "); this.sName = Console.ReadLine();
+            Console.WriteLine("Manager's Salary : "); this.iSalary = Convert.ToInt32(Console.ReadLine());
+        }
+        public void Print()
+        {
+            Console.WriteLine("----------------------------------------");
+            Console.WriteLine("Manager's Information: ");
+            Console.WriteLine("........................................");
+            Console.WriteLine("Manager's ID     : " + this.iID); 
+            Console.WriteLine("Manager's Name   : " + this.sName); 
+            Console.WriteLine("Manager's Salary : " + this.iSalary);
+            Console.WriteLine("----------------------------------------");
         }
     }
 }

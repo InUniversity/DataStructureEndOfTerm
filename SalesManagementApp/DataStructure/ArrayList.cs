@@ -39,17 +39,28 @@ namespace SalesManagementApp.DataStructure
             return this.iSize >= iCapacity;
         }
 
-        // Truyền vào một biểu thức lambda để so sánh 2 phần tử trong mảng
-        public void Sorted(Func<T, T, int> compare)
+        protected bool IsValidIndex(int index)
         {
-            for (int i = 0; i < this.iSize - 1; i++)
-                for (int j = i + 1; j < this.iSize; j++)
-                    if (compare(list_[j], list_[i]) > 0)
-                    {
-                        T temp = list_[j];
-                        list_[j] = list_[i];
-                        list_[i] = temp;
-                    }
+            return index >= 0 && index < this.iSize;
+        }
+
+        // Truyền vào một biểu thức lambda để so sánh 2 phần tử trong mảng
+        // insertion sort
+        public void Sort(Func<T, T, int> compare)
+        {
+            int i, j;
+            T value;
+            for (i = 1; i < iSize; i++)
+            {
+                value = list_[i];
+                j = i - 1;
+                while (j >= 0 && compare(value, this.list_[j]) > 0)
+                {
+                    list_[j + 1] = list_[j];
+                    j--;
+                }
+                list_[j + 1] = value;
+            }
         }
 
         public abstract T Get(int index);
@@ -64,7 +75,9 @@ namespace SalesManagementApp.DataStructure
 
         public abstract void Print();
 
-        public abstract int SearchItem(T item);
+        public abstract T SearchItem(T item);
+
+        public abstract int IndexOf(T item);
     }
 }
 
