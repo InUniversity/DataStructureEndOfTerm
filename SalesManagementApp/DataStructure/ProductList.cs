@@ -71,6 +71,17 @@ namespace SalesManagementApp.DataStructure
             return null;
         }
 
+        public bool SearchByName(Product name, ref string storage)
+        {
+            for (int i = 0; i < base.iSize; i++)
+                if (string.Compare(name.Name, base.list_[i].Name) == 0)
+                {
+                    storage = base.list_[i].Name;
+                    return true;
+                }
+            return false;
+        }
+
         public override int IndexOf(Product item)
         {
             for (int i = 0; i < base.iSize; i++)
@@ -78,6 +89,59 @@ namespace SalesManagementApp.DataStructure
                     return i;
             return -1;
         }
+        
+        public void SortByNumber(Product number)
+        {
+            for (int i = 1; i < base.iSize; i++)
+            {
+                Product t = list_[i];
+                int j = i - 1;
+                while (j >= 0 && t.NumberOfProduct > list_[j].NumberOfProduct)
+                {
+                    list_[j + 1] = list_[j];
+                    j--;
+                }
+                list_[j + 1] = t;
+            }
+
+        }
+        
+        //RemoveProductListExpires
+        public void RemoveProduct()
+        {
+
+        }
+
+        public void CheckListProduct(Date Today, int index)
+        {
+            Console.WriteLine("Enter Current Date");
+            Today.Input();
+            for (int i = 0; i < base.iSize; i++)
+            {
+                if (list_[i].CheckProduct(list_[i], Today) == true)
+                {
+                    Console.WriteLine("Expiry date is still available");
+                }
+                else
+                {
+
+                    Console.WriteLine("Out Of Date");
+                }
+            }
+        }
+
+        public int TotalGoods()
+        {
+            int sum = 0;
+            for (int i = 0; i < base.iSize; i++)
+            {
+                sum = list_[i].NumberOfProduct;
+            }
+            return sum;
+        }
+
+
+
     }
 }
 

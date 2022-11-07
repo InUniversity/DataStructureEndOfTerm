@@ -46,24 +46,41 @@ namespace SalesManagementApp.Models
             set { dDateExpires = value; }
         }
 
+        public Product()
+        {
+
+        }
+
         public Product(int iID, string sname, int iNumberOfProduct, Date dDayStartedUsing, Date dDateExpires)
         {
             this.iID = iID;
             this.sName = sname;
             this.iNumberOfProduct = iNumberOfProduct;
-            this.DayStartedUsing.IDay = dDayStartedUsing.IDay;
-            this.DayStartedUsing.IMonth = dDayStartedUsing.IMonth;
-            this.DayStartedUsing.IYear = dDayStartedUsing.IYear;
+       
+            this.DayStartedUsing.Day = dDayStartedUsing.Day;
+            this.DayStartedUsing.Month = dDayStartedUsing.Month;
+            this.DayStartedUsing.Year = dDayStartedUsing.Year;
 
-            this.dDateExpires.IDay = dDayStartedUsing.IDay;
-            this.dDateExpires.IMonth = dDayStartedUsing.IMonth;
-            this.dDateExpires.IYear = dDayStartedUsing.IYear;
+            this.dDateExpires.Day = dDayStartedUsing.Day;
+            this.dDateExpires.Month = dDayStartedUsing.Month;
+            this.dDateExpires.Year = dDayStartedUsing.Year;
         }
 
         public bool IsEqual(Product item)
         {
             if (this.iID == item.ID) return true;
             else return false;
+        }
+        
+        public bool CheckProduct(Product a, Date Today)
+        {
+            if (a.DateExpires > Today)
+                return false;
+            else
+            {
+                
+            }
+            return true;
         }
 
         public void Input()
@@ -89,14 +106,14 @@ namespace SalesManagementApp.Models
             Console.WriteLine("ID:" + this.iID);
             Console.WriteLine("Name:" + this.sName);
             Console.WriteLine("iNumberOfProduct:" + this.iNumberOfProduct);
-            Console.WriteLine("dDayStartedUsing:" + this.dDayStartedUsing.IDay);
-            Console.WriteLine("dDayStartedUsing:" + this.dDayStartedUsing.IMonth);
-            Console.WriteLine("dDayStartedUsing:" + this.dDayStartedUsing.IYear);
-
+            Console.WriteLine("dDayStartedUsing:");
+            Console.WriteLine(this.dDayStartedUsing.Day);
+            Console.WriteLine(this.dDayStartedUsing.Month);
+            Console.WriteLine(this.dDayStartedUsing.Year);
             Console.WriteLine("dDateExpires:");
-            Console.WriteLine("dDateExpires:" + this.dDateExpires.IDay);
-            Console.WriteLine("dDateExpires:" + this.dDateExpires.IMonth);
-            Console.WriteLine("dDateExpires:" + this.dDateExpires.IYear);
+            Console.WriteLine(this.DateExpires.Day);
+            Console.WriteLine(this.DateExpires.Month);
+            Console.WriteLine(this.DateExpires.Year);
         }
     }
 }

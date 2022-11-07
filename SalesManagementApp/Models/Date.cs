@@ -36,7 +36,6 @@ namespace SalesManagementApp.Models
         // methods
         public void Input()
         {
-            Console.WriteLine("Enter Date:");
             Console.Write("Day: ");
             iDay = Convert.ToInt32(Console.ReadLine());
             Console.Write("Month: ");
@@ -48,6 +47,78 @@ namespace SalesManagementApp.Models
         public static implicit operator string(Date date)
         {
             return date.iDay + "-" + date.iMonth + "-" + date.iYear;
+        }
+        
+        public static bool operator >(Date a, Date b)
+        {
+            if (a.Year > b.Year)
+                return true;
+            else if(a.Year == b.Year)
+            {
+                if (a.Month > b.Month)
+                    return true;
+                else if(b.Month == a.Month)
+                {
+                    if (a.Day > b.Day)
+                        return true;
+                    else return false;
+                }
+                else return false;
+            }   
+            else return false;
+        }
+        
+        public static bool operator >=(Date a, Date b)
+        {
+            return !(a < b);
+        }
+
+        public static implicit operator string(Date date)
+        {
+            return date.iDay + "-" + date.iMonth + "-" + date.iYear;
+        }
+
+        public static bool operator <(Date a, Date b)
+        {
+            if (a.Year < b.Year)
+                return true;
+            else if (a.Year == b.Year)
+            {
+                if (a.Month < b.Month)
+                    return true;
+                else if (b.Month == a.Month)
+                {
+                    if (a.Day < b.Day)
+                        return true;
+                    else return false;
+                }
+                else return false;
+            }
+            else return false;
+        }
+        
+        public static bool operator <=(Date a, Date b)
+        {
+            return !(a > b);
+        }
+
+        public static bool operator ==(Date a, Date b)
+        {
+            if ((a.Year == b.Year) && (a.Month == b.Month) && (a.Day == b.Day))
+                return true;
+            return false;
+        }
+
+        public static bool operator !=(Date a, Date b)
+        {
+            if ((a.Year != b.Year) || (a.Month != b.Month) || (a.Day != b.Day))
+                return true;
+            return false;
+        }
+        
+        public override string ToSring()
+        {
+            return this;
         }
     }
 }
