@@ -27,6 +27,21 @@ namespace SalesManagementApp.DataStructure
         }
 
         // methods
+        public StringCustom[] Split(char sign)
+        {
+            StringCustom[] result = new StringCustom[10];
+            StringCustom temp = "";
+            int i = 0;
+            while (i < 10)
+            {
+                while (i < 10 && CharAt(i) != sign)
+                    temp = temp.Concat(CharAt(i++));
+                result[i] = temp;
+                i++;
+            }
+            return result;
+        }
+
         public int ToInt()
         {
             int number = 0;
@@ -109,6 +124,11 @@ namespace SalesManagementApp.DataStructure
             return new StringCustom(result);
         }
 
+        public static implicit operator StringCustom(char chr)
+        {
+            return new StringCustom(chr.ToString());
+        }
+
         public static implicit operator string(StringCustom strCustom)
         {
             string result = "";
@@ -123,4 +143,3 @@ namespace SalesManagementApp.DataStructure
         }
     }
 }
-
