@@ -12,6 +12,7 @@ namespace SalesManagementApp.Database
     {
         
        public static EmployeeList employeeList = Init();
+
        private static EmployeeList Init()
        {
             EmployeeList list_ = new EmployeeList(100);

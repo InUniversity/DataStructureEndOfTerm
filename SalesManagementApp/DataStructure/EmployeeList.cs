@@ -18,6 +18,7 @@ namespace SalesManagementApp.DataStructure
         {
         }
         ~EmployeeList() { }
+
         //Thêm nhân viên vào vị trí bất kỳ
         public override void AddItem(int index, Employee item)
         {
@@ -29,24 +30,28 @@ namespace SalesManagementApp.DataStructure
             iSize++;
             base.list_[index] = item;
         }
+
         //Thêm nhân viên vào vị trí sau cùng
         public override void AddLast(Employee item)
         {
             if (base.iSize >= iCapacity) return;
             base.list_[base.iSize++] = item;
         }
+
         //Thêm một danh sach nhân viên vào cuối
         public override void AddRange(ArrayList<Employee> sourceList)
         {
             for (int i = 0; i < sourceList.Size; i++)
                 AddLast(sourceList.Get(i));
         }
+
         //Xuất ra nhân viên với chỉ số index
         public override Employee Get(int index)
         {
             if (!IsValidIndex(index)) return null;
             else return base.list_[index];
         }
+
         //Tìm chỉ số của nhân viên bằng id
         public override int IndexOf(Employee item)
         {
@@ -55,6 +60,7 @@ namespace SalesManagementApp.DataStructure
                     return i;
             return -1;
         }
+
         //Nhập thông tin của một danh sách nhân viên với số lượng nhập từ bàn phím
         public void Input()
         {
@@ -65,6 +71,7 @@ namespace SalesManagementApp.DataStructure
                 this.Input();
             }    
         }
+
         //In danh sách nhân viên
         public override void Print()
         {
@@ -93,6 +100,7 @@ namespace SalesManagementApp.DataStructure
                this.list_[i].NOOFWORK);// 8
             }
         }
+
         //Xóa nhân viên ở chỉ số index
         public override void RemoveItem(int index)
         {
@@ -102,6 +110,7 @@ namespace SalesManagementApp.DataStructure
             }
             base.iSize--;
         }
+
         //Tìm xem nhân viên mang ID có trong danh sách không
         public override Employee SearchItem(Employee item)
         {
@@ -124,6 +133,7 @@ namespace SalesManagementApp.DataStructure
                 Console.WriteLine("(Empty)");
             return temp;
         }
+
         // Xuất danh sach nhân viên có doanh số lớn nhất
         public EmployeeList MaxNumberOfSales()
         {
@@ -143,6 +153,7 @@ namespace SalesManagementApp.DataStructure
                 Console.WriteLine("(Empty)");
             return temp;
         }
+
         // Xuất danh sách nhân viên của tháng
         public EmployeeList EmployeeOfMonth()
         {
@@ -164,6 +175,7 @@ namespace SalesManagementApp.DataStructure
                 Console.WriteLine("(Empty)");
             return temp;
         }
+
         //Xuất danh sách nhân viên không đạt doanh thu tối thiểu
         public EmployeeList NotReachingSales()
         {
@@ -179,6 +191,7 @@ namespace SalesManagementApp.DataStructure
                 Console.WriteLine("(Empty)");
             return temp;
         }
+
         //Xuất danh sách nhân viên nghỉ quá số buổi quy định
         public EmployeeList AbsenceBeyondTheNorm()
         {

@@ -31,6 +31,7 @@ namespace SalesManagementApp.Models
             set { this.iNoOfWork = value; }
             get { return this.iNoOfWork; }
         }
+
         //constructor
         public Employee():base()
         {
@@ -43,6 +44,7 @@ namespace SalesManagementApp.Models
             this.iNoOfWork = noOfWork;
             //this.lCustomer = lcostomer;
         }
+
         //destruction
         ~Employee() { }
 
@@ -54,6 +56,7 @@ namespace SalesManagementApp.Models
             Console.WriteLine("Totals Order Number: "); this.iOrderNumber = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Totals No Of Work: "); this.iNoOfWork = Convert.ToInt32(Console.ReadLine());
         }
+
         public override void Print()
         {
             base.Print();
@@ -61,6 +64,7 @@ namespace SalesManagementApp.Models
             Console.WriteLine("Totals Order Number: "+this.iOrderNumber);
             Console.WriteLine("Totals No Of Work: " +this.iNoOfWork);
         }
+
         public override bool IsEquals(Person person)
         {
             if(this.ID == person.ID)
