@@ -10,7 +10,6 @@ namespace SalesManagementApp.DataStructure
         {
 
         }
-
         // methods
         public override void AddItem(int index, Product item)
         {
@@ -48,10 +47,14 @@ namespace SalesManagementApp.DataStructure
 
         public override void Print()
         {
+            Console.WriteLine("ID     Name    iNumberOfProduct     dDayStartedUsing     dDateExpires");
             for (int i = 0; i < base.iSize; i++)
             {
                 base.list_[i].Print();
             }
+            Console.WriteLine("Enter To Continue");
+            Console.ReadKey();
+
         }
 
         public override void RemoveItem(int index)
@@ -68,19 +71,39 @@ namespace SalesManagementApp.DataStructure
             for (int i = 0; i < base.iSize; i++)
                 if (item.IsEqual(base.list_[i]))
                     return base.list_[i];
+
             return null;
         }
-
-        public bool SearchByName(Product name, ref string storage)
+        public ProductList SearchItemByID(Product item)
         {
+            int temp1 = 0;
+            ProductList temp = new ProductList(100);
             for (int i = 0; i < base.iSize; i++)
-                if (string.Compare(name.Name, base.list_[i].Name) == 0)
+            {
+                if (item.IsEqual(base.list_[i]))
                 {
-                    storage = base.list_[i].Name;
-                    return true;
+                    temp.AddLast(base.list_[i]);
+                    temp1++;
                 }
-            return false;
+            }
+            if (temp1 == 0) return null;
+            return temp;
         }
+        public ProductList SearchItemByName(Product item)
+        {
+            ProductList temp = new ProductList(100);
+            int temp1 = 0;
+            for (int i = 0; i < base.iSize; i++)
+                if (String.Equals(item.Name, list_[i].Name))
+                {
+                    temp.AddLast(base.list_[i]);
+                    temp1++;
+                }
+
+            if (temp1 == 0) return null;
+            return temp;
+        }
+
 
         public override int IndexOf(Product item)
         {
@@ -89,9 +112,10 @@ namespace SalesManagementApp.DataStructure
                     return i;
             return -1;
         }
-        
-        public void SortByNumber(Product number)
+
+        public ProductList SortByNumber()
         {
+            ProductList temp = new ProductList(100);
             for (int i = 1; i < base.iSize; i++)
             {
                 Product t = list_[i];
@@ -102,32 +126,33 @@ namespace SalesManagementApp.DataStructure
                     j--;
                 }
                 list_[j + 1] = t;
+
             }
-
-        }
-        
-        //RemoveProductListExpires
-        public void RemoveProduct()
-        {
-
-        }
-
-        public void CheckListProduct(Date Today, int index)
-        {
-            Console.WriteLine("Enter Current Date");
-            Today.Input();
             for (int i = 0; i < base.iSize; i++)
             {
-                if (list_[i].CheckProduct(list_[i], Today) == true)
+                temp.AddLast(list_[i]);
+            }
+            return temp;
+        }
+
+        public ProductList CheckListProduct(Date Today)
+        {
+            ProductList temp = new ProductList(100);
+            for (int i = 0; i < base.iSize; i++)
+            {
+                if (list_[i].CheckProduct(list_[i], Today) != true)
                 {
-                    Console.WriteLine("Expiry date is still available");
+                    return null;
                 }
                 else
                 {
-
-                    Console.WriteLine("Out Of Date");
+                    temp.AddLast(list_[i]);
                 }
             }
+
+
+
+            return temp;
         }
 
         public int TotalGoods()
@@ -135,7 +160,7 @@ namespace SalesManagementApp.DataStructure
             int sum = 0;
             for (int i = 0; i < base.iSize; i++)
             {
-                sum = list_[i].NumberOfProduct;
+                sum += list_[i].NumberOfProduct;
             }
             return sum;
         }

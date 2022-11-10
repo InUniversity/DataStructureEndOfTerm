@@ -46,24 +46,23 @@ namespace SalesManagementApp.Models
             set { dDateExpires = value; }
         }
 
-        public Product()
-        {
-
-        }
 
         public Product(int iID, string sname, int iNumberOfProduct, Date dDayStartedUsing, Date dDateExpires)
         {
+
             this.iID = iID;
             this.sName = sname;
             this.iNumberOfProduct = iNumberOfProduct;
-       
-            this.DayStartedUsing.Day = dDayStartedUsing.Day;
-            this.DayStartedUsing.Month = dDayStartedUsing.Month;
-            this.DayStartedUsing.Year = dDayStartedUsing.Year;
 
-            this.dDateExpires.Day = dDayStartedUsing.Day;
-            this.dDateExpires.Month = dDayStartedUsing.Month;
-            this.dDateExpires.Year = dDayStartedUsing.Year;
+            this.DayStartedUsing = dDayStartedUsing;
+
+            this.DateExpires = dDateExpires;
+
+        }
+        public Product()
+        {
+            dDayStartedUsing = new Date();
+            dDateExpires = new Date();
         }
 
         public bool IsEqual(Product item)
@@ -71,16 +70,22 @@ namespace SalesManagementApp.Models
             if (this.iID == item.ID) return true;
             else return false;
         }
-        
+        public bool EqualNames(Product item)
+        {
+            if (this.sName == item.sName) return true;
+            else return false;
+        }
+
+
         public bool CheckProduct(Product a, Date Today)
         {
             if (a.DateExpires > Today)
-                return false;
+                return true;
             else
             {
-                
+                return false;
             }
-            return true;
+
         }
 
         public void Input()
@@ -92,28 +97,23 @@ namespace SalesManagementApp.Models
             Console.WriteLine("iNumberOfProduct:");
             this.iNumberOfProduct = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("dDayStartedUsing:");
-            this.dDayStartedUsing.IDay = Convert.ToInt32(Console.ReadLine());
-            this.dDayStartedUsing.IMonth = Convert.ToInt32(Console.ReadLine());
-            this.dDayStartedUsing.IYear = Convert.ToInt32(Console.ReadLine());
+            this.dDayStartedUsing.Input();
+
             Console.WriteLine("dDateExpires:");
-            this.dDateExpires.IDay = Convert.ToInt32(Console.ReadLine());
-            this.dDateExpires.IMonth = Convert.ToInt32(Console.ReadLine());
-            this.dDateExpires.IYear = Convert.ToInt32(Console.ReadLine());
+            this.dDateExpires.Input();
         }
 
         public void Print()
         {
-            Console.WriteLine("ID:" + this.iID);
-            Console.WriteLine("Name:" + this.sName);
-            Console.WriteLine("iNumberOfProduct:" + this.iNumberOfProduct);
-            Console.WriteLine("dDayStartedUsing:");
-            Console.WriteLine(this.dDayStartedUsing.Day);
-            Console.WriteLine(this.dDayStartedUsing.Month);
-            Console.WriteLine(this.dDayStartedUsing.Year);
-            Console.WriteLine("dDateExpires:");
-            Console.WriteLine(this.DateExpires.Day);
-            Console.WriteLine(this.DateExpires.Month);
-            Console.WriteLine(this.DateExpires.Year);
+
+            Console.Write(this.iID); Console.Write("    ");
+            Console.Write(this.sName); Console.Write("    ");
+            Console.Write(this.iNumberOfProduct); Console.Write("           ");
+            string dDayStartedUsing = (string)(this.dDayStartedUsing); Console.Write("    ");
+            Console.Write(dDayStartedUsing); Console.Write("    ");
+            string dDateExpires = (string)(this.dDateExpires); Console.Write("    ");
+            Console.Write(dDateExpires); Console.Write("    ");
+            Console.WriteLine();
         }
     }
 }
