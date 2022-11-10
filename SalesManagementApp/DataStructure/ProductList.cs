@@ -135,12 +135,12 @@ namespace SalesManagementApp.DataStructure
             return temp;
         }
 
-        public ProductList CheckListProduct(Date Today)
+        public ProductList FindExpiredProducts(Date today)
         {
             ProductList temp = new ProductList(100);
             for (int i = 0; i < base.iSize; i++)
             {
-                if (list_[i].CheckProduct(list_[i], Today) != true)
+                if (today>)
                 {
                     return null;
                 }

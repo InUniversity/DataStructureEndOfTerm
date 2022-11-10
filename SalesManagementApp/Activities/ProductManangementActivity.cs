@@ -14,8 +14,12 @@ namespace SalesManagementApp.Activities
         {
             ProductList productList = ProductData.productList;
             ProductList temp = new ProductList(100);
-            Product temp1 = new Product();
-            Product product = new Product();
+            Product tempProduct = new Product();
+            int index;
+            ProductList tempList = new ProductList(100);
+            Date today = new Date();
+            int sum;
+            char choose;
             while (true)
             {
                 Console.Write("=========================MENU=========================\n");
@@ -28,27 +32,26 @@ namespace SalesManagementApp.Activities
                 Console.Write("|6. Sort By NumberOfProduct |\n");
                 Console.Write("|7. Check Expired Products |\n");
                 Console.Write("|8. Total products in stock |\n");
-                Console.Write("|9. Quit app                                         |\n");
+                Console.Write("|9. Back |\n");
+                Console.Write("|any key. Quit app                                         |\n");
                 Console.Write("=========================MENU=========================\n");
                 Console.Write("Choose: ");
-                int choose;
-                choose = Convert.ToInt32(Console.ReadLine());
+                choose = Convert.ToChar(Console.ReadLine());
                 switch (choose)
                 {
-                    case 0:
+                    case '0':
                         Console.WriteLine("----------Result----------");
                         productList.Print();
                         break;
-                    case 1:
-                        product.Input();
-                        productList.AddLast(product);
+                    case '1':
+                        tempProduct.Input();
+                        productList.AddLast(tempProduct);
                         Console.WriteLine("----------Result----------");
                         productList.Print();
-
                         break;
-                    case 2:
+                    case '2':
                         Console.WriteLine("Enter the product location to delete.");
-                        int index = Convert.ToInt32(Console.ReadLine());
+                        index = Convert.ToInt32(Console.ReadLine());
                         if (index >= productList.Size)
                         {
                             Console.WriteLine("Element not in stock.");
@@ -58,87 +61,71 @@ namespace SalesManagementApp.Activities
                         Console.WriteLine("----------Result----------");
                         productList.Print();
                         break;
-
-                    case 3:
+                    case '3':
                         Console.WriteLine("Location Add Products");
-                        int index2 = Convert.ToInt32(Console.ReadLine());
+                        index = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine("Product Information");
-                        product.Input();
-                        productList.AddItem(index2, product);
+                        tempProduct.Input();
+                        productList.AddItem(index, tempProduct);
                         Console.WriteLine("----------Result----------");
                         productList.Print();
                         break;
-                    case 4:
-                        ProductList temp3 = new ProductList(100);
+                    case '4':  
                         Console.WriteLine("Enter product ID");
-                        temp1.ID = Convert.ToInt32(Console.ReadLine());
-                        temp3 = productList.SearchItemByID(temp1);
+                        tempProduct.ID = Convert.ToInt32(Console.ReadLine());
+                        tempList = productList.SearchItemByID(tempProduct);
                         Console.WriteLine("----------Result----------");
-                        if (temp3 == null)
+                        if (tempList == null)
                             Console.WriteLine("No products found");
                         else
                         {
                             Console.WriteLine("Product found");
-                            temp3.Print();
+                            tempList.Print();
                         }
                         break;
-                    case 5:
-                        ProductList temp4 = new ProductList(100);
+                    case '5':
                         Console.WriteLine("Enter product name ");
-                        temp1.Name = Console.ReadLine();
-                        temp4 = productList.SearchItemByName(temp1);
+                        tempProduct.Name = Console.ReadLine();
+                        tempList = productList.SearchItemByName(tempProduct);
                         Console.WriteLine("----------Result----------");
-                        if (temp4 == null)
+                        if (tempList == null)
                             Console.WriteLine("No products found");
                         else
                         {
                             Console.WriteLine("Product found");
-                            temp4.Print();
+                            tempList.Print();
                         }
                         break;
-                    case 6:
-
+                    case '6':
                         ProductList temp5 = productList.SortByNumber();
                         temp5.Print();
                         break;
-
-                    case 7:
-                        Date Today;
-                        Today = new Date();
+                    case '7':
                         Console.WriteLine("Enter the current date");
-                        Today.Input();
-                        productList.CheckListProduct(Today);
-                        if (productList.CheckListProduct(Today) == null)
+                        today.Input();
+                        tempList = productList.FindExpiredProducts(today);
+                        if (tempList.IsEmpty())
                             Console.WriteLine("No products are out of date.");
                         else
                         {
                             Console.WriteLine("Expired product list:");
-                            ProductList temp6 = productList.CheckListProduct(Today);
+                            ProductList temp6 = productList.FindExpiredProducts(today);
                             temp6.Print();
                         }
-
                         break;
-                    case 8:
-                        int sum = productList.TotalGoods();
+                    case '8':
+                        sum = productList.TotalGoods();
                         Console.WriteLine(sum);
                         break;
+                    case '9':
+                        return 2;
+                        break;
                     default:
-
+                        Console.WriteLine("Quit app, Goodbye");
+                        return -1;
                         break;
                 }
-                if (choose == 9)
-                {
-                    Console.WriteLine("Quit app, Goodbye");
-                    return 0;
-                }
-                if (choose > 9)
-                {
-                    Console.WriteLine("Syntax error, Re-Enter");
-
-                }
-
             }
-
         }
     }
 }
