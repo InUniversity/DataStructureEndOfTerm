@@ -7,7 +7,6 @@ using System.Collections.Specialized;
 
 namespace SalesManagementApp.Activities
 {
-
     public static class ProductManangementActivity
     {
         public static int RunActivity()
@@ -23,17 +22,17 @@ namespace SalesManagementApp.Activities
             while (true)
             {
                 Console.Write("=========================MENU=========================\n");
-                Console.Write("|0. Check product in stock                      |\n");
-                Console.Write("|1. Enter a product                      |\n");
-                Console.Write("|2. Delete product by index                    |\n");
-                Console.Write("|3. Add products to any position |\n");
-                Console.Write("|4. Search product by ID |\n");
-                Console.Write("|5. Search product by Name |\n");
-                Console.Write("|6. Sort By NumberOfProduct |\n");
-                Console.Write("|7. Check Expired Products |\n");
-                Console.Write("|8. Total products in stock |\n");
+                Console.Write("|0. Check product in stock                           |\n");
+                Console.Write("|1. Enter a product                                  |\n");
+                Console.Write("|2. Delete product by index                          |\n");
+                Console.Write("|3. Add products to any position                     |\n");
+                Console.Write("|4. Search product by ID                             |\n");
+                Console.Write("|5. Search product by Name                           |\n");
+                Console.Write("|6. Sort By NumberOfProduct                          |\n");
+                Console.Write("|7. Check Expired Products                           |\n");
+                Console.Write("|8. Total products in stock                          |\n");
                 Console.Write("|9. Back |\n");
-                Console.Write("|any key. Quit app                                         |\n");
+                Console.Write("|any key. Quit app                                   |\n");
                 Console.Write("=========================MENU=========================\n");
                 Console.Write("Choose: ");
                 choose = Convert.ToChar(Console.ReadLine());
@@ -109,8 +108,7 @@ namespace SalesManagementApp.Activities
                         else
                         {
                             Console.WriteLine("Expired product list:");
-                            ProductList temp6 = productList.FindExpiredProducts(today);
-                            temp6.Print();
+                            tempList.Print();
                         }
                         break;
                     case '8':

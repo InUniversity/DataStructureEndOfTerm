@@ -7,7 +7,7 @@ namespace SalesManagementApp.Models
         private int iDay;
         private int iMonth;
         private int iYear;
-        //
+
         public int Day
         {
             get { return iDay; }
@@ -32,12 +32,12 @@ namespace SalesManagementApp.Models
             Month = iMonth;
             Year = iYear;
         }
+
         public Date()
         {
 
         }
 
-        // methods
         public void Input()
         {
             Console.WriteLine("Enter Date:");
@@ -48,10 +48,12 @@ namespace SalesManagementApp.Models
             Console.Write("Year: ");
             Year = Convert.ToInt32(Console.ReadLine());
         }
+
         public static implicit operator string(Date date)
         {
             return date.iDay + "-" + date.iMonth + "-" + date.iYear;
         }
+
         public static bool operator >(Date a, Date b)
         {
             if (a.Year > b.Year)
@@ -70,10 +72,12 @@ namespace SalesManagementApp.Models
             }
             else return false;
         }
+
         public static bool operator >=(Date a, Date b)
         {
             return !(a < b);
         }
+
         public static bool operator <(Date a, Date b)
         {
             if (a.Year < b.Year)
@@ -92,6 +96,7 @@ namespace SalesManagementApp.Models
             }
             else return false;
         }
+
         public static bool operator <=(Date a, Date b)
         {
             return !(a > b);
@@ -104,18 +109,17 @@ namespace SalesManagementApp.Models
             return false;
         }
 
-
         public static bool operator !=(Date a, Date b)
         {
             if ((a.Year != b.Year) || (a.Month != b.Month) || (a.Day != b.Day))
                 return true;
             return false;
         }
+
         public override string ToString()
         {
             return this;
         }
-
     }
 }
 

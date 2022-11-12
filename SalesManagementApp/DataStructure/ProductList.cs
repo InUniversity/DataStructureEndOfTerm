@@ -5,12 +5,11 @@ namespace SalesManagementApp.DataStructure
 {
     public class ProductList : ArrayList<Product>
     {
-
         public ProductList(int iCapacity) : base(iCapacity)
         {
 
         }
-        // methods
+
         public override void AddItem(int index, Product item)
         {
             if (base.iSize >= iCapacity) return;
@@ -74,6 +73,7 @@ namespace SalesManagementApp.DataStructure
 
             return null;
         }
+
         public ProductList SearchItemByID(Product item)
         {
             int temp1 = 0;
@@ -89,6 +89,7 @@ namespace SalesManagementApp.DataStructure
             if (temp1 == 0) return null;
             return temp;
         }
+
         public ProductList SearchItemByName(Product item)
         {
             ProductList temp = new ProductList(100);
@@ -103,7 +104,6 @@ namespace SalesManagementApp.DataStructure
             if (temp1 == 0) return null;
             return temp;
         }
-
 
         public override int IndexOf(Product item)
         {
@@ -139,19 +139,8 @@ namespace SalesManagementApp.DataStructure
         {
             ProductList temp = new ProductList(100);
             for (int i = 0; i < base.iSize; i++)
-            {
-                if (today>)
-                {
-                    return null;
-                }
-                else
-                {
+                if (today > list_[i].DateExpires)
                     temp.AddLast(list_[i]);
-                }
-            }
-
-
-
             return temp;
         }
 
@@ -164,9 +153,6 @@ namespace SalesManagementApp.DataStructure
             }
             return sum;
         }
-
-
-
     }
 }
 

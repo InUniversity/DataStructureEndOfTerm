@@ -8,8 +8,6 @@ namespace SalesManagementApp.Models
 {
     public class Product
     {
-
-        // fields: (iID: int, sName: string, iNumberOfProduct: int,  dDayStartedUsing: Date, dDateExpires: Date)
         private int iID;
         private string sName;
         private int iNumberOfProduct;
@@ -46,19 +44,16 @@ namespace SalesManagementApp.Models
             set { dDateExpires = value; }
         }
 
-
         public Product(int iID, string sname, int iNumberOfProduct, Date dDayStartedUsing, Date dDateExpires)
         {
 
             this.iID = iID;
             this.sName = sname;
             this.iNumberOfProduct = iNumberOfProduct;
-
             this.DayStartedUsing = dDayStartedUsing;
-
             this.DateExpires = dDateExpires;
-
         }
+
         public Product()
         {
             dDayStartedUsing = new Date();
@@ -70,22 +65,11 @@ namespace SalesManagementApp.Models
             if (this.iID == item.ID) return true;
             else return false;
         }
+
         public bool EqualNames(Product item)
         {
             if (this.sName == item.sName) return true;
             else return false;
-        }
-
-
-        public bool CheckProduct(Product a, Date Today)
-        {
-            if (a.DateExpires > Today)
-                return true;
-            else
-            {
-                return false;
-            }
-
         }
 
         public void Input()
@@ -98,14 +82,12 @@ namespace SalesManagementApp.Models
             this.iNumberOfProduct = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("dDayStartedUsing:");
             this.dDayStartedUsing.Input();
-
             Console.WriteLine("dDateExpires:");
             this.dDateExpires.Input();
         }
 
         public void Print()
         {
-
             Console.Write(this.iID); Console.Write("    ");
             Console.Write(this.sName); Console.Write("    ");
             Console.Write(this.iNumberOfProduct); Console.Write("           ");
