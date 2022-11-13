@@ -114,12 +114,10 @@ namespace SalesManagementApp.DataStructure
         //Tìm xem nhân viên mang ID/ tên có trong danh sách không
         public override Employee SearchItem(Employee item)
         {
-            if (item.ID>=9000000)
-            {
                 for (int i = 0; i < base.iSize; i++)
                     if (item.IsEquals(base.list_[i]))
                         return base.list_[i];
-            }
+           
             return null;
         }
 
