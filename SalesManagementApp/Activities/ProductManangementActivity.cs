@@ -85,7 +85,8 @@ namespace SalesManagementApp.Activities
                     case '5':
                         Console.WriteLine("Enter product name ");
                         tempProduct.Name = Console.ReadLine();
-                        tempList = productList.SearchItemByName(tempProduct);
+                        StringCustom name = new StringCustom(tempProduct.Name);
+                        tempList = productList.SearchItemByName(name);
                         Console.WriteLine("---------------------------------------------Result---------------------------------");
                         if (tempList == null)
                             Console.WriteLine("No products found");

@@ -50,7 +50,6 @@ namespace SalesManagementApp.DataStructure
                    "ID ","Name","iNumberOfProduct","dDayStartedUsing","dDateExpires");
             for (int i = 0; i < base.iSize; i++)
             {
-                // base.list_[i].Print();
                 Console.WriteLine("|{0, 8}|{1, -25}|{2, 16}|{3, 17}|{4, 12}|",
                     list_[i].ID,
                     list_[i].Name,
@@ -62,33 +61,6 @@ namespace SalesManagementApp.DataStructure
             Console.ReadKey();
 
         }
-
-        //public override void Print()
-        //{
-        //    Console.WriteLine("|{0, -8}|{1, -25}|{2, -4}|{3, -10}|{4, -25}|{5, -12}|{6, -19}|{7, -6}|{8, -14}|{9, -18}|",
-        //        "ID",
-        //        "Name",
-        //        "iNumberOfProduct",
-        //        "dDayStartedUsing",
-        //        "dDateExpires",
-
-        //    Product temp;
-        //    Node<Customer>? head = nFirstItem;
-        //    while (head != null)
-        //    {
-        //        temp = head.item;
-        //        Console.WriteLine("|{0, 8}|{1, -25}|{2, 4}|{3, -10}|{4, -25}|{5, -12}|{6, -19}|{7, -6}|{8, -14}|{9, -18}|",
-        //        temp.ID, // 0
-        //        temp.Name, // 1
-        //        temp.Sex, // 2
-        //        temp.Birthday, // 3
-        //        temp.Address, // 4
-
-
-        //        head = head.next;
-        //    }
-        //}
-
 
         public override void RemoveItem(int index)
         {
@@ -124,17 +96,20 @@ namespace SalesManagementApp.DataStructure
             return temp;
         }
 
-        public ProductList SearchItemByName(Product item)
+        public ProductList SearchItemByName(StringCustom name)
         {
-            ProductList temp = new ProductList(100);
             int temp1 = 0;
+            ProductList temp = new ProductList(1000);
+            Product product = new Product();
             for (int i = 0; i < base.iSize; i++)
-                if (String.Equals(item.Name, list_[i].Name))
+            {
+                StringCustom list = base.list_[i].Name;
+                if (list.IsEqual(name))
                 {
                     temp.AddLast(base.list_[i]);
                     temp1++;
-                }
-
+                }    
+            }
             if (temp1 == 0) return null;
             return temp;
         }
