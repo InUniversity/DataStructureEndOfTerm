@@ -95,9 +95,9 @@ namespace SalesManagementApp.DataStructure
                this.list_[i].Birthday, // 3
                this.list_[i].Address, // 4
                this.list_[i].PhoneNumber, // 5
-               this.list_[i].SALARY, //6
-               this.list_[i].ORDERNUMBER, // 7
-               this.list_[i].NOOFWORK);// 8
+               this.list_[i].Salary, //6
+               this.list_[i].Ordernumber, // 7
+               this.list_[i].NoOfWork);// 8
             }
         }
 
@@ -111,12 +111,15 @@ namespace SalesManagementApp.DataStructure
             base.iSize--;
         }
 
-        //Tìm xem nhân viên mang ID có trong danh sách không
+        //Tìm xem nhân viên mang ID/ tên có trong danh sách không
         public override Employee SearchItem(Employee item)
         {
-            for (int i = 0; i < base.iSize; i++)
-                if (item.IsEquals(base.list_[i]))
-                    return base.list_[i];
+            if (item.ID>=9000000)
+            {
+                for (int i = 0; i < base.iSize; i++)
+                    if (item.IsEquals(base.list_[i]))
+                        return base.list_[i];
+            }
             return null;
         }
 
@@ -125,7 +128,7 @@ namespace SalesManagementApp.DataStructure
         {
             EmployeeList temp = new EmployeeList(base.iSize);
             for(int i = 0; i<base.iSize; i++)
-                if (base.list_[i].NOOFWORK == 30)
+                if (base.list_[i].NoOfWork == 30)
                 {
                     temp.AddLast(base.list_[i]);
                 }
@@ -134,18 +137,18 @@ namespace SalesManagementApp.DataStructure
             return temp;
         }
 
-        // Xuất danh sach nhân viên có doanh số lớn nhất
+        // Xuất danh sách nhân viên có doanh số lớn nhất
         public EmployeeList MaxNumberOfSales()
         {
             EmployeeList temp = new EmployeeList(base.iSize);
-            int max = base.list_[0].ORDERNUMBER;
+            int max = base.list_[0].Ordernumber;
             for (int i = 0; i < base.iSize; i++)
-                if (base.list_[i].ORDERNUMBER >max)
+                if (base.list_[i].Ordernumber >max)
                 {
-                    max = base.list_[i].ORDERNUMBER;
+                    max = base.list_[i].Ordernumber;
                 }
             for (int i = 0; i < base.iSize; i++)
-                if (base.list_[i].ORDERNUMBER == max)
+                if (base.list_[i].Ordernumber == max)
                 {
                     temp.AddLast(base.list_[i]);
                 }
@@ -182,7 +185,7 @@ namespace SalesManagementApp.DataStructure
             EmployeeList temp = new EmployeeList(iCapacity);
             for (int i = 0; i<base.iSize; i++)
             {
-                if(base.list_[i].ORDERNUMBER < minium)
+                if(base.list_[i].Ordernumber < minium)
                 {
                     temp.AddLast(base.list_[i]);
                 }    
@@ -198,7 +201,7 @@ namespace SalesManagementApp.DataStructure
             EmployeeList temp = new EmployeeList(iCapacity);
             for (int i = 0; i < base.iSize; i++)
             {
-                if (base.list_[i].NOOFWORK < 30 - maxdayoff)
+                if (base.list_[i].NoOfWork < 30 - maxdayoff)
                 {
                     temp.AddLast(base.list_[i]);
                 }
