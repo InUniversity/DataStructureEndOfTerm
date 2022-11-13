@@ -12,9 +12,9 @@ namespace SalesManagementApp.DataStructure
         {
         }
 
-        public bool WriteFile(string fileName)
+        public bool WriteFile(StringCustom fileName)
         {
-            string path = "../../" + fileName;
+            StringCustom path = @fileName;
             StreamWriter sw = new StreamWriter(fileName);
             Node<Customer> head = nFirstItem;
             Customer customer;
@@ -39,14 +39,14 @@ namespace SalesManagementApp.DataStructure
             return true;
         }
 
-        public bool AddFromFile(string fileName)
+        public bool AddFromFile(StringCustom fileName)
         {
-            string path = "../../" + fileName;
+            StringCustom path = fileName;
             if (!File.Exists(path)) return false;
 
             CustomerList customerList = new CustomerList();
             Customer customer = new Customer();
-            string[] lines = File.ReadAllLines(fileName);
+            string[] lines = File.ReadAllLines(path);
             foreach (string str in lines)
             {
                 customer = GetCustomerFromFile(str);
@@ -55,26 +55,31 @@ namespace SalesManagementApp.DataStructure
             return true;
         }
 
-        private Customer GetCustomerFromFile(string data)
+        private Customer GetCustomerFromFile(StringCustom data)
         {
             Customer customer = new Customer();
-            string[] temp = data.Split(';');
+            StringCustom[] temp = data.Split(';');
             customer.ID = temp[0].ToInt();
             customer.Name = temp[1];
             customer.Sex = temp[2];
-            customer.Birthday = temp[3];
+            customer.Birthday = (Date) temp[3];
             customer.Address = temp[4];
-            customer.PhoneNumber = temp[5].ToInt();
+            customer.PhoneNumber = temp[5];
             customer.NumberOfProductsPurchased = temp[6].ToInt();
             customer.Point = temp[7].ToInt();
             customer.TypeOfMember = temp[8];
-            customer.LastPurchaseDate = temp[9];
+            customer.LastPurchaseDate = (Date) temp[9];
             return customer;
         }
 
         public void SortByLastPurchaseDate()
         {
-            base.Sort((customer1, customer2) => customer1.LastPurchaseDate > customer2.LastPurchaseDate);
+            base.Sort((customer1, customer2) => {
+                if (customer1.LastPurchaseDate > customer2.LastPurchaseDate)
+                    return 1;
+                else
+                    return -1;
+            });
         }
 
         public CustomerList FindByDateOfPurchase(Date start, Date end)
@@ -106,7 +111,7 @@ namespace SalesManagementApp.DataStructure
             return null;
         }
 
-        public CustomerList FindByName(string name)
+        public CustomerList FindByName(StringCustom name)
         {
             CustomerList customerList = new CustomerList();
             Customer customer;
@@ -114,7 +119,7 @@ namespace SalesManagementApp.DataStructure
             while (head != null)
             {
                 customer = head.item;
-                if (String.Equals(customer.Name, name))
+                if (customer.Name.Contain(name))
                     customerList.AddLast(customer);
                 head = head.next;
             }
@@ -145,7 +150,7 @@ namespace SalesManagementApp.DataStructure
 
         public override void Print()
         {
-            Console.WriteLine("|{0, -8}|{1, -25}|{2, -4}|{3, -10}|{4, -25}|{5, -12}|{6, -19}|{7, -6}|{8, -14}|{9, -18}|",
+            Console.WriteLine("|{0, -8}|{1, -25}|{2, -4}|{3, -10}|{4, -20}|{5, -12}|{6, -19}|{7, -6}|{8, -14}|{9, -18}|",
                 "ID",
                 "Name",
                 "Sex",
@@ -161,13 +166,13 @@ namespace SalesManagementApp.DataStructure
             while (head != null)
             {
                 temp = head.item;
-                Console.WriteLine("|{0, 8}|{1, -25}|{2, 4}|{3, -10}|{4, -25}|{5, -12}|{6, -19}|{7, -6}|{8, -14}|{9, -18}|",
+                Console.WriteLine("|{0, 8}|{1, 25}|{2, 4}|{3, 10}|{4, 20}|{5, 12}|{6, 19}|{7, 6}|{8, 14}|{9, 18}|",
                 temp.ID, // 0
                 temp.Name, // 1
                 temp.Sex, // 2
                 temp.Birthday, // 3
                 temp.Address, // 4
-                temp.PhoneNumber, // 5
+                temp.PhoneNumber.ToString(), // 5
                 temp.NumberOfProductsPurchased, //6
                 temp.Point, // 7
                 temp.TypeOfMember, // 8
@@ -200,7 +205,6 @@ namespace SalesManagementApp.DataStructure
                     return i;
                 head = head.next;
             }
-
             return -1;
         }
 

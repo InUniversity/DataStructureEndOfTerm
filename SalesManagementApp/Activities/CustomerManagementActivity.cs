@@ -12,9 +12,9 @@ namespace SalesManagementApp.Activities
         {
             CustomerList customerList = CustomerData.customerList;
             CustomerList tempList;
-            Customer tempCustomer = new Customer();
-            string tempName;
-            Date start = new Date(-1, -1, -1), end = new Date(-1, -1, -1);
+            Customer tempCustomer;
+            StringCustom tempName;
+            Date start, end;
             bool over;
             char choose;
             int tempID;
@@ -31,7 +31,7 @@ namespace SalesManagementApp.Activities
                 Console.Write("|6. Find by ID                                           |\n");
                 Console.Write("|7. Find by Name                                         |\n");
                 Console.Write("|8. Write file                                           |\n");
-                Console.Write("|9. Read from file                                       |\n");
+                // Console.Write("|9. Read from file                                       |\n");
                 Console.Write("|0. Quit app                                             |\n");
                 Console.Write("===========================MENU===========================\n");
                 Console.Write("Choose: ");
@@ -42,6 +42,7 @@ namespace SalesManagementApp.Activities
                 {
                     case '1':
                         Console.WriteLine("Enter customer: ");
+                        tempCustomer = new Customer();
                         tempCustomer.Input();
                         if (customerList.SearchNode(tempCustomer) != null)
                         {
@@ -76,6 +77,8 @@ namespace SalesManagementApp.Activities
                         customerList.Print();
                         break;
                     case '5':
+                        start = new Date(-1, -1, -1);
+                        end = new Date(-1, -1, -1);
                         Console.WriteLine("Enter start date:\n{");
                         start.Input();
                         Console.WriteLine("}");
@@ -118,19 +121,21 @@ namespace SalesManagementApp.Activities
                             customerList.Print();
                         }
                         break;
-                    case '9':
-                        tempName = "customer.txt";
-                        Console.WriteLine("File name: " + tempName);
-                        if (!customerList.AddFromFile(tempName))
-                            Console.WriteLine(Constant.NOT_FOUND_MESSAGE);
-                        else
-                        {
-                            Console.WriteLine(Constant.SUCCESS_MESSAGE);
-                            customerList.Print();
-                        }
+                    // case '9':
+                    //     tempName = "customer.txt";
+                    //     Console.WriteLine("File name: " + tempName);
+                    //     if (!customerList.AddFromFile(tempName))
+                    //         Console.WriteLine(Constant.NOT_FOUND_MESSAGE);
+                    //     else
+                    //     {
+                    //         Console.WriteLine(Constant.SUCCESS_MESSAGE);
+                    //         customerList.Print();
+                    //     }
+                    //     break;
+                    case '0':
+                        over = true;
                         break;
                     default:
-                        over = true;
                         break;
                 }
                 Console.ReadKey();

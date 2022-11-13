@@ -1,4 +1,6 @@
 ﻿using System;
+using SalesManagementApp.DataStructure;
+
 namespace SalesManagementApp.Models
 {
     public abstract class Person
@@ -6,11 +8,11 @@ namespace SalesManagementApp.Models
 
         // fields
         protected int iID;
-        protected string sName;
-        protected string sSex;
+        protected StringCustom sName;
+        protected StringCustom sSex;
         protected Date dBirthday;
-        protected string sAddress;
-        protected int iPhoneNumber;
+        protected StringCustom sAddress;
+        protected StringCustom iPhoneNumber;
 
         // constructor
         public Person()
@@ -18,8 +20,8 @@ namespace SalesManagementApp.Models
             dBirthday = new Date(-1, -1, -1);
         }
 
-        public Person(int iID,string sName, string sSex,
-            Date dBirthday, string sAddress, int iPhoneNumber)
+        public Person(int iID,StringCustom sName, StringCustom sSex,
+            Date dBirthday, StringCustom sAddress, StringCustom iPhoneNumber)
         {
             this.iID = iID;
             this.sName = sName;
@@ -39,13 +41,13 @@ namespace SalesManagementApp.Models
             set { iID = value; }
         }
 
-        public string Name
+        public StringCustom Name
         {
             get { return sName; }
             set { sName = value; }
         }
 
-        public string Sex
+        public StringCustom Sex
         {
             get { return sSex; }
             set { sSex = value; }
@@ -57,13 +59,13 @@ namespace SalesManagementApp.Models
             set { dBirthday = value; }
         }
 
-        public string Address
+        public StringCustom Address
         {
             get { return sAddress; }
             set { sAddress = value; }
         }
 
-        public int PhoneNumber
+        public StringCustom PhoneNumber
         {
             get { return iPhoneNumber; }
             set { iPhoneNumber = value; }
@@ -85,7 +87,7 @@ namespace SalesManagementApp.Models
             Console.Write("Address: ");
             sAddress = Console.ReadLine();
             Console.Write("Phone number: ");
-            iPhoneNumber = Convert.ToInt32(Console.ReadLine());
+            iPhoneNumber = Console.ReadLine();
         }
 
         public virtual void Print()

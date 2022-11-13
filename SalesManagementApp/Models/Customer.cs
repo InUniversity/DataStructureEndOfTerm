@@ -1,4 +1,6 @@
 ﻿using System;
+using SalesManagementApp.DataStructure;
+
 namespace SalesManagementApp.Models
 {
     public class Customer : Person
@@ -7,7 +9,7 @@ namespace SalesManagementApp.Models
         // fields
         private int iNumberOfProductsPurchased;
         private int iPoint;
-        private string sTypeOfMember;
+        private StringCustom sTypeOfMember;
         private Date dLastPurchaseDate;
 
         // constructor
@@ -16,9 +18,9 @@ namespace SalesManagementApp.Models
             dLastPurchaseDate = new Date(-1, -1, -1);
         }
 
-        public Customer(int iID, string sName, string sSex,
-            Date dBirthday, string sAddress, int iPhoneNumber,
-            int iNumberOfProductsPurchased, int iPoint, string sTypeOfMember,
+        public Customer(int iID, StringCustom sName, StringCustom sSex,
+            Date dBirthday, StringCustom sAddress, StringCustom iPhoneNumber,
+            int iNumberOfProductsPurchased, int iPoint, StringCustom sTypeOfMember,
             Date dLastPurchaseDate) : base(iID, sName, sSex, dBirthday,
                 sAddress, iPhoneNumber)
         {
@@ -41,7 +43,7 @@ namespace SalesManagementApp.Models
             set { iPoint = value; }
         }
 
-        public string TypeOfMember
+        public StringCustom TypeOfMember
         {
             get { return sTypeOfMember; }
             set { sTypeOfMember = value; }

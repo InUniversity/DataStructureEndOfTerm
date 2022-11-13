@@ -1,10 +1,12 @@
 ﻿using System;
+using SalesManagementApp.DataStructure;
+
 namespace SalesManagementApp.Activities
 {
     public static class SignInActivity
     {
-        private static string sUsername = "";
-        private static string sPassword = "";
+        private static StringCustom sUsername = "";
+        private static StringCustom sPassword = "";
 
         public static int RunActivity()
         {
