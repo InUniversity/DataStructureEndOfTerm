@@ -1,4 +1,5 @@
 ﻿using SalesManagementApp.Activities;
+using SalesManagementApp.DataStructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,20 +14,20 @@ namespace SalesManagementApp.Models
         protected int iOrderNumber;
         protected int iNoOfWork;
   
-        // protected List<Customer> lCustomer;
+        // protected List<Customer> lCustomer; 
 
         //properties
-        public int SALARY
+        public int Salary
         {
             set { this.iSalary = value; }
             get { return this.iSalary; }
         }
-        public int ORDERNUMBER
+        public int Ordernumber
         {
             set { this.iSalary = value; }
             get { return this.iOrderNumber; }
         }
-        public int NOOFWORK
+        public int NoOfWork
         {
             set { this.iNoOfWork = value; }
             get { return this.iNoOfWork; }
@@ -37,7 +38,7 @@ namespace SalesManagementApp.Models
         {
 
         }
-        public Employee(int id, string name, string sex, Date birthday, string address, int phoneno,int salary, int orderNumber, int noOfWork /*,List<Customer> lcustomer*/) :base(id,name,sex,birthday,address, phoneno)
+        public Employee(int id, StringCustom name, StringCustom sex, Date birthday, StringCustom address, StringCustom phoneno,int salary, int orderNumber, int noOfWork /*,List<Customer> lcustomer*/) :base(id,name,sex,birthday,address, phoneno)
         {
             this.iSalary = salary;
             this.iOrderNumber = orderNumber;

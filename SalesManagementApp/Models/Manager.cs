@@ -1,27 +1,12 @@
-﻿using System;
+﻿using SalesManagementApp.DataStructure;
+using System;
 namespace SalesManagementApp.Models
 {
-    public class Manager
+    public class Manager : Person
     {
-
         // fields
-        private int iID;
-        private string sName;
         private int iSalary;
-
         // properties
-        public int ID
-        {
-            get { return this.iID; }
-            set { this.iID = value; }
-        }
-
-        public string Name
-        {
-            get { return this.sName; }
-            set { this.sName = value; }
-        }
-
         public int Salary
         {
             get { return this.iSalary; }
@@ -33,13 +18,10 @@ namespace SalesManagementApp.Models
         {
         }
 
-        public Manager(int id, string name, int salary)
+        public Manager(int salary, int id, StringCustom name, StringCustom sex, Date birthday, StringCustom address, StringCustom nophone): base(id, name, sex, birthday, address, nophone)
         {
-            this.iID = id;
-            this.sName = name;
             this.iSalary = salary;
         }
-
         // destructor
         ~Manager() { }
 
@@ -52,20 +34,24 @@ namespace SalesManagementApp.Models
 
         public void Input()
         {
-            Console.WriteLine("Insert the manager's information: ");
-            Console.WriteLine("Manager's ID     : "); this.iID = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Manager's Name   : "); this.sName = Console.ReadLine();
-            Console.WriteLine("Manager's Salary : "); this.iSalary = Convert.ToInt32(Console.ReadLine());
+            base.Input();
+            Console.Write("Salary: ");
+            this.iSalary = Convert.ToInt32(Console.ReadLine());
         }
         public void Print()
         {
             Console.WriteLine("----------------------------------------");
             Console.WriteLine("Manager's Information: ");
             Console.WriteLine("........................................");
-            Console.WriteLine("Manager's ID     : " + this.iID); 
-            Console.WriteLine("Manager's Name   : " + this.sName); 
-            Console.WriteLine("Manager's Salary : " + this.iSalary);
+            base.Print();
+            Console.WriteLine("Salary: " +this.Salary);
             Console.WriteLine("----------------------------------------");
+        }
+
+        public override bool IsEquals(Person person)
+        {
+            if(this.iID == person.ID) return true;
+            return false;
         }
     }
 }
