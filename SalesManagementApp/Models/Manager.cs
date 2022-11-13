@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SalesManagementApp.DataStructure;
+using System;
 namespace SalesManagementApp.Models
 {
     public class Manager
@@ -6,7 +7,7 @@ namespace SalesManagementApp.Models
 
         // fields
         private int iID;
-        private string sName;
+        private StringCustom sName;
         private int iSalary;
 
         // properties
@@ -33,10 +34,17 @@ namespace SalesManagementApp.Models
         {
         }
 
-        public Manager(int id, string name, int salary)
+        public Manager(int id, StringCustom name, int salary)
         {
             this.iID = id;
             this.sName = name;
+            this.iSalary = salary;
+        }
+        public Manager(int id, string name, int salary)
+        {
+            StringCustom x = new StringCustom(name);
+            this.iID = id;
+            this.sName = x;
             this.iSalary = salary;
         }
 

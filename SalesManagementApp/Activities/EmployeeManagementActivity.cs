@@ -69,6 +69,7 @@ namespace SalesManagementApp.Activities
                     case 4:
                         Console.WriteLine("............Add a employee to any position...........");
                         Console.WriteLine("Insert the information of employee");
+                        temp = new Employee();
                         temp.Input();
                         Console.WriteLine("Insert the index:");
                         index = Convert.ToInt32(Console.ReadLine());
@@ -80,6 +81,7 @@ namespace SalesManagementApp.Activities
                     case 5:
                         Console.WriteLine("............Add a employee to the last position...........");
                         Console.WriteLine("Insert the information of employee");
+                        temp = new Employee();
                         temp.Input();
                         Console.WriteLine("..........................................................");
                         employeeList.AddLast(temp);
@@ -90,6 +92,7 @@ namespace SalesManagementApp.Activities
                         tempList = new EmployeeList(employeeList.Capacity);
                         Console.WriteLine("..................Add to a employee list.................");
                         Console.WriteLine("Insert the information of employees");
+                        tempList = new EmployeeList(employeeList.Capacity);
                         tempList.Input();
                         Console.WriteLine("..........................................................");
                         employeeList.AddRange(tempList);
@@ -106,6 +109,7 @@ namespace SalesManagementApp.Activities
                         break;
                     case 8:
                         Console.WriteLine("..Print a list of employees who have worked for 30 days..");
+                        tempList = new EmployeeList(employeeList.Capacity);
                         tempList = employeeList.Full30days();
                         tempList.Print();
                         Console.WriteLine(".........................................................");
@@ -118,18 +122,21 @@ namespace SalesManagementApp.Activities
                         break;
                     case 10:
                         Console.WriteLine(".......Print the list of employees of the month........");
+                        tempList = new EmployeeList(employeeList.Capacity);
                         tempList = employeeList.EmployeeOfMonth();
                         tempList.Print();
                         Console.WriteLine(".......................................................");
                         break;
                     case 11:
                          Console.WriteLine(".....Print a list of employees with insufficient sales......");
-                         tempList = employeeList.NotReachingSales();
+                        tempList = new EmployeeList(employeeList.Capacity);
+                        tempList = employeeList.NotReachingSales();
                          tempList.Print();
                          Console.WriteLine("............................................................");
                          break;
                     case 12:
                         Console.WriteLine("..Print a list of employees who are absent beyond the specified date..");
+                        tempList = new EmployeeList(employeeList.Capacity);
                         tempList = employeeList.AbsenceBeyondTheNorm();
                         tempList.Print();
                         Console.WriteLine("......................................................................");
