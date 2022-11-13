@@ -14,7 +14,7 @@ namespace SalesManagementApp.Models
         protected int iOrderNumber;
         protected int iNoOfWork;
   
-        // protected List<Customer> lCustomer;
+        // protected List<Customer> lCustomer; 
 
         //properties
         public int Salary

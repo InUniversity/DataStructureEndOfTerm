@@ -24,7 +24,7 @@ namespace SalesManagementApp.Database
             list_.AddLast(new Employee(900006, "Vo Vu Truong Giang", "Nam", new Date(24, 04, 1993), "Quang Nam", "0909547623",30000, 30, 29));
             list_.AddLast(new Employee(900007, "Le Thi My Giang", "Nu", new Date(06, 12, 1998), "Dong Thap", "0765443211", 27000, 27, 30));
 
-
+             
             return list_;
        }
 

@@ -14,7 +14,7 @@ namespace SalesManagementApp.Activities
             /*
             * Cho người dùng lựa chọn:
             * 1.
-            * 2.
+            * 2. 
             * 3.
             */
             
