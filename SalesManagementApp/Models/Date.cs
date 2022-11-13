@@ -26,16 +26,16 @@ namespace SalesManagementApp.Models
             set { iYear = value; }
         }
 
+        public Date()
+        {
+
+        }
+
         public Date(int iDay, int iMonth, int iYear)
         {
             Day = iDay;
             Month = iMonth;
             Year = iYear;
-        }
-
-        public Date()
-        {
-
         }
 
         public void Input()

@@ -39,13 +39,13 @@ namespace SalesManagementApp.Activities
                 switch (choose)
                 {
                     case '0':
-                        Console.WriteLine("----------Result----------");
+                        Console.WriteLine("---------------------------------------------Result---------------------------------");
                         productList.Print();
                         break;
                     case '1':
                         tempProduct.Input();
                         productList.AddLast(tempProduct);
-                        Console.WriteLine("----------Result----------");
+                        Console.WriteLine("---------------------------------------------Result---------------------------------");
                         productList.Print();
                         break;
                     case '2':
@@ -57,7 +57,7 @@ namespace SalesManagementApp.Activities
                             break;
                         }
                         productList.RemoveItem(index);
-                        Console.WriteLine("----------Result----------");
+                        Console.WriteLine("---------------------------------------------Result---------------------------------");
                         productList.Print();
                         break;
                     case '3':
@@ -66,14 +66,14 @@ namespace SalesManagementApp.Activities
                         Console.WriteLine("Product Information");
                         tempProduct.Input();
                         productList.AddItem(index, tempProduct);
-                        Console.WriteLine("----------Result----------");
+                        Console.WriteLine("---------------------------------------------Result---------------------------------");
                         productList.Print();
                         break;
                     case '4':  
                         Console.WriteLine("Enter product ID");
                         tempProduct.ID = Convert.ToInt32(Console.ReadLine());
                         tempList = productList.SearchItemByID(tempProduct);
-                        Console.WriteLine("----------Result----------");
+                        Console.WriteLine("---------------------------------------------Result---------------------------------");
                         if (tempList == null)
                             Console.WriteLine("No products found");
                         else
@@ -86,7 +86,7 @@ namespace SalesManagementApp.Activities
                         Console.WriteLine("Enter product name ");
                         tempProduct.Name = Console.ReadLine();
                         tempList = productList.SearchItemByName(tempProduct);
-                        Console.WriteLine("----------Result----------");
+                        Console.WriteLine("---------------------------------------------Result---------------------------------");
                         if (tempList == null)
                             Console.WriteLine("No products found");
                         else

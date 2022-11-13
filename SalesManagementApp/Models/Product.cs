@@ -44,6 +44,12 @@ namespace SalesManagementApp.Models
             set { dDateExpires = value; }
         }
 
+        public Product()
+        {
+            dDayStartedUsing = new Date();
+            dDateExpires = new Date();
+        }
+
         public Product(int iID, string sname, int iNumberOfProduct, Date dDayStartedUsing, Date dDateExpires)
         {
 
@@ -52,12 +58,6 @@ namespace SalesManagementApp.Models
             this.iNumberOfProduct = iNumberOfProduct;
             this.DayStartedUsing = dDayStartedUsing;
             this.DateExpires = dDateExpires;
-        }
-
-        public Product()
-        {
-            dDayStartedUsing = new Date();
-            dDateExpires = new Date();
         }
 
         public bool IsEqual(Product item)
