@@ -54,6 +54,14 @@ namespace SalesManagementApp.Models
             return date.iDay + "-" + date.iMonth + "-" + date.iYear;
         }
 
+        public static implicit operator Date(string date)
+        {
+            int day = (((date[0]) - '0') * 10) + ((date[1]) - '0');
+            int month = (((date[3]) - '0') * 10) + ((date[4]) - '0');
+            int year = (((date[6] - '0') * 10 + (date[7] - '0')) * 10 + (date[8] - '0')) * 10 + (date[9] - '0');
+            return new Date(day, month, year);
+        }
+
         public static bool operator >(Date a, Date b)
         {
             if (a.Year > b.Year)
