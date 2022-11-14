@@ -27,17 +27,17 @@ namespace SalesManagementApp.DataStructure
         }
 
         // methods
-        public StringCustom[] Split(char sign)
+        public StringCustomList Split(char sign)
         {
-            StringCustom[] result = new StringCustom[10];
+            StringCustomList result = new StringCustomList();
             StringCustom temp;
             int i = 0;
-            while (i < 10)
+            while (i < this.iSize)
             {
                 temp = "";
-                while (i < 10 && CharAt(i) != sign)
+                while (i < this.iSize && CharAt(i) != sign)
                     temp = temp.Concat(CharAt(i++));
-                result[i] = temp;
+                result.AddLast(temp);
                 i++;
             }
             return result;
@@ -46,7 +46,7 @@ namespace SalesManagementApp.DataStructure
         public int ToInt()
         {
             int number = 0;
-            for (int i = 0; i < iSize ; i++)
+            for (int i = 0; i < iSize; i++)
                 number = number * 10 + (CharAt(i) - '0');
             return number;
         }

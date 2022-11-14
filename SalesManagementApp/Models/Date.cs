@@ -1,4 +1,6 @@
 ﻿using System;
+using SalesManagementApp.DataStructure;
+
 namespace SalesManagementApp.Models
 {
     public class Date
@@ -51,14 +53,31 @@ namespace SalesManagementApp.Models
 
         public static implicit operator string(Date date)
         {
-            return date.iDay + "-" + date.iMonth + "-" + date.iYear;
+            int day = date.Day, month = date.Month, year = date.Year;
+            string result = "";
+            if (day < 10)
+                result += ("0" + day);
+            else
+                result += day;
+            result += "-";
+
+            if (month < 10)
+                result += ("0" + month);
+            else
+                result += month;
+            result += "-";
+
+            // fix "yyyy = 0230"
+            result += year;
+            return result;
         }
 
-        public static implicit operator Date(string date)
+        public static explicit operator Date(StringCustom date)
         {
-            int day = (((date[0]) - '0') * 10) + ((date[1]) - '0');
-            int month = (((date[3]) - '0') * 10) + ((date[4]) - '0');
-            int year = (((date[6] - '0') * 10 + (date[7] - '0')) * 10 + (date[8] - '0')) * 10 + (date[9] - '0');
+            int day = (((date.CharAt(0)) - '0') * 10) + ((date.CharAt(1)) - '0');
+            int month = (date.CharAt(3) - '0') * 10 + (date.CharAt(4) - '0');
+            int year = (((date.CharAt(6) - '0') * 10 + (date.CharAt(7) - '0')) * 10 + 
+                (date.CharAt(8) - '0')) * 10 + (date.CharAt(9) - '0');
             return new Date(day, month, year);
         }
 

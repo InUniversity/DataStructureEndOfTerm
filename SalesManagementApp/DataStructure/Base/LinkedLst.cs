@@ -63,6 +63,14 @@ namespace SalesManagementApp.DataStructure
             iSize++;
         }
 
+        public T GetItem(int index)
+        {
+            Node<T>? head = nFirstItem;
+            for (int i = 0; i < index; i++)
+                head = head.next;
+            return head.item;
+        }
+
         public bool IsEmpty()
         {
             return this.nFirstItem == null;

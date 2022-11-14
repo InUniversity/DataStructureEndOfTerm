@@ -11,14 +11,7 @@ namespace SalesManagementApp.Activities
     {
         public static int RunActivity()
         {
-            /*
-             * Cho người dùng lựa chọn:
-             * 1.
-             * 2.
-             * 3.
-             */
-            bool over, pressEnter;
-            char choose;
+            int choose = -100;
             while (true)
             {
                 Console.Clear();
@@ -28,20 +21,32 @@ namespace SalesManagementApp.Activities
                 Console.Write("|3. Move to employee management                      |\n");
                 Console.Write("|4. Quit app                                         |\n");
                 Console.Write("=========================MENU=========================\n");
-                Console.Write("Choose: "); choose = Console.ReadLine()[0];
-                switch(choose)
+                Console.Write("Choose: "); 
+                
+                try
                 {
-                    case '1':
+                    choose = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+                switch (choose)
+                {
+                    case 1:
                         return 3;
-                    case '2':
+                    case 2:
                         return 5;
-                    case '3':
+                    case 3:
                         return 4;
-                    default:
+                    case 4:
                         return -1;
+                    default:
+                        Console.WriteLine(Constant.NOT_VALID_MESSAGE);
+                        break;
                 }
             }
-            return -1;
         }
     }
 }

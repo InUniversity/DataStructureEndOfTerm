@@ -18,10 +18,13 @@ namespace SalesManagementApp.Models
         {
         }
 
-        public Manager(int salary, int id, StringCustom name, StringCustom sex, Date birthday, StringCustom address, StringCustom nophone) : base(id, name, sex, birthday, address, nophone)
+        public Manager(int salary, int id, StringCustom name, StringCustom sex,
+            Date birthday, StringCustom address, StringCustom nophone
+            ) : base(id, name, sex, birthday, address, nophone)
         {
             this.iSalary = salary;
         }
+
         // destructor
         ~Manager() { }
 
@@ -32,13 +35,13 @@ namespace SalesManagementApp.Models
             else return false;
         }
 
-        public void Input()
+        public override void Input()
         {
             base.Input();
             Console.Write("Salary: ");
             this.iSalary = Convert.ToInt32(Console.ReadLine());
         }
-        public void Print()
+        public override void Print()
         {
             Console.WriteLine("----------------------------------------");
             Console.WriteLine("Manager's Information: ");
@@ -50,7 +53,7 @@ namespace SalesManagementApp.Models
 
         public override bool IsEquals(Person person)
         {
-            if(this.iID == person.ID) return true;
+            if (this.iID == person.ID) return true;
             return false;
         }
     }
