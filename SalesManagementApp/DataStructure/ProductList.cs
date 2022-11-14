@@ -79,24 +79,21 @@ namespace SalesManagementApp.DataStructure
 
         public ProductList SearchItemByID(Product item)
         {
-            int temp1 = 0;
             ProductList temp = new ProductList(100);
             for (int i = 0; i < base.iSize; i++)
             {
                 if (item.IsEqual(base.list_[i]))
                 {
                     temp.AddLast(base.list_[i]);
-                    temp1++;
                 }
             }
-            if (temp1 == 0) return null;
+            if (temp.Size == 0) return null;
             return temp;
         }
 
         public ProductList SearchItemByName(StringCustom name)
         {
-            int temp1 = 0;
-            ProductList temp = new ProductList(1000);
+            ProductList temp = new ProductList(100);
             Product product = new Product();
             for (int i = 0; i < base.iSize; i++)
             {
@@ -104,10 +101,9 @@ namespace SalesManagementApp.DataStructure
                 if (list.IsEqual(name))
                 {
                     temp.AddLast(base.list_[i]);
-                    temp1++;
                 }    
             }
-            if (temp1 == 0) return null;
+            if (temp.Size == 0) return null;
             return temp;
         }
 

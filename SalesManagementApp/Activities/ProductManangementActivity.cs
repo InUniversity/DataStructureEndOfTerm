@@ -16,7 +16,7 @@ namespace SalesManagementApp.Activities
             Product tempProduct; 
             int index;
             ProductList tempList = new ProductList(100);
-            Date today = new Date();
+            Date today;
             int sum;
             char choose;
             while (true)
@@ -103,6 +103,7 @@ namespace SalesManagementApp.Activities
                         productList.Print();
                         break;
                     case '7':
+                        today = new Date();
                         Console.WriteLine("Enter the current date");
                         today.Input();
                         tempList = productList.FindExpiredProducts(today);
@@ -119,11 +120,9 @@ namespace SalesManagementApp.Activities
                         break;
                     case '9':
                         return 2;
-                        break;
                     default:
                         Console.WriteLine(Constant.QUIT_APP_MESSAGE);
                         return -1;
-                        break;
                 }
                 Console.WriteLine("Enter To Continue");
                 Console.ReadKey();

@@ -10,7 +10,7 @@ namespace SalesManagementApp.Database
         private static ProductList Init()
         {
             ProductList list_ = new ProductList(100);
-            list_.AddLast(new Product(123, "BanhQuy", 31, new Date(10, 10, 2022), new Date(1, 1, 2023)));
+            list_.AddLast(new Product(123, "Banh Quy", 31, new Date(10, 10, 2022), new Date(1, 1, 2023)));
             list_.AddLast(new Product(123, "Banh Chuoi", 90, new Date(9, 9, 2022), new Date(2, 2, 2023)));
             list_.AddLast(new Product(123, "Banh Bao", 35, new Date(8, 8, 2022), new Date(4, 4, 2023)));
             list_.AddLast(new Product(123, "Ca Hop", 312, new Date(7, 7, 2022), new Date(5, 5, 2023)));
