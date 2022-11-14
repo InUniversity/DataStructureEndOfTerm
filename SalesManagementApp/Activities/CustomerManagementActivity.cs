@@ -15,12 +15,10 @@ namespace SalesManagementApp.Activities
             Customer tempCustomer;
             StringCustom tempName;
             Date start, end;
-            bool over;
-            char choose;
+            int choose = 10;
             int tempID;
-            do
+            while (true)
             {
-                over = false;
                 Console.Clear();
                 Console.Write("===========================MENU===========================\n");
                 Console.Write("|1. Add a customer                                       |\n");
@@ -32,15 +30,24 @@ namespace SalesManagementApp.Activities
                 Console.Write("|7. Find by Name                                         |\n");
                 Console.Write("|8. Write file                                           |\n");
                 // Console.Write("|9. Read from file                                       |\n");
+                Console.Write("|10. Back to Main activity                               |\n");
                 Console.Write("|0. Quit app                                             |\n");
                 Console.Write("===========================MENU===========================\n");
                 Console.Write("Choose: ");
-                choose = (char) Console.ReadKey().Key;
+                try
+                {
+                    choose = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
                 Console.WriteLine();
 
                 switch (choose)
                 {
-                    case '1':
+                    case 1:
                         Console.WriteLine("Enter customer: ");
                         tempCustomer = new Customer();
                         tempCustomer.Input();
@@ -52,7 +59,7 @@ namespace SalesManagementApp.Activities
                         customerList.AddLast(tempCustomer);
                         customerList.Print();
                         break;
-                    case '2':
+                    case 2:
                         Console.Write("Enter ID: ");
                         tempID = Convert.ToInt32(Console.ReadLine());
                         tempCustomer = customerList.FindByID(tempID);
@@ -64,7 +71,7 @@ namespace SalesManagementApp.Activities
                         customerList.Remove(tempCustomer);
                         customerList.Print();
                         break;
-                    case '3':
+                    case 3:
                         if (customerList.IsEmpty())
                         {
                             Console.WriteLine(Constant.EMPTY_MESSAGE);
@@ -72,11 +79,11 @@ namespace SalesManagementApp.Activities
                         }
                         customerList.Print();
                         break;
-                    case '4':
+                    case 4:
                         customerList.SortByLastPurchaseDate();
                         customerList.Print();
                         break;
-                    case '5':
+                    case 5:
                         start = new Date(-1, -1, -1);
                         end = new Date(-1, -1, -1);
                         Console.WriteLine("Enter start date:\n{");
@@ -88,7 +95,7 @@ namespace SalesManagementApp.Activities
                         tempList = customerList.FindByDateOfPurchase(start, end);
                         tempList.Print();
                         break;
-                    case '6':
+                    case 6:
                         Console.Write("Enter ID: ");
                         tempID = Convert.ToInt32(Console.ReadLine());
                         tempCustomer = customerList.FindByID(tempID);
@@ -99,7 +106,7 @@ namespace SalesManagementApp.Activities
                         }
                         tempCustomer.Print();
                         break;
-                    case '7':
+                    case 7:
                         Console.Write("Enter name: ");
                         tempName = Console.ReadLine();
                         tempList = customerList.FindByName(tempName);
@@ -110,7 +117,7 @@ namespace SalesManagementApp.Activities
                         }
                         tempList.Print();
                         break;
-                    case '8':
+                    case 8:
                         Console.WriteLine("Enter file name: ");
                         tempName = Console.ReadLine();
                         if (!customerList.WriteFile(tempName))
@@ -121,7 +128,7 @@ namespace SalesManagementApp.Activities
                             customerList.Print();
                         }
                         break;
-                    // case '9':
+                    // case 9:
                     //     tempName = "customer.txt";
                     //     Console.WriteLine("File name: " + tempName);
                     //     if (!customerList.AddFromFile(tempName))
@@ -132,15 +139,16 @@ namespace SalesManagementApp.Activities
                     //         customerList.Print();
                     //     }
                     //     break;
-                    case '0':
-                        over = true;
-                        break;
+                    case 10:
+                        return 2;
+                    case 0:
+                        return -1;
                     default:
                         break;
                 }
+                Console.WriteLine("Press to continue...");
                 Console.ReadKey();
-            } while (!over);
-            return -1;
+            }
         }
     }
 }

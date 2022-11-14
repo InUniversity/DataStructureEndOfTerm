@@ -30,10 +30,11 @@ namespace SalesManagementApp.DataStructure
         public StringCustom[] Split(char sign)
         {
             StringCustom[] result = new StringCustom[10];
-            StringCustom temp = "";
+            StringCustom temp;
             int i = 0;
             while (i < 10)
             {
+                temp = "";
                 while (i < 10 && CharAt(i) != sign)
                     temp = temp.Concat(CharAt(i++));
                 result[i] = temp;
@@ -45,7 +46,7 @@ namespace SalesManagementApp.DataStructure
         public int ToInt()
         {
             int number = 0;
-            for (int i = 0; i < iSize - 1; i++)
+            for (int i = 0; i < iSize ; i++)
                 number = number * 10 + (CharAt(i) - '0');
             return number;
         }
@@ -75,10 +76,10 @@ namespace SalesManagementApp.DataStructure
 
         public bool IsEqual(StringCustom strCustom)
         {
-            int endPoint = this.iSize;
-            if (strCustom.Size < endPoint)
-                endPoint = strCustom.Size;
-            for (int i = 0; i < endPoint; i++)
+            if (iSize != strCustom.Size)
+                return false;
+
+            for (int i = 0; i < this.iSize; i++)
                 if (this.CharAt(i) != strCustom.CharAt(i))
                     return false;
             return true;

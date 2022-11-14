@@ -18,10 +18,9 @@ namespace SalesManagementApp.Activities
              * 3.
              */
             bool over, pressEnter;
-            int choose = 1, key, x = 0, y = 0;
-            do
+            char choose;
+            while (true)
             {
-                over = false;
                 Console.Clear();
                 Console.Write("=========================MENU=========================\n");
                 Console.Write("|1. Move to product management                       |\n");
@@ -29,46 +28,19 @@ namespace SalesManagementApp.Activities
                 Console.Write("|3. Move to employee management                      |\n");
                 Console.Write("|4. Quit app                                         |\n");
                 Console.Write("=========================MENU=========================\n");
-                Console.Write("Choose: ");
-                x = Console.CursorLeft;
-                y = Console.CursorTop;
-                do
-                {
-                    pressEnter = false;
-                    Console.SetCursorPosition(x, y);
-                    Console.Write(choose);
-                    key = (int)Console.ReadKey().Key;
-                    switch (key)
-                    {
-                        case Constant.UP_ARROW:
-                            choose--;
-                            if (choose < 0)
-                                choose = 4;
-                            break;
-                        case Constant.DOWN_ARROW:
-                            choose++;
-                            if (choose > 4)
-                                choose = 0;
-                            break;
-                        case Constant.ENTER_KEY:
-                            pressEnter = true;
-                            break;
-                    }
-                } while (!pressEnter);
-
+                Console.Write("Choose: "); choose = Console.ReadLine()[0];
                 switch(choose)
                 {
-                    case 1:
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
+                    case '1':
+                        return 3;
+                    case '2':
+                        return 5;
+                    case '3':
+                        return 4;
                     default:
-                        over = true;
-                        break;
+                        return -1;
                 }
-            } while (!over);
+            }
             return -1;
         }
     }
