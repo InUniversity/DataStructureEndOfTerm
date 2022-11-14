@@ -128,7 +128,7 @@ namespace SalesManagementApp.DataStructure
 
         public override void AddNode(int index, Customer item)
         {
-            if (item == null || IsFull()) return;
+            if (item == null) return;
 
             Node<Customer> newNode = new Node<Customer>(item);
             Node<Customer>? curNode = GetNode(index);
@@ -206,12 +206,6 @@ namespace SalesManagementApp.DataStructure
                 head = head.next;
             }
             return -1;
-        }
-
-        public override bool IsFull()
-        {
-            Node<Customer>? newNode = new Node<Customer>(new Customer());
-            return newNode == null;
         }
 
         public override void Remove(int index)

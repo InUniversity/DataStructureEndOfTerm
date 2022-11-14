@@ -18,7 +18,7 @@ namespace SalesManagementApp.Models
         {
         }
 
-        public Manager(int salary, int id, StringCustom name, StringCustom sex, Date birthday, StringCustom address, StringCustom nophone): base(id, name, sex, birthday, address, nophone)
+        public Manager(int salary, int id, StringCustom name, StringCustom sex, Date birthday, StringCustom address, StringCustom nophone) : base(id, name, sex, birthday, address, nophone)
         {
             this.iSalary = salary;
         }
