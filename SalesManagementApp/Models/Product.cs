@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SalesManagementApp.DataStructure;
 
 namespace SalesManagementApp.Models
 {
     public class Product
     {
         private int iID;
-        private string sName;
+        private StringCustom sName;
         private int iNumberOfProduct;
         private Date dDayStartedUsing;
         private Date dDateExpires;
@@ -20,7 +16,7 @@ namespace SalesManagementApp.Models
             set { iID = value; }
         }
 
-        public string Name
+        public StringCustom Name
         {
             get { return sName; }
             set { sName = value; }
@@ -50,11 +46,11 @@ namespace SalesManagementApp.Models
             dDateExpires = new Date();
         }
 
-        public Product(int iID, string sname, int iNumberOfProduct, Date dDayStartedUsing, Date dDateExpires)
+        public Product(int iID, StringCustom sName, int iNumberOfProduct, Date dDayStartedUsing, Date dDateExpires)
         {
 
             this.iID = iID;
-            this.sName = sname;
+            this.sName = sName;
             this.iNumberOfProduct = iNumberOfProduct;
             this.DayStartedUsing = dDayStartedUsing;
             this.DateExpires = dDateExpires;
@@ -85,10 +81,8 @@ namespace SalesManagementApp.Models
             Console.WriteLine(this.iID);
             Console.WriteLine(this.sName);
             Console.WriteLine(this.iNumberOfProduct);
-            string dDayStartedUsing = (string)(this.dDayStartedUsing);
-            Console.WriteLine(dDayStartedUsing);
-            string dDateExpires = (string)(this.dDateExpires);
-            Console.WriteLine(dDateExpires);
+            Console.WriteLine(this.dDayStartedUsing);
+            Console.WriteLine(this.dDateExpires);
         }
     }
 }

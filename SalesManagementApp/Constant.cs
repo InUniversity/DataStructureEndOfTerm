@@ -14,8 +14,6 @@ namespace SalesManagementApp
         public const string DUPLICATED_MESSAGE = "-> Duplicated!!!";
         public const string SUCCESS_MESSAGE = "-> Success!!!";
 
-      
-
         public const string NOT_FOUND_PRODUCT_MESSAGE = "-> No products found!!!";
         public const string NOT_OUT_OF_TIME_PRODUCT_MESSAGE = "-> No products are out of date!!!";
         public const string QUIT_APP_MESSAGE = "-> Quit app, Goodbye!!!";
