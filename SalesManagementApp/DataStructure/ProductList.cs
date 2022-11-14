@@ -47,7 +47,7 @@ namespace SalesManagementApp.DataStructure
         public override void Print()
         {
             Console.WriteLine("|{0, 8}|{1, -25}|{2, 16}|{3, 17}|{4, 12}|",
-                   "ID ","Name","iNumberOfProduct","dDayStartedUsing","dDateExpires");
+                   "ID ","Name","NumberOfProduct","DayStartedUsing","DateExpires");
             for (int i = 0; i < base.iSize; i++)
             {
                 Console.WriteLine("|{0, 8}|{1, -25}|{2, 16}|{3, 17}|{4, 12}|",
@@ -57,9 +57,6 @@ namespace SalesManagementApp.DataStructure
                     list_[i].DayStartedUsing,
                     list_[i].DateExpires);
             }
-            Console.WriteLine("Enter To Continue");
-            Console.ReadKey();
-
         }
 
         public override void RemoveItem(int index)
@@ -122,9 +119,8 @@ namespace SalesManagementApp.DataStructure
             return -1;
         }
 
-        public ProductList SortByNumber()
+        public void SortByNumberOfProduct()
         {
-            ProductList temp = new ProductList(100);
             for (int i = 1; i < base.iSize; i++)
             {
                 Product t = list_[i];
@@ -135,13 +131,7 @@ namespace SalesManagementApp.DataStructure
                     j--;
                 }
                 list_[j + 1] = t;
-
             }
-            for (int i = 0; i < base.iSize; i++)
-            {
-                temp.AddLast(list_[i]);
-            }
-            return temp;
         }
 
         public ProductList FindExpiredProducts(Date today)

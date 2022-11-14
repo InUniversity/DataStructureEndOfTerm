@@ -66,12 +66,6 @@ namespace SalesManagementApp.Models
             else return false;
         }
 
-        public bool EqualNames(Product item)
-        {
-            if (this.sName == item.sName) return true;
-            else return false;
-        }
-
         public void Input()
         {
             Console.WriteLine("ID:");
@@ -88,14 +82,13 @@ namespace SalesManagementApp.Models
 
         public void Print()
         {
-            Console.Write(this.iID); Console.Write("    ");
-            Console.Write(this.sName); Console.Write("    ");
-            Console.Write(this.iNumberOfProduct); Console.Write("           ");
-            string dDayStartedUsing = (string)(this.dDayStartedUsing); Console.Write("    ");
-            Console.Write(dDayStartedUsing); Console.Write("    ");
-            string dDateExpires = (string)(this.dDateExpires); Console.Write("    ");
-            Console.Write(dDateExpires); Console.Write("    ");
-            Console.WriteLine();
+            Console.WriteLine(this.iID);
+            Console.WriteLine(this.sName);
+            Console.WriteLine(this.iNumberOfProduct);
+            string dDayStartedUsing = (string)(this.dDayStartedUsing);
+            Console.WriteLine(dDayStartedUsing);
+            string dDateExpires = (string)(this.dDateExpires);
+            Console.WriteLine(dDateExpires);
         }
     }
 }

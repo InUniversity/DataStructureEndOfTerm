@@ -66,11 +66,9 @@ namespace SalesManagementApp.Models
                 {
                     if (a.Day > b.Day)
                         return true;
-                    else return false;
                 }
-                else return false;
             }
-            else return false;
+            return false;
         }
 
         public static bool operator >=(Date a, Date b)
@@ -90,11 +88,9 @@ namespace SalesManagementApp.Models
                 {
                     if (a.Day < b.Day)
                         return true;
-                    else return false;
                 }
-                else return false;
             }
-            else return false;
+            return false;
         }
 
         public static bool operator <=(Date a, Date b)
