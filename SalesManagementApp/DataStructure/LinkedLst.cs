@@ -37,8 +37,6 @@ namespace SalesManagementApp.DataStructure
         // methods
         public void AddFirst(T item)
         {
-            if (IsFull()) return;
-
             Node<T> newNode = new Node<T>(item);
             if (IsEmpty())
                 nFirstItem = nLastItem = newNode;
@@ -54,8 +52,6 @@ namespace SalesManagementApp.DataStructure
 
         public void AddLast(T item)
         {
-            if (IsFull()) return;
-
             Node<T>? newNode = new Node<T>(item);
             if (IsEmpty())
                 nFirstItem = nLastItem = newNode;
@@ -107,24 +103,24 @@ namespace SalesManagementApp.DataStructure
             }
         }
 
+        public void ForEach(Action<T> action)
+        {
+            Node<T>? head = nFirstItem;
+            while (head != null)
+            {
+                action(head.item);
+                head = head.next;
+            }
+        }
+
         public abstract void AddNode(int index, T item);
-
-        public abstract bool IsFull();
-
         public abstract void Remove(T item);
-
         public abstract void Remove(int index);
-
         public abstract void RemoveLast();
-
         public abstract void AddRange(LinkedLst<T> sourceList);
-
         public abstract Node<T>? GetNode(int index);
-
         public abstract Node<T>? SearchNode(T item);
-
         public abstract void Print();
-
         public abstract int IndexOf(T item);
     }
 }

@@ -17,29 +17,32 @@ namespace SalesManagementApp
             {
                 int activityOrder;
                 activityOrder = SignInActivity.RunActivity();
-                switch (activityOrder)
+                while (true)
                 {
-                    case 0:
-                        activityOrder = SignUpActivity.RunActivity();
-                        break;
-                    case 1:
-                        activityOrder = SignInActivity.RunActivity();
-                        break;
-                    case 2:
-                        activityOrder = MainActivity.RunActivity();
-                        break;
-                    case 3:
-                        activityOrder = ProductManangementActivity.RunActivity();
-                        break;
-                    case 4:
-                        activityOrder = EmployeeManagementActivity.RunActivity();
-                        break;
-                    case 5:
-                        activityOrder = CustomerManagementActivity.RunActivity();
-                        break;
-                    default:
-                        Console.WriteLine("Quit Application!!!");
-                        break;
+                    switch (activityOrder)
+                    {
+                        case 0:
+                            activityOrder = SignUpActivity.RunActivity();
+                            break;
+                        case 1:
+                            activityOrder = SignInActivity.RunActivity();
+                            break;
+                        case 2:
+                            activityOrder = MainActivity.RunActivity();
+                            break;
+                        case 3:
+                            activityOrder = ProductManangementActivity.RunActivity();
+                            break;
+                        case 4:
+                            activityOrder = EmployeeManagementActivity.RunActivity();
+                            break;
+                        case 5:
+                            activityOrder = CustomerManagementActivity.RunActivity();
+                            break;
+                        default:
+                            Console.WriteLine("Quit Application!!!");
+                            break;
+                    }
                 }
             }
             catch (Exception e)
