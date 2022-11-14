@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using SalesManagementApp.Database;
 using SalesManagementApp.Models;
 
 namespace SalesManagementApp.DataStructure
@@ -14,61 +15,80 @@ namespace SalesManagementApp.DataStructure
 
         public bool WriteFile(StringCustom fileName)
         {
-            StringCustom path = @fileName;
-            StreamWriter sw = new StreamWriter(fileName);
-            Node<Customer> head = nFirstItem;
-            Customer customer;
-            while (head != null)
+            StringCustom path = Directory.GetCurrentDirectory();
+            path += "/../../../Database/" + fileName;
+            try
             {
-                customer = head.item;
-                sw.WriteLine("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9}",
-                customer.ID, // 0
-                customer.Name, // 1
-                customer.Sex, // 2
-                customer.Birthday, // 3
-                customer.Address, // 4
-                customer.PhoneNumber, // 5
-                customer.NumberOfProductsPurchased, //6
-                customer.Point, // 7
-                customer.TypeOfMember, // 8
-                customer.LastPurchaseDate); // 9
-                head = head.next;
+                StreamWriter sw = new StreamWriter(path);
+                Node<Customer> head = nFirstItem;
+                Customer customer;
+                while (head != null)
+                {
+                    customer = head.item;
+                    sw.WriteLine("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9}",
+                    customer.ID, // 0
+                    customer.Name, // 1
+                    customer.Sex, // 2
+                    customer.Birthday, // 3
+                    customer.Address, // 4
+                    customer.PhoneNumber, // 5
+                    customer.NumberOfProductsPurchased, //6
+                    customer.Point, // 7
+                    customer.TypeOfMember, // 8
+                    customer.LastPurchaseDate); // 9
+
+                    head = head.next;
+                }
+                sw.Close();
             }
-            sw.Flush();
-            sw.Close();
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
             return true;
         }
 
         public bool AddFromFile(StringCustom fileName)
         {
-            StringCustom path = fileName;
-            if (!File.Exists(path)) return false;
-
-            CustomerList customerList = new CustomerList();
-            Customer customer = new Customer();
-            string[] lines = File.ReadAllLines(path);
-            foreach (string str in lines)
+            StringCustom path = Directory.GetCurrentDirectory();
+            path += "/../../../Database/" + fileName;
+            try
             {
-                customer = GetCustomerFromFile(str);
-                customerList.AddLast(customer);
+                Customer customer = new Customer();
+                // read the whole file
+                string[] lines = File.ReadAllLines(path);
+
+                foreach (string str in lines)
+                {
+                    customer = GetCustomerFromFile(new StringCustom(str));
+                    if (CustomerData.customerList.FindByID(customer.ID) == null)
+                        CustomerData.customerList.AddLast(customer);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
             }
             return true;
         }
 
         private Customer GetCustomerFromFile(StringCustom data)
         {
+            StringCustomList temp = data.Split(';');
+
             Customer customer = new Customer();
-            StringCustom[] temp = data.Split(';');
-            customer.ID = temp[0].ToInt();
-            customer.Name = temp[1];
-            customer.Sex = temp[2];
-            customer.Birthday = (Date) temp[3];
-            customer.Address = temp[4];
-            customer.PhoneNumber = temp[5];
-            customer.NumberOfProductsPurchased = temp[6].ToInt();
-            customer.Point = temp[7].ToInt();
-            customer.TypeOfMember = temp[8];
-            customer.LastPurchaseDate = (Date) temp[9];
+            customer.ID = temp.GetItem(0).ToInt();
+            customer.Name = temp.GetItem(1);
+            customer.Sex = temp.GetItem(2);
+            customer.Birthday = (Date) temp.GetItem(3);
+            customer.Address = temp.GetItem(4);
+            customer.PhoneNumber = temp.GetItem(5);
+            customer.NumberOfProductsPurchased = temp.GetItem(6).ToInt();
+            customer.Point = temp.GetItem(7).ToInt();
+            customer.TypeOfMember = temp.GetItem(8);
+            customer.LastPurchaseDate = (Date) temp.GetItem(9);
             return customer;
         }
 

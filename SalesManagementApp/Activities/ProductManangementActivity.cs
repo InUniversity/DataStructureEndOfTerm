@@ -31,7 +31,7 @@ namespace SalesManagementApp.Activities
                 Console.Write("|6. Sort By NumberOfProduct                          |\n");
                 Console.Write("|7. Check Expired Products                           |\n");
                 Console.Write("|8. Total products in stock                          |\n");
-                Console.Write("|9. Back |\n");
+                Console.Write("|9. Back                                             |\n");
                 Console.Write("|any key. Quit app                                   |\n");
                 Console.Write("=========================MENU=========================\n");
                 Console.Write("Choose: ");

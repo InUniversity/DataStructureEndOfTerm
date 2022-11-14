@@ -21,19 +21,20 @@ namespace SalesManagementApp.Activities
             {
                 Console.Clear();
                 Console.Write("===========================MENU===========================\n");
-                Console.Write("|1. Add a customer                                       |\n");
-                Console.Write("|2. Delete customer with ID                              |\n");
-                Console.Write("|3. Display customer list                                |\n");
-                Console.Write("|4. Sort by LAST purchased date                          |\n");
-                Console.Write("|5. Find by date of purchase                             |\n");
-                Console.Write("|6. Find by ID                                           |\n");
-                Console.Write("|7. Find by Name                                         |\n");
-                Console.Write("|8. Write file                                           |\n");
-                // Console.Write("|9. Read from file                                       |\n");
+                Console.Write("| 1. Add a customer                                      |\n");
+                Console.Write("| 2. Delete customer with ID                             |\n");
+                Console.Write("| 3. Display customer list                               |\n");
+                Console.Write("| 4. Sort by LAST purchased date                         |\n");
+                Console.Write("| 5. Find by date of purchase                            |\n");
+                Console.Write("| 6. Find by ID                                          |\n");
+                Console.Write("| 7. Find by Name                                        |\n");
+                Console.Write("| 8. Write file                                          |\n");
+                Console.Write("| 9. Read from file                                      |\n");
                 Console.Write("|10. Back to Main activity                               |\n");
-                Console.Write("|0. Quit app                                             |\n");
+                Console.Write("| 0. Quit app                                            |\n");
                 Console.Write("===========================MENU===========================\n");
                 Console.Write("Choose: ");
+
                 try
                 {
                     choose = Convert.ToInt32(Console.ReadLine());
@@ -128,22 +129,23 @@ namespace SalesManagementApp.Activities
                             customerList.Print();
                         }
                         break;
-                    // case 9:
-                    //     tempName = "customer.txt";
-                    //     Console.WriteLine("File name: " + tempName);
-                    //     if (!customerList.AddFromFile(tempName))
-                    //         Console.WriteLine(Constant.NOT_FOUND_MESSAGE);
-                    //     else
-                    //     {
-                    //         Console.WriteLine(Constant.SUCCESS_MESSAGE);
-                    //         customerList.Print();
-                    //     }
-                    //     break;
+                    case 9:
+                        tempName = "customer.txt";
+                        Console.WriteLine("File name: " + tempName);
+                        if (!customerList.AddFromFile(tempName))
+                            Console.WriteLine(Constant.NOT_FOUND_MESSAGE);
+                        else
+                        {
+                            Console.WriteLine(Constant.SUCCESS_MESSAGE);
+                            customerList.Print();
+                        }
+                        break;
                     case 10:
                         return 2;
                     case 0:
                         return -1;
                     default:
+                        Console.WriteLine(Constant.NOT_VALID_MESSAGE);
                         break;
                 }
                 Console.WriteLine("Press to continue...");

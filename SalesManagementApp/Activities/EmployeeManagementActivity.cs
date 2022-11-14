@@ -11,19 +11,12 @@ namespace SalesManagementApp.Activities
     {
         public static int RunActivity()
         {
-            /*
-            * Cho người dùng lựa chọn:
-            * 1.
-            * 2. 
-            * 3.
-            */
-            
             EmployeeList employeeList = EmployeeData.employeeList;
             Employee temp = new Employee();
             EmployeeList tempList = new EmployeeList(employeeList.Capacity);
             int index;
-            int choose;
-            do
+            int choose = -100;
+            while (true)
             {
                 Console.Clear();
                 Console.WriteLine("======================================MENU======================================");
@@ -42,7 +35,17 @@ namespace SalesManagementApp.Activities
                 Console.WriteLine("| 12. Print a list of employees who are absent beyond the specified date       |");
                 Console.WriteLine("| 13. Back                                                                     |");
                 Console.WriteLine("======================================MENU======================================");
-                Console.Write("Choose: "); choose = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Choose: "); 
+                
+                try
+                {
+                    choose = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
                 switch (choose)
                 {
                     case 1:
@@ -149,11 +152,8 @@ namespace SalesManagementApp.Activities
                 }
                 Console.WriteLine("Press Enter to continue...");
                 Console.ReadKey();
-                                
-            } while(true);
-            return -1;
+            }
         }
     }
     
 }
-

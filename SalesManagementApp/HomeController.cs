@@ -40,8 +40,8 @@ namespace SalesManagementApp
                             activityOrder = CustomerManagementActivity.RunActivity();
                             break;
                         default:
-                            Console.WriteLine("Quit Application!!!");
-                            break;
+                            Console.WriteLine(Constant.QUIT_APP_MESSAGE);
+                            return;
                     }
                 }
             }
