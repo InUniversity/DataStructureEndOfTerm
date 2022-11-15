@@ -34,6 +34,7 @@ namespace SalesManagementApp.Activities
                 Console.WriteLine("| 11. Print a list of employees with insufficient sales                        |");
                 Console.WriteLine("| 12. Print a list of employees who are absent beyond the specified date       |");
                 Console.WriteLine("| 13. Back                                                                     |");
+                Console.WriteLine("| 14. Quit app                                                                 |");
                 Console.WriteLine("======================================MENU======================================");
                 Console.Write("Choose: "); 
                 
@@ -146,6 +147,8 @@ namespace SalesManagementApp.Activities
                         break;
                     case 13:
                         return 2;
+                    case 14: 
+                        return -1;
                     default:
                         Console.WriteLine("Cancel!");
                         break;
