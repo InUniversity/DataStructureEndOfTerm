@@ -27,9 +27,30 @@ namespace SalesManagementApp.DataStructure
         }
 
         // methods
-        public StringCustomList Split(char sign)
+        public StringCustom Trim()
         {
-            StringCustomList result = new StringCustomList();
+            if (iSize == 0) return this;
+            int start = 0, end = iSize - 1;
+
+            while (this.CharAt(start) == ' ')
+                start++;
+            while (this.CharAt(end) == ' ')
+                end--;
+            return substring(start, end);
+        }
+
+        public StringCustom substring(int start, int end)
+        {
+            if (iSize == 0 && start < 0 && end > iSize) return this;
+            StringCustom result = "";
+            for (int i = start; i <= end; i++)
+                result = result.Concat(this.CharAt(i));
+            return result;
+        }
+
+        public LinkedLst<StringCustom> Split(char sign)
+        {
+            LinkedLst<StringCustom> result = new LinkedLst<StringCustom>();
             StringCustom temp;
             int i = 0;
             while (i < this.iSize)

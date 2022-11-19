@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Xml.Linq;
+using SalesManagementApp.Models;
 
 namespace SalesManagementApp.DataStructure
 {
-    public abstract class LinkedLst<T>
+    public class LinkedLst<T>
     {
+
         protected Node<T>? nFirstItem;
         protected Node<T>? nLastItem;
         protected int iSize;
@@ -76,7 +78,7 @@ namespace SalesManagementApp.DataStructure
             return this.nFirstItem == null;
         }
 
-        public void RemoveNode(Node<T> del)
+        public void RemoveNodeInList(Node<T> del)
         {
             if (IsEmpty()) return;
 
@@ -111,24 +113,24 @@ namespace SalesManagementApp.DataStructure
             }
         }
 
-        public void ForEach(Action<T> action)
+        public Node<T>? GetNode(T item)
         {
             Node<T>? head = nFirstItem;
             while (head != null)
             {
-                action(head.item);
+                if (item.Equals(head.item))
+                    return head;
                 head = head.next;
             }
+            return null;
         }
 
-        public abstract void AddNode(int index, T item);
-        public abstract void Remove(T item);
-        public abstract void Remove(int index);
-        public abstract void RemoveLast();
-        public abstract void AddRange(LinkedLst<T> sourceList);
-        public abstract Node<T>? GetNode(int index);
-        public abstract Node<T>? SearchNode(T item);
-        public abstract void Print();
-        public abstract int IndexOf(T item);
+        public Node<T>? GetNode(int index)
+        {
+            Node<T>? head = nFirstItem;
+            for (int i = 0; i < index; i++)
+                head = head.next;
+            return head;
+        }
     }
 }
