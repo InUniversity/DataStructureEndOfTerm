@@ -2,11 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using SalesManagementApp.Database;
+using SalesManagementApp.DataStructure.Base;
 using SalesManagementApp.Models;
 
 namespace SalesManagementApp.DataStructure
 {
-    public class CustomerList : LinkedLst<Customer>
+    public class CustomerList : LinkedLst<Customer>, ILinkedLst<Customer>
     {
 
         public CustomerList() : base()
@@ -76,7 +77,7 @@ namespace SalesManagementApp.DataStructure
 
         private Customer GetCustomerFromFile(StringCustom data)
         {
-            StringCustomList temp = data.Split(';');
+            LinkedLst<StringCustom> temp = data.Split(';');
 
             Customer customer = new Customer();
             customer.ID = temp.GetItem(0).ToInt();
@@ -146,7 +147,7 @@ namespace SalesManagementApp.DataStructure
             return customerList;
         }
 
-        public override void AddNode(int index, Customer item)
+        public void AddNode(int index, Customer item)
         {
             if (item == null) return;
 
@@ -168,7 +169,7 @@ namespace SalesManagementApp.DataStructure
             iSize++;
         }
 
-        public override void Print()
+        public void Print()
         {
             Console.WriteLine("|{0, -8}|{1, -25}|{2, -4}|{3, -10}|{4, -20}|{5, -12}|{6, -19}|{7, -6}|{8, -14}|{9, -18}|",
                 "ID",
@@ -202,21 +203,7 @@ namespace SalesManagementApp.DataStructure
             }
         }
 
-        public override Node<Customer>? SearchNode(Customer item)
-        {
-            Node<Customer>? head = nFirstItem;
-            Customer customer;
-            while (head != null)
-            {
-                customer = head.item;
-                if (item.IsEquals(customer))
-                    return head;
-                head = head.next;
-            }
-            return null;
-        }
-
-        public override int IndexOf(Customer item)
+        public int IndexOf(Customer item)
         {
             Node<Customer>? head = nFirstItem;
             for (int i = 0; i < iSize; i++)
@@ -228,23 +215,21 @@ namespace SalesManagementApp.DataStructure
             return -1;
         }
 
-        public override void Remove(int index)
+        public void Remove(int index)
         {
             Node<Customer>? del = GetNode(index);
-            if (del == null)
-                return;
-            RemoveNode(del);
+            if (del == null) return;
+            RemoveNodeInList(del);
         }
 
-        public override void Remove(Customer item)
+        public void Remove(Customer item)
         {
-            Node<Customer>? del = SearchNode(item);
-            if (del == null)
-                return;
-            RemoveNode(del);
+            Node<Customer>? del = GetNode(item);
+            if (del == null) return;
+            RemoveNodeInList(del);
         }
 
-        public override void RemoveLast()
+        public void RemoveLast()
         {
             if (IsEmpty()) return;
 
@@ -258,7 +243,7 @@ namespace SalesManagementApp.DataStructure
             iSize--;
         }
 
-        public override void AddRange(LinkedLst<Customer> sourceList)
+        public void AddRange(LinkedLst<Customer> sourceList)
         {
             Node<Customer>? head = sourceList.FirstItem;
             while (head != null)
@@ -266,14 +251,6 @@ namespace SalesManagementApp.DataStructure
                 base.AddLast(head.item);
                 head = head.next;
             }
-        }
-
-        public override Node<Customer>? GetNode(int index)
-        {
-            Node<Customer>? head = nFirstItem;
-            for (int i = 0; i < index; i++)
-                head = head.next;
-            return head;
         }
     }
 }

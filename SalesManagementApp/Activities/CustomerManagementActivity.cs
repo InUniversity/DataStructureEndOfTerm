@@ -52,7 +52,7 @@ namespace SalesManagementApp.Activities
                         Console.WriteLine("Enter customer: ");
                         tempCustomer = new Customer();
                         tempCustomer.Input();
-                        if (customerList.SearchNode(tempCustomer) != null)
+                        if (customerList.GetNode(tempCustomer) != null)
                         {
                             Console.WriteLine(Constant.DUPLICATED_MESSAGE);
                             break;

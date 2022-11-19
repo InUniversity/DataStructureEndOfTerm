@@ -1,32 +1,47 @@
 ﻿using System;
 using SalesManagementApp.DataStructure;
+using SalesManagementApp.Models;
 
 namespace SalesManagementApp.Activities
 {
     public static class SignInActivity
     {
-        private static StringCustom sUsername = "";
-        private static StringCustom sPassword = "";
 
         public static int RunActivity()
         {
-            // yêu cầu: nhập vào username và password
-            // sau đó kiểm tra nếu đúng thì trả về số 1
-            // nếu sai trả về số 0
+            ManagerAccount manager = new ManagerAccount();
+            int key = 0;
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("Enter choose: ");
+                Console.WriteLine("0. Sign in");
+                Console.WriteLine("1. Move to Sign up");
+                Console.WriteLine("2. Quit app");
 
-            Console.Clear();
-            Console.WriteLine("===========SIGN IN===========\n");
-            Console.WriteLine("|Username:                  |");
-            Console.WriteLine("|Password:                  |");
-            Console.WriteLine("===========SIGN IN===========\n");
+                try
+                {
+                    key = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
 
-            return 2;
-        }
+                if (key == 1)
+                    return 0;
+                else if (key == 2)
+                    return -1;
 
-        // phần này dùng hash table nên tạm thời chưa làm
-        public static bool IsCorrectUser()
-        {
-            return true;
+                Console.WriteLine("===========SIGN IN===========\n");
+                Console.WriteLine("|Username:");
+                manager.Username = Console.ReadLine();
+                Console.WriteLine("|Password:");
+                manager.InputPassword();
+
+                if (ManagerAccount.CheckValidAccount(manager))
+                    return 2;
+            }
         }
     }
 }

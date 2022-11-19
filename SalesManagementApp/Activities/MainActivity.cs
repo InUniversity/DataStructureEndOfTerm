@@ -19,7 +19,8 @@ namespace SalesManagementApp.Activities
                 Console.Write("|1. Move to product management                       |\n");
                 Console.Write("|2. Move to customer management                      |\n");
                 Console.Write("|3. Move to employee management                      |\n");
-                Console.Write("|4. Quit app                                         |\n");
+                Console.Write("|4. show profile                                     |\n");
+                Console.Write("|5. Quit app                                         |\n");
                 Console.Write("=========================MENU=========================\n");
                 Console.Write("Choose: "); 
                 

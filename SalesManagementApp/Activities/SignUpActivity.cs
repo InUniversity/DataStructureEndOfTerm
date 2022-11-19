@@ -1,4 +1,6 @@
 ﻿using System;
+using SalesManagementApp.Models;
+
 namespace SalesManagementApp.Activities
 {
     public static class SignUpActivity
@@ -10,7 +12,38 @@ namespace SalesManagementApp.Activities
 
         public static int RunActivity()
         {
-            return 2;
+            ManagerAccount manager = new ManagerAccount();
+            int key = 0;
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("Enter choose: ");
+                Console.WriteLine("0. Sign up");
+                Console.WriteLine("1. Quit app");
+
+                try
+                {
+                    key = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+                if (key == 1)
+                    return 0;
+                else if (key == 2)
+                    return -1;
+
+                Console.WriteLine("===========SIGN UP===========\n");
+                Console.WriteLine("|Username:");
+                manager.Username = Console.ReadLine();
+                Console.WriteLine("|Password:");
+                manager.InputPassword();
+
+                if (ManagerAccount.CheckValidAccount(manager))
+                    return 2;
+            }
         }
     }
 }
