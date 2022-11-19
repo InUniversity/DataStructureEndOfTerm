@@ -27,6 +27,17 @@ namespace SalesManagementApp.DataStructure
             base.list_[base.iSize++] = item;
         }
 
+        public void AddFirst(Product item)
+        {
+            if (base.iSize >= iCapacity) return;
+            iSize++;
+            for (int i = iSize; i > 0; i--)
+            {
+                base.list_[i] = base.list_[i - 1];
+            }
+            base.list_[0] = item;
+        }
+
         public override void AddRange(ArrayList<Product> sourceList)
         {
             for (int i = 0; i < sourceList.Size; i++)
@@ -47,7 +58,7 @@ namespace SalesManagementApp.DataStructure
         public override void Print()
         {
             Console.WriteLine("|{0, 8}|{1, -25}|{2, 16}|{3, 17}|{4, 12}|",
-                   "ID ","Name","NumberOfProduct","DayStartedUsing","DateExpires");
+                   "ID ", "Name", "NumberOfProduct", "DayStartedUsing", "DateExpires");
             for (int i = 0; i < base.iSize; i++)
             {
                 Console.WriteLine("|{0, 8}|{1, -25}|{2, 16}|{3, 17}|{4, 12}|",
@@ -68,12 +79,27 @@ namespace SalesManagementApp.DataStructure
             base.iSize--;
         }
 
+        public int RemoveItemByID(Product tempproduct)
+        {
+            int count = base.iSize;
+            for (int i = 0; i < base.iSize; i++)
+            {
+                if (base.list_[i].ID == tempproduct.ID)
+                {
+                    RemoveItem(i);
+                    count -= 3;
+                    break;
+                }
+            }
+            return count;
+
+        }
+
         public override Product SearchItem(Product item)
         {
             for (int i = 0; i < base.iSize; i++)
                 if (item.IsEqual(base.list_[i]))
                     return base.list_[i];
-
             return null;
         }
 
@@ -101,7 +127,7 @@ namespace SalesManagementApp.DataStructure
                 if (list.IsEqual(name))
                 {
                     temp.AddLast(base.list_[i]);
-                }    
+                }
             }
             if (temp.Size == 0) return null;
             return temp;
@@ -134,7 +160,7 @@ namespace SalesManagementApp.DataStructure
         {
             ProductList temp = new ProductList(100);
             for (int i = 0; i < base.iSize; i++)
-                if (today < list_[i].DateExpires)
+                if (today > list_[i].DateExpires)
                     temp.AddLast(list_[i]);
             return temp;
         }

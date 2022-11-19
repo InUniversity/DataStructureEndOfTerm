@@ -66,8 +66,6 @@ namespace SalesManagementApp.Models
             else
                 result += month;
             result += "-";
-
-            // fix "yyyy = 0230"
             result += year;
             return result;
         }
@@ -76,7 +74,7 @@ namespace SalesManagementApp.Models
         {
             int day = (((date.CharAt(0)) - '0') * 10) + ((date.CharAt(1)) - '0');
             int month = (date.CharAt(3) - '0') * 10 + (date.CharAt(4) - '0');
-            int year = (((date.CharAt(6) - '0') * 10 + (date.CharAt(7) - '0')) * 10 + 
+            int year = (((date.CharAt(6) - '0') * 10 + (date.CharAt(7) - '0')) * 10 +
                 (date.CharAt(8) - '0')) * 10 + (date.CharAt(9) - '0');
             return new Date(day, month, year);
         }

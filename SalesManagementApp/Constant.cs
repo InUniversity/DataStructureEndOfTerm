@@ -8,6 +8,7 @@ namespace SalesManagementApp
         public const int RIGHT_ARROW = 39;
         public const int LEFT_ARROW = 37;
         public const int ENTER_KEY = 13;
+        public const int LINE_SYMBOL = 9552;
 
         public const string EMPTY_MESSAGE = "-> List is Empty!!!";
         public const string NOT_FOUND_MESSAGE = "-> Not found!!!";
