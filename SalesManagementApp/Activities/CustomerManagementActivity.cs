@@ -2,6 +2,7 @@
 using SalesManagementApp.Database;
 using SalesManagementApp.DataStructure;
 using SalesManagementApp.Models;
+using SalesManagementApp.Utilities;
 
 namespace SalesManagementApp.Activities
 {
@@ -10,7 +11,7 @@ namespace SalesManagementApp.Activities
 
         public static int RunActivity()
         {
-            CustomerList customerList = CustomerData.customerList;
+            CustomerList customerList = CustomerData.GetInstance();
             CustomerList tempList;
             Customer tempCustomer;
             StringCustom tempName;
@@ -20,6 +21,7 @@ namespace SalesManagementApp.Activities
             while (true)
             {
                 Console.Clear();
+                Printer.PrintGroupInformation(80);
                 Console.Write("===========================MENU===========================\n");
                 Console.Write("| 1. Add a customer                                      |\n");
                 Console.Write("| 2. Delete customer with ID                             |\n");
@@ -52,12 +54,7 @@ namespace SalesManagementApp.Activities
                         Console.WriteLine("Enter customer: ");
                         tempCustomer = new Customer();
                         tempCustomer.Input();
-                        if (customerList.GetNode(tempCustomer) != null)
-                        {
-                            Console.WriteLine(Constant.DUPLICATED_MESSAGE);
-                            break;
-                        }
-                        customerList.AddLast(tempCustomer);
+                        customerList.AddLastNoDuplicate(tempCustomer);
                         customerList.Print();
                         break;
                     case 2:

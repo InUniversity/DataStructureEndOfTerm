@@ -14,6 +14,16 @@ namespace SalesManagementApp.DataStructure
         {
         }
 
+        public void AddLastNoDuplicate(Customer customer)
+        {
+            if (FindByID(customer.ID) != null)
+            {
+                Console.WriteLine(Constant.DUPLICATED_MESSAGE);
+                return;
+            }
+            AddLast(customer);
+        }
+
         public bool WriteFile(StringCustom fileName)
         {
             StringCustom path = Directory.GetCurrentDirectory();
@@ -63,8 +73,7 @@ namespace SalesManagementApp.DataStructure
                 foreach (string str in lines)
                 {
                     customer = GetCustomerFromFile(new StringCustom(str));
-                    if (CustomerData.customerList.FindByID(customer.ID) == null)
-                        CustomerData.customerList.AddLast(customer);
+                    AddLastNoDuplicate(customer);
                 }
             }
             catch (Exception e)
