@@ -11,7 +11,7 @@ namespace SalesManagementApp.Utilities
 
         public static void PrintGroupInformation(int space)
         {
-            string line = new string((char)Constant.LINE_SYMBOL, 34);
+            string line = new string(Constant.LINE_SYMBOL, 34);
             string angle = new string((char)9, 100);
             int left = Console.CursorLeft;
             int top = Console.CursorTop;

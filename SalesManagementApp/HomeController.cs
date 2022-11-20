@@ -1,4 +1,5 @@
 ﻿using SalesManagementApp.Activities;
+using SalesManagementApp.Database;
 
 namespace SalesManagementApp
 {
@@ -21,22 +22,22 @@ namespace SalesManagementApp
                 {
                     switch (activityOrder)
                     {
-                        case 0:
+                        case Constant.SIGNUP_ACTIVITY:
                             activityOrder = SignUpActivity.RunActivity();
                             break;
-                        case 1:
+                        case Constant.SIGNIN_ACTIVITY:
                             activityOrder = SignInActivity.RunActivity();
                             break;
-                        case 2:
+                        case Constant.MAIN_ACTIVITY:
                             activityOrder = MainActivity.RunActivity();
                             break;
-                        case 3:
+                        case Constant.PRODUCT_MANANGEMENT_ACTIVITY:
                             activityOrder = ProductManangementActivity.RunActivity();
                             break;
-                        case 4:
+                        case Constant.EMPLOYEE_MANAGEMENT_ACTIVITY:
                             activityOrder = EmployeeManagementActivity.RunActivity();
                             break;
-                        case 5:
+                        case Constant.CUSTOMER_MANAGEMENT_ACTIVITY:
                             activityOrder = CustomerManagementActivity.RunActivity();
                             break;
                         default:
@@ -49,6 +50,9 @@ namespace SalesManagementApp
             {
                 Console.WriteLine(e.Message);
             }
+
+            // save file after run program
+            CustomerData.SaveFile();
         }
     }
 }
