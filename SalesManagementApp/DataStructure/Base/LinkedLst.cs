@@ -92,27 +92,6 @@ namespace SalesManagementApp.DataStructure
             iSize--;
         }
 
-        public void Sort(Func<T, T, int> compare)
-        {
-            Node<T>? head1 = nFirstItem;
-            Node<T>? temp = null;
-            while (head1.next != null)
-            {
-                Node<T>? head2 = head1.next;
-                while (head2 != null)
-                {
-                    if (compare(head2.item, head1.item) > 0)
-                    {
-                        temp = head1;
-                        head1 = head2;
-                        head2 = temp;
-                    }
-                    head2 = head2.next;
-                }
-                head1 = head1.next;
-            }
-        }
-
         public Node<T>? GetNode(T item)
         {
             Node<T>? head = nFirstItem;

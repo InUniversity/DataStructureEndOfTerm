@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
+using SalesManagementApp.Database;
 using SalesManagementApp.DataStructure;
 
 namespace SalesManagementApp.Models
@@ -11,10 +12,12 @@ namespace SalesManagementApp.Models
         private StringCustom sPassword;
         private int iManagerID;
 
+        private const int ID_WITH_MIN_VALUE = 123456;
+
         public ManagerAccount()
         {
             sUsername = "unknow";
-            sPassword = null;
+            sPassword = "unknow";
             iManagerID = 0;
         }
 
@@ -43,6 +46,13 @@ namespace SalesManagementApp.Models
             set { this.iManagerID = value; }
         }
 
+        public static bool AccountDate { get; private set; }
+
+        public Manager GetManager()
+        {
+            return ManagerData.managerList.SearchItemWithID(iManagerID);
+        }
+
         public void Print()
         {
             Console.WriteLine("Name: {0}", sUsername);
@@ -52,7 +62,11 @@ namespace SalesManagementApp.Models
 
         public static bool Exits(ManagerAccount managerAccount)
         {
-            return true;
+            ManagerAccount temp = AccountData
+                .GetInstance()
+                .GetValue(managerAccount.Username);
+
+            return temp != null && managerAccount.Password.IsEqual(temp.Password);
         }
 
         public static bool CheckValidAccount(ManagerAccount managerAccount)
@@ -62,27 +76,27 @@ namespace SalesManagementApp.Models
                 IsValidID(managerAccount.ManagerID);
         }
 
-        /// To Do
-        public static bool IsValidUsername(StringCustom name)
+        public static bool IsValidUsername(StringCustom username)
         {
-            return name != null;
+            return username != null;
         }
 
+        // to do
         public static bool IsValidPassword(StringCustom password)
         {
-            return false;
-        }
-
-        public static bool IsValidID(int id)
-        {
-            // khong co trong hash map
             return true;
         }
 
+        // check duplicate
+        public static bool IsValidID(int id)
+        {
+            return id >= ID_WITH_MIN_VALUE && AccountData.GetInstance().Search(id) == null;
+        }
+
+        // to do
         public void InputPassword()
         {
-            throw new NotImplementedException();
+            sPassword = Console.ReadLine();
         }
     }
 }
-

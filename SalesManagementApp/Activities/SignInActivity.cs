@@ -1,6 +1,7 @@
 ﻿using System;
 using SalesManagementApp.DataStructure;
 using SalesManagementApp.Models;
+using SalesManagementApp.Utilities;
 
 namespace SalesManagementApp.Activities
 {
@@ -9,38 +10,54 @@ namespace SalesManagementApp.Activities
 
         public static int RunActivity()
         {
-            ManagerAccount manager = new ManagerAccount();
-            int key = 0;
+            ManagerAccount account = new ManagerAccount();
+            int choose = 0;
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("Enter choose: ");
-                Console.WriteLine("0. Sign in");
-                Console.WriteLine("1. Move to Sign up");
-                Console.WriteLine("2. Quit app");
-
+                Printer.PrintGroupInformation(80);
                 try
                 {
-                    key = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("===========SIGN IN===========");
+                    Console.Write("Username: ");
+                    account.Username = Console.ReadLine();
+                    Console.Write("Password: ");
+                    account.InputPassword();
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
                 }
 
-                if (key == 1)
-                    return 0;
-                else if (key == 2)
-                    return -1;
+                if (ManagerAccount.Exits(account))
+                    return Constant.MAIN_ACTIVITY;
 
-                Console.WriteLine("===========SIGN IN===========\n");
-                Console.WriteLine("|Username:");
-                manager.Username = Console.ReadLine();
-                Console.WriteLine("|Password:");
-                manager.InputPassword();
+                Console.Clear();
+                Printer.PrintGroupInformation(80);
+                Console.WriteLine("=============MENU=============");
+                Console.WriteLine("| Any key. Sign in           |");
+                Console.WriteLine("| 1. Move to Sign up         |");
+                Console.WriteLine("| 2. Quit app                |");
+                Console.WriteLine("=============MENU=============");
 
-                if (ManagerAccount.CheckValidAccount(manager))
-                    return 2;
+                Console.Write("Enter choose: ");
+                try
+                {
+                    choose = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                Console.WriteLine();
+
+                if (choose == 1)
+                    return Constant.SIGNUP_ACTIVITY;
+                else if (choose == 2)
+                    return Constant.EXIT_APPLICATION;
+
+                Console.WriteLine(Constant.NOT_VALID_MESSAGE);
+                Console.ReadKey();
             }
         }
     }

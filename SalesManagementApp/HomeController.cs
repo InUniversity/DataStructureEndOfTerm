@@ -1,5 +1,6 @@
 ﻿using SalesManagementApp.Activities;
 using SalesManagementApp.Database;
+using SalesManagementApp.Models;
 
 namespace SalesManagementApp
 {
@@ -42,6 +43,11 @@ namespace SalesManagementApp
                             break;
                         default:
                             Console.WriteLine(Constant.QUIT_APP_MESSAGE);
+
+                            // save file after run program
+                            CustomerData.SaveFile();
+                            AccountData.SaveFile();
+                            Console.ReadKey();
                             return;
                     }
                 }
@@ -50,9 +56,6 @@ namespace SalesManagementApp
             {
                 Console.WriteLine(e.Message);
             }
-
-            // save file after run program
-            CustomerData.SaveFile();
         }
     }
 }

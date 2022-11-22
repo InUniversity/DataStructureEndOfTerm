@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SalesManagementApp;
+using SalesManagementApp.Utilities;
 
 namespace SalesManagementApp.Activities
 {
@@ -15,34 +16,28 @@ namespace SalesManagementApp.Activities
             while (true)
             {
                 Console.Clear();
+                Printer.PrintGroupInformation(80);
                 Console.Write("=========================MENU=========================\n");
                 Console.Write("|1. Move to product management                       |\n");
                 Console.Write("|2. Move to customer management                      |\n");
                 Console.Write("|3. Move to employee management                      |\n");
-                Console.Write("|4. show profile                                     |\n");
-                Console.Write("|5. Quit app                                         |\n");
+                Console.Write("|4. Quit app                                         |\n");
                 Console.Write("=========================MENU=========================\n");
-                Console.Write("Choose: "); 
-                
-                try
-                {
-                    choose = Convert.ToInt32(Console.ReadLine());
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
+                Console.Write("Choose: ");
+
+                try { choose = Convert.ToInt32(Console.ReadLine()); }
+                catch (Exception e) { Console.WriteLine(e.Message); }
 
                 switch (choose)
                 {
                     case 1:
-                        return 3;
+                        return Constant.PRODUCT_MANANGEMENT_ACTIVITY;
                     case 2:
-                        return 5;
+                        return Constant.CUSTOMER_MANAGEMENT_ACTIVITY;
                     case 3:
-                        return 4;
+                        return Constant.EMPLOYEE_MANAGEMENT_ACTIVITY;
                     case 4:
-                        return -1;
+                        return Constant.EXIT_APPLICATION;
                     default:
                         Console.WriteLine(Constant.NOT_VALID_MESSAGE);
                         break;

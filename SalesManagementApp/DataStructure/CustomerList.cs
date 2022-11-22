@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using SalesManagementApp.Database;
 using SalesManagementApp.DataStructure.Base;
 using SalesManagementApp.Models;
@@ -9,6 +10,8 @@ namespace SalesManagementApp.DataStructure
 {
     public class CustomerList : LinkedLst<Customer>, ILinkedLst<Customer>
     {
+
+        private const int QUANTITY_OF_PRODUCTS_REQUIRED = 30;
 
         public CustomerList() : base()
         {
@@ -104,12 +107,44 @@ namespace SalesManagementApp.DataStructure
 
         public void SortByLastPurchaseDate()
         {
-            base.Sort((customer1, customer2) => {
-                if (customer1.LastPurchaseDate > customer2.LastPurchaseDate)
-                    return 1;
-                else
-                    return -1;
-            });
+            Node<Customer>? head1 = nFirstItem;
+            Customer temp;
+            while (head1.next != null)
+            {
+                Node<Customer>? head2 = head1.next;
+                while (head2 != null)
+                {
+                    if (head1.item.LastPurchaseDate < head2.item.LastPurchaseDate)
+                    {
+                        temp = head1.item;
+                        head1.item = head2.item;
+                        head2.item = temp;
+                    }
+                    head2 = head2.next;
+                }
+                head1 = head1.next;
+            }
+        }
+
+        public void SortBySex()
+        {
+            Node<Customer>? head1 = nFirstItem;
+            Customer temp;
+            while (head1.next != null)
+            {
+                Node<Customer>? head2 = head1.next;
+                while (head2 != null)
+                {
+                    if (head1.item.Sex.Size > head2.item.Sex.Size)
+                    {
+                        temp = head1.item;
+                        head1.item = head2.item;
+                        head2.item = temp;
+                    }
+                    head2 = head2.next;
+                }
+                head1 = head1.next;
+            }
         }
 
         public CustomerList FindByDateOfPurchase(Date start, Date end)
@@ -150,6 +185,53 @@ namespace SalesManagementApp.DataStructure
             {
                 customer = head.item;
                 if (customer.Name.Contain(name))
+                    customerList.AddLast(customer);
+                head = head.next;
+            }
+            return customerList;
+        }
+
+        public CustomerList FindCustomersWhoBuyMultipleProducts()
+        {
+            CustomerList customerList = new CustomerList();
+            Node<Customer>? head = this.nFirstItem;
+            Customer customer;
+            while (head != null)
+            {
+                customer = head.item;
+                if (customer.NumberOfProductsPurchased >= QUANTITY_OF_PRODUCTS_REQUIRED)
+                    customerList.AddLast(customer);
+                head = head.next;
+            }
+            return customerList;
+        }
+
+        public CustomerList FindByMemberType(StringCustom memberType)
+        {
+            CustomerList customerList = new CustomerList();
+            Customer customer;
+            Node<Customer>? head = this.nFirstItem;
+            while (head != null)
+            {
+                customer = head.item;
+                if (memberType.IsEqual(customer.TypeOfMember))
+                    customerList.AddLast(customer);
+                head = head.next;
+            }
+            return customerList;
+        }
+
+
+        public CustomerList FindBySexAndMemberType(StringCustom sex, StringCustom memberType)
+        {
+            CustomerList customerList = new CustomerList();
+            Customer customer;
+            Node<Customer>? head = this.nFirstItem;
+            while (head != null)
+            {
+                customer = head.item;
+                if (sex.IsEqual(customer.Sex) &&
+                    memberType.IsEqual(customer.TypeOfMember))
                     customerList.AddLast(customer);
                 head = head.next;
             }

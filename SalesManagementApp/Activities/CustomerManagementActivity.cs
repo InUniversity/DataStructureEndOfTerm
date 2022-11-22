@@ -14,7 +14,7 @@ namespace SalesManagementApp.Activities
             CustomerList customerList = CustomerData.GetInstance();
             CustomerList tempList;
             Customer tempCustomer;
-            StringCustom tempName;
+            StringCustom tempStr, tempStr1;
             Date start, end;
             int choose = 10;
             int tempID;
@@ -30,13 +30,16 @@ namespace SalesManagementApp.Activities
                 Console.Write("| 5. Find by date of purchase                            |\n");
                 Console.Write("| 6. Find by ID                                          |\n");
                 Console.Write("| 7. Find by Name                                        |\n");
-                Console.Write("| 8. Write file                                          |\n");
-                Console.Write("| 9. Read from file                                      |\n");
-                Console.Write("|10. Back to Main activity                               |\n");
+                Console.Write("| 8. Find customers who buy multiple products            |\n");
+                Console.Write("| 9. Find by member type                                 |\n");
+                Console.Write("|10. Find by sex and member type                         |\n");
+                Console.Write("|11. Write file                                          |\n");
+                Console.Write("|12. Reload customer data                                |\n");
+                Console.Write("|13. Group by gender                                     |\n");
+                Console.Write("|14. Back to Main activity                               |\n");
                 Console.Write("| 0. Quit app                                            |\n");
                 Console.Write("===========================MENU===========================\n");
                 Console.Write("Choose: ");
-
                 try
                 {
                     choose = Convert.ToInt32(Console.ReadLine());
@@ -45,7 +48,6 @@ namespace SalesManagementApp.Activities
                 {
                     Console.WriteLine(e.Message);
                 }
-
                 Console.WriteLine();
 
                 switch (choose)
@@ -106,8 +108,8 @@ namespace SalesManagementApp.Activities
                         break;
                     case 7:
                         Console.Write("Enter name: ");
-                        tempName = Console.ReadLine();
-                        tempList = customerList.FindByName(tempName);
+                        tempStr = Console.ReadLine();
+                        tempList = customerList.FindByName(tempStr);
                         if (tempList.IsEmpty())
                         {
                             Console.WriteLine(Constant.EMPTY_MESSAGE);
@@ -116,20 +118,36 @@ namespace SalesManagementApp.Activities
                         tempList.Print();
                         break;
                     case 8:
-                        Console.WriteLine("Enter file name: ");
-                        tempName = Console.ReadLine();
-                        if (!customerList.WriteFile(tempName))
-                            Console.WriteLine(Constant.NOT_FOUND_MESSAGE);
-                        else
-                        {
-                            Console.WriteLine(Constant.SUCCESS_MESSAGE);
-                            customerList.Print();
-                        }
+                        customerList.FindCustomersWhoBuyMultipleProducts().Print();
                         break;
                     case 9:
-                        tempName = "customer.txt";
-                        Console.WriteLine("File name: " + tempName);
-                        if (!customerList.AddFromFile(tempName))
+                        Console.Write("Enter member type: ");
+                        tempStr = Console.ReadLine();
+                        tempList = customerList.FindByMemberType(tempStr);
+                        if (tempList.IsEmpty())
+                        {
+                            Console.WriteLine(Constant.EMPTY_MESSAGE);
+                            break;
+                        }
+                        tempList.Print();
+                        break;
+                    case 10:
+                        Console.Write("Enter sex: ");
+                        tempStr = Console.ReadLine();
+                        Console.Write("Enter member type: ");
+                        tempStr1 = Console.ReadLine();
+                        tempList = customerList.FindBySexAndMemberType(tempStr, tempStr1);
+                        if (tempList.IsEmpty())
+                        {
+                            Console.WriteLine(Constant.EMPTY_MESSAGE);
+                            break;
+                        }
+                        tempList.Print();
+                        break;
+                    case 11:
+                        Console.WriteLine("Enter file name: ");
+                        tempStr = Console.ReadLine();
+                        if (!customerList.WriteFile(tempStr))
                             Console.WriteLine(Constant.NOT_FOUND_MESSAGE);
                         else
                         {
@@ -137,10 +155,25 @@ namespace SalesManagementApp.Activities
                             customerList.Print();
                         }
                         break;
-                    case 10:
-                        return 2;
+                    case 12:
+                        tempStr = "CustomerData.txt";
+                        Console.WriteLine("File name: " + tempStr);
+                        if (!customerList.AddFromFile(tempStr))
+                            Console.WriteLine(Constant.NOT_FOUND_MESSAGE);
+                        else
+                        {
+                            Console.WriteLine(Constant.SUCCESS_MESSAGE);
+                            customerList.Print();
+                        }
+                        break;
+                    case 13:
+                        customerList.SortBySex();
+                        customerList.Print();
+                        break;
+                    case 14:
+                        return Constant.MAIN_ACTIVITY;
                     case 0:
-                        return -1;
+                        return Constant.EXIT_APPLICATION;
                     default:
                         Console.WriteLine(Constant.NOT_VALID_MESSAGE);
                         break;

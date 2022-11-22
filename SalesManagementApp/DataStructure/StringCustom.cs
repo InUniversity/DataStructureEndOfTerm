@@ -3,6 +3,7 @@ namespace SalesManagementApp.DataStructure
 {
     public class StringCustom
     {
+
         private char[] data;
         private int iSize;
 
