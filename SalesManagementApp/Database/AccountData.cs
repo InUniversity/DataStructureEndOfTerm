@@ -7,21 +7,21 @@ namespace SalesManagementApp.Database
 	{
         private static ManagerAccountHash accountHash = Init();
 
-        public static CustomerList GetInstance()
+        public static ManagerAccountHash GetInstance()
         {
             return accountHash;
         }
 
-        private static CustomerList Init()
+        private static ManagerAccountHash Init()
         {
-            accountHash = new ManagerAccountHash(1111);
-            accountHash.AddFromFile("CustomerData.txt");
+            accountHash = new ManagerAccountHash(111);
+            accountHash.AddFromFile("AccountData.txt");
             return accountHash;
         }
 
         public static void SaveFile()
         {
-            accountHash.WriteFile("CustomerData.txt");
+            accountHash.WriteFile("AccountData.txt");
         }
     }
 }

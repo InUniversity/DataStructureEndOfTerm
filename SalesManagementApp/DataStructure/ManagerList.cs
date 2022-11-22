@@ -69,6 +69,14 @@ namespace SalesManagementApp.DataStructure
             return null;
         }
 
+        public Manager SearchItemWithID(int id)
+        {
+            for (int i = 0; i < base.iSize; i++)
+                if (id == base.list_[i].ID)
+                    return base.list_[i];
+            return null;
+        }
+
         public override int IndexOf(Manager item)
         {
             for(int i = 0; i < base.iSize; i++)

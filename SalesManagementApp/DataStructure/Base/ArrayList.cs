@@ -44,25 +44,6 @@ namespace SalesManagementApp.DataStructure
             return index >= 0 && index < this.iSize;
         }
 
-        // Truyền vào một biểu thức lambda để so sánh 2 phần tử trong mảng
-        // insertion sort
-        public void Sort(Func<T, T, int> compare)
-        {
-            int i, j;
-            T value;
-            for (i = 1; i < iSize; i++)
-            {
-                value = list_[i];
-                j = i - 1;
-                while (j >= 0 && compare(value, this.list_[j]) > 0)
-                {
-                    list_[j + 1] = list_[j];
-                    j--;
-                }
-                list_[j + 1] = value;
-            }
-        }
-
         public abstract T Get(int index);
 
         public abstract void AddLast(T item);

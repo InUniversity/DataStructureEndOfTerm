@@ -3,7 +3,6 @@ namespace SalesManagementApp.DataStructure.Base
 {
 	public interface ILinkedLst<T>
 	{
-
         public abstract void AddNode(int index, T item);
         public abstract void Remove(T item);
         public abstract void Remove(int index);
