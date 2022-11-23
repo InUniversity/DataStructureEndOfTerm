@@ -33,11 +33,7 @@ namespace SalesManagementApp.Activities
 
                 if (ManagerAccount.CheckValidAccount(manager))
                 {
-                    AccountData.GetInstance().Insert(manager.Username, manager);
-
-                    AccountData.GetInstance().GetValue(manager.Username).Print();
-
-                    Console.ReadKey();
+                    AccountData.GetInstance().AddLast(manager);
                     return Constant.MAIN_ACTIVITY;
                 }
                 Console.WriteLine(Constant.NOT_VALID_MESSAGE);

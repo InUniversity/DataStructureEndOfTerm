@@ -65,6 +65,23 @@ namespace SalesManagementApp.DataStructure
             iSize++;
         }
 
+        public void PrependTheCurrentNode(Node<T>? currentNode, T item)
+        {
+            if (currentNode == nFirstItem)
+                AddFirst(item);
+            else if (currentNode == null)
+                AddLast(item);
+            else
+            {
+                Node<T> add = new Node<T>(item);
+                add.next = currentNode;
+                currentNode.previous.next = add;
+                add.previous = currentNode.previous;
+                currentNode.previous = add;
+            }
+            iSize++;
+        }
+
         public T GetItem(int index)
         {
             Node<T>? head = nFirstItem;
@@ -78,17 +95,17 @@ namespace SalesManagementApp.DataStructure
             return this.nFirstItem == null;
         }
 
-        public void RemoveNodeInList(Node<T> del)
+        public void RemoveCurrentNode(Node<T> currentNode)
         {
             if (IsEmpty()) return;
 
-            if (nFirstItem == del)
-                nFirstItem = del.next;
+            if (nFirstItem == currentNode)
+                nFirstItem = currentNode.next;
 
-            if (del.next != null)
-                del.next.previous = del.previous;
-            if (del.previous != null)
-                del.previous.next = del.next;
+            if (currentNode.next != null)
+                currentNode.next.previous = currentNode.previous;
+            if (currentNode.previous != null)
+                currentNode.previous.next = currentNode.next;
             iSize--;
         }
 
