@@ -5,16 +5,16 @@ namespace SalesManagementApp.Database
 {
 	public class AccountData
 	{
-        private static ManagerAccountHash accountHash = Init();
+        private static AccountList accountHash = Init();
 
-        public static ManagerAccountHash GetInstance()
+        public static AccountList GetInstance()
         {
             return accountHash;
         }
 
-        private static ManagerAccountHash Init()
+        private static AccountList Init()
         {
-            accountHash = new ManagerAccountHash(111);
+            accountHash = new AccountList();
             accountHash.AddFromFile("AccountData.txt");
             return accountHash;
         }

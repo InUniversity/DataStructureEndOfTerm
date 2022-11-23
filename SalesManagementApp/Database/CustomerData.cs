@@ -4,25 +4,25 @@ using SalesManagementApp.Models;
 
 namespace SalesManagementApp.Database
 {
-    public static class CustomerData
+    public class CustomerData
     {
-        private static CustomerList customerList = Init();
+        private static CustomerHash customerHash = Init();
 
-        public static CustomerList GetInstance()
+        public static CustomerHash GetInstance()
         {
-            return customerList;
+            return customerHash;
         }
 
-        private static CustomerList Init()
+        private static CustomerHash Init()
         {
-            customerList = new CustomerList();
-            customerList.AddFromFile("CustomerData.txt");
-            return customerList;
+            customerHash = new CustomerHash(111);
+            customerHash.AddFromFile("CustomerData.txt");
+            return customerHash;
         }
 
         public static void SaveFile()
         {
-            customerList.WriteFile("CustomerData.txt");
+            customerHash.WriteFile("CustomerData.txt");
         }
     }
 }

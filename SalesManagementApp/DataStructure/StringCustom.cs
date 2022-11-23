@@ -96,7 +96,7 @@ namespace SalesManagementApp.DataStructure
             return false;
         }
 
-        public bool IsEqual(StringCustom strCustom)
+        public bool IsEquals(StringCustom strCustom)
         {
             if (iSize != strCustom.Size)
                 return false;

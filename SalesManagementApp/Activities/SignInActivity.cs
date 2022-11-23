@@ -1,4 +1,5 @@
 ﻿using System;
+using SalesManagementApp.Database;
 using SalesManagementApp.DataStructure;
 using SalesManagementApp.Models;
 using SalesManagementApp.Utilities;
@@ -29,7 +30,7 @@ namespace SalesManagementApp.Activities
                     Console.WriteLine(e.Message);
                 }
 
-                if (ManagerAccount.Exits(account))
+                if (AccountData.GetInstance().Exits(account))
                     return Constant.MAIN_ACTIVITY;
 
                 Console.Clear();
@@ -55,9 +56,6 @@ namespace SalesManagementApp.Activities
                     return Constant.SIGNUP_ACTIVITY;
                 else if (choose == 2)
                     return Constant.EXIT_APPLICATION;
-
-                Console.WriteLine(Constant.NOT_VALID_MESSAGE);
-                Console.ReadKey();
             }
         }
     }

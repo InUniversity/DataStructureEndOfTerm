@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using SalesManagementApp.DataStructure.Base;
+using SalesManagementApp.Models;
 
 namespace SalesManagementApp.DataStructure
 {
@@ -27,6 +29,11 @@ namespace SalesManagementApp.DataStructure
         {
             get { return this.iSize; }
             set { this.iSize = value; }
+        }
+
+        public bool IsEmpty()
+        {
+            return iSize == 0;
         }
 
         public void Insert(T key, V value)

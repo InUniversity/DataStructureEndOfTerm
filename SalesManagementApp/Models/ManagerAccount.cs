@@ -53,20 +53,16 @@ namespace SalesManagementApp.Models
             return ManagerData.managerList.SearchItemWithID(iManagerID);
         }
 
+        public bool IsEquals(ManagerAccount item)
+        {
+            return iManagerID == item.ManagerID;
+        }
+
         public void Print()
         {
             Console.WriteLine("Name: {0}", sUsername);
             Console.WriteLine("Password: {0}", sPassword);
             Console.WriteLine("ID: {0}", iManagerID);
-        }
-
-        public static bool Exits(ManagerAccount managerAccount)
-        {
-            ManagerAccount temp = AccountData
-                .GetInstance()
-                .GetValue(managerAccount.Username);
-
-            return temp != null && managerAccount.Password.IsEqual(temp.Password);
         }
 
         public static bool CheckValidAccount(ManagerAccount managerAccount)
@@ -90,7 +86,7 @@ namespace SalesManagementApp.Models
         // check duplicate
         public static bool IsValidID(int id)
         {
-            return id >= ID_WITH_MIN_VALUE && AccountData.GetInstance().Search(id) == null;
+            return id >= ID_WITH_MIN_VALUE && AccountData.GetInstance().FindById(id) == null;
         }
 
         // to do

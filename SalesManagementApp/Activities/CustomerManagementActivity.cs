@@ -11,8 +11,8 @@ namespace SalesManagementApp.Activities
 
         public static int RunActivity()
         {
-            CustomerList customerList = CustomerData.GetInstance();
-            CustomerList tempList;
+            CustomerHash customerHash = CustomerData.GetInstance();
+            CustomerHash tempHash;
             Customer tempCustomer;
             StringCustom tempStr, tempStr1;
             Date start, end;
@@ -56,32 +56,31 @@ namespace SalesManagementApp.Activities
                         Console.WriteLine("Enter customer: ");
                         tempCustomer = new Customer();
                         tempCustomer.Input();
-                        customerList.AddLastNoDuplicate(tempCustomer);
-                        customerList.Print();
+                        customerHash.InsertNoDuplicate(tempCustomer);
+                        customerHash.Print();
                         break;
                     case 2:
                         Console.Write("Enter ID: ");
                         tempID = Convert.ToInt32(Console.ReadLine());
-                        tempCustomer = customerList.FindByID(tempID);
+                        tempCustomer = customerHash.GetValue(tempID);
                         if (tempCustomer == null)
                         {
                             Console.WriteLine(Constant.NOT_FOUND_MESSAGE);
                             break;
                         }
-                        customerList.Remove(tempCustomer);
-                        customerList.Print();
+                        customerHash.Remove(tempCustomer.ID);
+                        customerHash.Print();
                         break;
                     case 3:
-                        if (customerList.IsEmpty())
+                        if (customerHash.IsEmpty())
                         {
                             Console.WriteLine(Constant.EMPTY_MESSAGE);
                             break;
                         }
-                        customerList.Print();
+                        customerHash.Print();
                         break;
                     case 4:
-                        customerList.SortByLastPurchaseDate();
-                        customerList.Print();
+                        customerHash.SortByLastPurchaseDate();
                         break;
                     case 5:
                         start = new Date(-1, -1, -1);
@@ -92,13 +91,13 @@ namespace SalesManagementApp.Activities
                         Console.WriteLine("Enter end date:\n{");
                         end.Input();
                         Console.WriteLine("}");
-                        tempList = customerList.FindByDateOfPurchase(start, end);
-                        tempList.Print();
+                        tempHash = customerHash.FindByDateOfPurchase(start, end);
+                        tempHash.Print();
                         break;
                     case 6:
                         Console.Write("Enter ID: ");
                         tempID = Convert.ToInt32(Console.ReadLine());
-                        tempCustomer = customerList.FindByID(tempID);
+                        tempCustomer = customerHash.GetValue(tempID);
                         if (tempCustomer == null)
                         {
                             Console.WriteLine(Constant.NOT_FOUND_MESSAGE);
@@ -109,66 +108,65 @@ namespace SalesManagementApp.Activities
                     case 7:
                         Console.Write("Enter name: ");
                         tempStr = Console.ReadLine();
-                        tempList = customerList.FindByName(tempStr);
-                        if (tempList.IsEmpty())
+                        tempHash = customerHash.FindByName(tempStr);
+                        if (tempHash.IsEmpty())
                         {
                             Console.WriteLine(Constant.EMPTY_MESSAGE);
                             break;
                         }
-                        tempList.Print();
+                        tempHash.Print();
                         break;
                     case 8:
-                        customerList.FindCustomersWhoBuyMultipleProducts().Print();
+                        customerHash.FindCustomersWhoBuyMultipleProducts().Print();
                         break;
                     case 9:
                         Console.Write("Enter member type: ");
                         tempStr = Console.ReadLine();
-                        tempList = customerList.FindByMemberType(tempStr);
-                        if (tempList.IsEmpty())
+                        tempHash = customerHash.FindByMemberType(tempStr);
+                        if (tempHash.IsEmpty())
                         {
                             Console.WriteLine(Constant.EMPTY_MESSAGE);
                             break;
                         }
-                        tempList.Print();
+                        tempHash.Print();
                         break;
                     case 10:
-                        Console.Write("Enter sex: ");
+                        Console.Write("Enter gender: ");
                         tempStr = Console.ReadLine();
                         Console.Write("Enter member type: ");
                         tempStr1 = Console.ReadLine();
-                        tempList = customerList.FindBySexAndMemberType(tempStr, tempStr1);
-                        if (tempList.IsEmpty())
+                        tempHash = customerHash.FindBySexAndMemberType(tempStr, tempStr1);
+                        if (tempHash.IsEmpty())
                         {
                             Console.WriteLine(Constant.EMPTY_MESSAGE);
                             break;
                         }
-                        tempList.Print();
+                        tempHash.Print();
                         break;
                     case 11:
                         Console.WriteLine("Enter file name: ");
                         tempStr = Console.ReadLine();
-                        if (!customerList.WriteFile(tempStr))
+                        if (!customerHash.WriteFile(tempStr))
                             Console.WriteLine(Constant.NOT_FOUND_MESSAGE);
                         else
                         {
                             Console.WriteLine(Constant.SUCCESS_MESSAGE);
-                            customerList.Print();
+                            customerHash.Print();
                         }
                         break;
                     case 12:
                         tempStr = "CustomerData.txt";
                         Console.WriteLine("File name: " + tempStr);
-                        if (!customerList.AddFromFile(tempStr))
+                        if (!customerHash.AddFromFile(tempStr))
                             Console.WriteLine(Constant.NOT_FOUND_MESSAGE);
                         else
                         {
                             Console.WriteLine(Constant.SUCCESS_MESSAGE);
-                            customerList.Print();
+                            customerHash.Print();
                         }
                         break;
                     case 13:
-                        customerList.SortBySex();
-                        customerList.Print();
+                        customerHash.SortByGender();
                         break;
                     case 14:
                         return Constant.MAIN_ACTIVITY;
