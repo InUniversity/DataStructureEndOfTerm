@@ -92,7 +92,13 @@ namespace SalesManagementApp.Models
         // to do
         public void InputPassword()
         {
-            sPassword = Console.ReadLine();
+            char c;
+            do
+            {
+                c = Console.ReadKey(true).KeyChar;
+                Console.Write("*");
+                sPassword += c;
+            } while (c != 13);
         }
     }
 }
