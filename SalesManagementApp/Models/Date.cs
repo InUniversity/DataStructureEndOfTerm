@@ -141,6 +141,12 @@ namespace SalesManagementApp.Models
         {
             return this;
         }
+
+        public static Date GetCurrentDate()
+        {
+            return null;
+        }
+
     }
 }
 
