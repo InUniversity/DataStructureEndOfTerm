@@ -9,6 +9,9 @@ namespace SalesManagementApp.Models
         private int iDay;
         private int iMonth;
         private int iYear;
+        private int iHour;
+        private int iMinute;
+        private int iSecond;
 
         public int Day
         {
@@ -28,16 +31,44 @@ namespace SalesManagementApp.Models
             set { iYear = value; }
         }
 
+        public int Hour
+        {
+            get { return iHour; }
+            set { iHour = value; }
+        }
+
+        public int Minute
+        {
+            get { return iMinute; }
+            set { iMinute = value; }
+        }
+
+        public int Second
+        {
+            get { return iSecond; }
+            set{ iSecond = value;}
+        }
+
         public Date()
         {
 
         }
 
+        public Date(int iDay, int iMonth, int iYear, int iHour, int iMinute, int iSecond)
+        {
+            this.Day = iDay;
+            this.Month = iMonth;
+            this.Year = iYear;
+            this.Hour = iHour;
+            this.Minute = iMinute;
+            this.Second = iSecond;
+        }
+
         public Date(int iDay, int iMonth, int iYear)
         {
-            Day = iDay;
-            Month = iMonth;
-            Year = iYear;
+            this.Day = iDay;
+            this.Month = iMonth;
+            this.Year = iYear;
         }
 
         public void Input()
@@ -49,11 +80,18 @@ namespace SalesManagementApp.Models
             Month = Convert.ToInt32(Console.ReadLine());
             Console.Write("Year: ");
             Year = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Hour: ");
+            Hour = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Minute: ");
+            Minute = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Second: ");
+            Second = Convert.ToInt32(Console.ReadLine());
         }
 
         public static implicit operator string(Date date)
         {
             int day = date.Day, month = date.Month, year = date.Year;
+            int hour = date.Hour, minute = date.Minute, second = date.Second;
             string result = "";
             if (day < 10)
                 result += ("0" + day);
@@ -67,6 +105,21 @@ namespace SalesManagementApp.Models
                 result += month;
             result += "-";
             result += year;
+            result +=";";
+            if (hour < 10)
+                result += ("0" + hour);
+            else
+                result += hour;
+            result += "-";
+            if (minute < 10)
+                result += ("0" + minute);
+            else
+                result += minute;
+            result += "-";
+            if (second < 10)
+                result += ("0" + second);
+            else
+                result += second;
             return result;
         }
 
@@ -83,16 +136,28 @@ namespace SalesManagementApp.Models
         {
             if (a.Year > b.Year)
                 return true;
-            else if (a.Year == b.Year)
-            {
-                if (a.Month > b.Month)
-                    return true;
-                else if (b.Month == a.Month)
-                {
-                    if (a.Day > b.Day)
-                        return true;
-                }
-            }
+            if(a.Year < b.Year)
+                return false;
+            if (a.Month > b.Month)
+                return true;
+            if (a.Month < b.Month)
+                return false;
+            if (a.Day > b.Day)
+                return true;
+            if (a.Day < b.Day)
+                return false;
+            if (a.Hour > b.Hour)
+                return true;
+            if (a.Hour < b.Hour)
+                return false;
+            if (a.Minute > b.Minute)
+                return true;
+            if (a.Minute < b.Minute)
+                return false;
+            if (a.Second > b.Second)
+                return true;
+            if (a.Second < b.Second)
+                return false;
             return false;
         }
 
@@ -105,16 +170,28 @@ namespace SalesManagementApp.Models
         {
             if (a.Year < b.Year)
                 return true;
-            else if (a.Year == b.Year)
-            {
-                if (a.Month < b.Month)
-                    return true;
-                else if (b.Month == a.Month)
-                {
-                    if (a.Day < b.Day)
-                        return true;
-                }
-            }
+            if (a.Year > b.Year)
+                return false;
+            if (a.Month < b.Month)
+                return true;
+            if (a.Month > b.Month)
+                return false;
+            if (a.Day < b.Day)
+                return true;
+            if (a.Day > b.Day)
+                return false;
+            if (a.Hour < b.Hour)
+                return true;
+            if (a.Hour > b.Hour)
+                return false;
+            if (a.Minute < b.Minute)
+                return true;
+            if (a.Minute > b.Minute)
+                return false;
+            if (a.Second < b.Second)
+                return true;
+            if (a.Second > b.Second)
+                return false;
             return false;
         }
 
@@ -125,14 +202,14 @@ namespace SalesManagementApp.Models
 
         public static bool operator ==(Date a, Date b)
         {
-            if ((a.Year == b.Year) && (a.Month == b.Month) && (a.Day == b.Day))
+            if ((a.Year == b.Year) && (a.Month == b.Month) && (a.Day == b.Day) && (a.Hour == b.Hour) && (a.Minute == b.Minute) && (a.Second == b.Second))
                 return true;
             return false;
         }
 
         public static bool operator !=(Date a, Date b)
         {
-            if ((a.Year != b.Year) || (a.Month != b.Month) || (a.Day != b.Day))
+            if ((a.Year != b.Year) || (a.Month != b.Month) || (a.Day != b.Day) || (a.Hour != b.Hour) || (a.Minute != b.Minute) || (a.Second != b.Second))
                 return true;
             return false;
         }
@@ -144,7 +221,25 @@ namespace SalesManagementApp.Models
 
         public static Date GetCurrentDate()
         {
-            return null;
+            
+            DateTime dateTime = DateTime.UtcNow.Date;
+            return new Date(
+                dateTime.Day, 
+                dateTime.Month,
+                dateTime.Year,
+                dateTime.Hour,
+                dateTime.Minute,
+                dateTime.Second);
+        }
+
+        public void Print()
+        {
+            Console.WriteLine("Day:"+this.Day);
+            Console.WriteLine("Month:" + this.Month);
+            Console.WriteLine("Year:" + this.Year);
+            Console.WriteLine("Hour:" + this.Hour);
+            Console.WriteLine("Minute:" + this.Minute);
+            Console.WriteLine("Second:" + this.Second);
         }
 
     }
