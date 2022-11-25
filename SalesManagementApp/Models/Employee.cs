@@ -38,7 +38,7 @@ namespace SalesManagementApp.Models
         {
 
         }
-        public Employee(int id, StringCustom name, StringCustom sex, Date birthday, StringCustom address, StringCustom phoneno,int salary, int orderNumber, int noOfWork /*,List<Customer> lcustomer*/) :base(id,name,sex,birthday,address, phoneno)
+        public Employee(StringCustom id, StringCustom name, StringCustom sex, Date birthday, StringCustom address, StringCustom phoneno,int salary, int orderNumber, int noOfWork /*,List<Customer> lcustomer*/) :base(id,name,sex,birthday,address, phoneno)
         {
             this.iSalary = salary;
             this.iOrderNumber = orderNumber;

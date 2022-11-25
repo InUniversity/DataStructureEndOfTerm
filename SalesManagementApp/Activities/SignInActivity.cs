@@ -30,7 +30,7 @@ namespace SalesManagementApp.Activities
                     Console.WriteLine(e.Message);
                 }
 
-                if (AccountData.GetInstance().Exits(account))
+                if (AccountData.accountHash.Exits(account))
                     return Constant.MAIN_ACTIVITY;
 
                 Console.Clear();

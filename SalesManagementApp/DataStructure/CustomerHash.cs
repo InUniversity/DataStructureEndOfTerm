@@ -10,7 +10,7 @@ using SalesManagementApp.Models;
 
 namespace SalesManagementApp.DataStructure
 {
-    public class CustomerHash : HashTable<int, Customer>
+    public class CustomerHash : HashTable<StringCustom, Customer>
     {
 
         private const int QUANTITY_OF_PRODUCTS_REQUIRED = 30;
@@ -36,8 +36,8 @@ namespace SalesManagementApp.DataStructure
             try
             {
                 StreamWriter sw = new StreamWriter(path);
-                Node<Pair<int, Customer>>? head = null;
-                Pair<int, Customer> temp = null;
+                Node<Pair<StringCustom, Customer>>? head = null;
+                Pair<StringCustom, Customer> temp = null;
                 Customer customer = null;
                 for (int i = 0; i < BUCKET; i++)
                 {
@@ -48,7 +48,7 @@ namespace SalesManagementApp.DataStructure
                         sw.WriteLine("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9}",
                         customer.ID, // 0
                         customer.Name, // 1
-                        customer.Sex, // 2
+                        customer.Gender, // 2
                         customer.Birthday, // 3
                         customer.Address, // 4
                         customer.PhoneNumber, // 5
@@ -98,9 +98,9 @@ namespace SalesManagementApp.DataStructure
             LinkedLst<StringCustom> temp = data.Split(';');
 
             Customer customer = new Customer();
-            customer.ID = temp.GetItem(0).ToInt();
+            customer.ID = temp.GetItem(0);
             customer.Name = temp.GetItem(1);
-            customer.Sex = temp.GetItem(2);
+            customer.Gender = temp.GetItem(2);
             customer.Birthday = (Date) temp.GetItem(3);
             customer.Address = temp.GetItem(4);
             customer.PhoneNumber = temp.GetItem(5);
@@ -115,7 +115,7 @@ namespace SalesManagementApp.DataStructure
         {
             LinkedLst<Customer> orderedList = new LinkedLst<Customer>();
 
-            Node<Pair<int, Customer>>? head;
+            Node<Pair<StringCustom, Customer>>? head;
             Customer account;
             for (int i = 0; i < BUCKET; i++)
             {
@@ -162,7 +162,7 @@ namespace SalesManagementApp.DataStructure
         {
             Func<Customer, Customer, int> compare = (item1, item2) =>
             {
-                if (item1.Sex.Size < item2.Sex.Size)
+                if (item1.Gender.Size < item2.Gender.Size)
                     return 1;
                 else
                     return -1;
@@ -192,7 +192,7 @@ namespace SalesManagementApp.DataStructure
                 Console.WriteLine("|{0, 8}|{1, 25}|{2, 4}|{3, 10}|{4, 20}|{5, 12}|{6, 19}|{7, 6}|{8, 14}|{9, 18}|",
                     customer.ID, // 0
                     customer.Name, // 1
-                    customer.Sex, // 2
+                    customer.Gender, // 2
                     customer.Birthday, // 3
                     customer.Address, // 4
                     customer.PhoneNumber.ToString(), // 5
@@ -204,58 +204,99 @@ namespace SalesManagementApp.DataStructure
             }
         }
 
-        public CustomerHash FindByValue(Func<Customer, bool> compare)
+        public CustomerHash FindByDateOfPurchase(Date start, Date end)
         {
             CustomerHash result = new CustomerHash(BUCKET);
-            Node<Pair<int, Customer>>? head = null;
-            Pair<int, Customer> temp = null;
+            Node<Pair<StringCustom, Customer>>? head = null;
+            Customer? customer = null;
             for (int i = 0; i < BUCKET; i++)
             {
                 head = table[i].FirstItem;
                 while (head != null)
                 {
-                    temp = head.item;
-                    if (compare(temp.value))
-                        result.Insert(temp.key, temp.value);
+                    customer = head.item.value;
+                    if (customer.LastPurchaseDate >= start && customer.LastPurchaseDate <= end)
+                        result.Insert(customer.ID, customer);
                     head = head.next;
                 }
             }
             return result;
         }
 
-        public CustomerHash FindByDateOfPurchase(Date start, Date end)
-        {
-            Func<Customer, bool> condition = (customer) =>
-                customer.LastPurchaseDate >= start && customer.LastPurchaseDate <= end;
-            return FindByValue(condition);
-        }
-
         public CustomerHash FindByName(StringCustom name)
         {
-            Func<Customer, bool> condition = (customer) =>
-                name.Contain(customer.Name);
-            return FindByValue(condition);
+            CustomerHash result = new CustomerHash(BUCKET);
+            Node<Pair<StringCustom, Customer>>? head = null;
+            Customer? customer = null;
+            for (int i = 0; i < BUCKET; i++)
+            {
+                head = table[i].FirstItem;
+                while (head != null)
+                {
+                    customer = head.item.value;
+                    if (name.Contain(customer.Name))
+                        result.Insert(customer.ID, customer);
+                    head = head.next;
+                }
+            }
+            return result;
         }
 
         public CustomerHash FindCustomersWhoBuyMultipleProducts()
         {
-            Func<Customer, bool> condition = (customer) =>
-                customer.NumberOfProductsPurchased >= QUANTITY_OF_PRODUCTS_REQUIRED;
-            return FindByValue(condition);
+            CustomerHash result = new CustomerHash(BUCKET);
+            Node<Pair<StringCustom, Customer>>? head = null;
+            Customer? customer = null;
+            for (int i = 0; i < BUCKET; i++)
+            {
+                head = table[i].FirstItem;
+                while (head != null)
+                {
+                    customer = head.item.value;
+                    if (customer.NumberOfProductsPurchased >= QUANTITY_OF_PRODUCTS_REQUIRED)
+                        result.Insert(customer.ID, customer);
+                    head = head.next;
+                }
+            }
+            return result;
         }
 
         public CustomerHash FindByMemberType(StringCustom memberType)
         {
-            Func<Customer, bool> condition = (customer) =>
-                memberType.IsEquals(customer.TypeOfMember);
-            return FindByValue(condition);
+            CustomerHash result = new CustomerHash(BUCKET);
+            Node<Pair<StringCustom, Customer>>? head = null;
+            Customer? customer = null;
+            for (int i = 0; i < BUCKET; i++)
+            {
+                head = table[i].FirstItem;
+                while (head != null)
+                {
+                    customer = head.item.value;
+                    if (memberType.IsEquals(customer.TypeOfMember))
+                        result.Insert(customer.ID, customer);
+                    head = head.next;
+                }
+            }
+            return result;
         }
 
         public CustomerHash FindBySexAndMemberType(StringCustom sex, StringCustom memberType)
         {
-            Func<Customer, bool> condition = (customer) =>
-                sex.IsEquals(customer.Sex) && memberType.IsEquals(customer.TypeOfMember);
-            return FindByValue(condition);
+            CustomerHash result = new CustomerHash(BUCKET);
+            Node<Pair<StringCustom, Customer>>? head = null;
+            Customer? customer = null;
+            for (int i = 0; i < BUCKET; i++)
+            {
+                head = table[i].FirstItem;
+                while (head != null)
+                {
+                    customer = head.item.value;
+                    if (sex.IsEquals(customer.Gender) && memberType.IsEquals(customer.TypeOfMember))
+                        result.Insert(customer.ID, customer);
+                    head = head.next;
+                }
+            }
+            return result;
         }
 
         public void Print()
@@ -272,7 +313,7 @@ namespace SalesManagementApp.DataStructure
                 "Type of member",
                 "Last purchase date");
 
-            Node<Pair<int, Customer>>? head = null;
+            Node<Pair<StringCustom, Customer>>? head = null;
             Customer customer = null;
             for (int i = 0; i < BUCKET; i++)
             {
@@ -283,7 +324,7 @@ namespace SalesManagementApp.DataStructure
                     Console.WriteLine("|{0, 8}|{1, 25}|{2, 4}|{3, 10}|{4, 20}|{5, 12}|{6, 19}|{7, 6}|{8, 14}|{9, 18}|",
                         customer.ID, // 0
                         customer.Name, // 1
-                        customer.Sex, // 2
+                        customer.Gender, // 2
                         customer.Birthday, // 3
                         customer.Address, // 4
                         customer.PhoneNumber.ToString(), // 5
@@ -296,14 +337,14 @@ namespace SalesManagementApp.DataStructure
             }
         }
 
-        public override void Remove(int key)
+        public override void Remove(StringCustom key)
         {
             int index = HashFunction(key);
             if (table[index].IsEmpty())
                 return;
 
-            Pair<int, Customer> delItem = null;
-            Node<Pair<int, Customer>>? head = table[index].FirstItem;
+            Pair<StringCustom, Customer> delItem = null;
+            Node<Pair<StringCustom, Customer>>? head = table[index].FirstItem;
             while (head != null)
             {
                 if (key == head.item.key)
@@ -315,30 +356,33 @@ namespace SalesManagementApp.DataStructure
             }
             if (delItem == null) return;
 
-            Node<Pair<int, Customer>>? delNode = table[index].GetNode(delItem);
+            Node<Pair<StringCustom, Customer>>? delNode = table[index].GetNode(delItem);
             table[index].RemoveCurrentNode(delNode);
             iSize--;
         }
 
-        public override Customer GetValue(int key)
+        public override Customer GetValue(StringCustom key)
         {
             int index = HashFunction(key);
             if (table[index].IsEmpty())
                 return null;
 
-            Node<Pair<int, Customer>>? head = table[index].FirstItem;
+            Node<Pair<StringCustom, Customer>>? head = table[index].FirstItem;
             while (head != null)
             {
-                if (key == head.item.key)
+                if (key.IsEquals(head.item.key))
                     return head.item.value;
                 head = head.next;
             }
             return null;
         }
 
-        public override int HashFunction(int key)
+        public override int HashFunction(StringCustom key)
         {
-            return key % BUCKET;
+            int temp = 0;
+            for (int i = 0; i < key.Size; i++)
+                temp += key.CharAt(i);
+            return temp % BUCKET;
         }
     }
 }

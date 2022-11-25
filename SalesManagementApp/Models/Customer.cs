@@ -18,10 +18,10 @@ namespace SalesManagementApp.Models
             dLastPurchaseDate = new Date(-1, -1, -1);
         }
 
-        public Customer(int iID, StringCustom sName, StringCustom sSex,
+        public Customer(StringCustom sID, StringCustom sName, StringCustom sSex,
             Date dBirthday, StringCustom sAddress, StringCustom iPhoneNumber,
             int iNumberOfProductsPurchased, int iPoint, StringCustom sTypeOfMember,
-            Date dLastPurchaseDate) : base(iID, sName, sSex, dBirthday,
+            Date dLastPurchaseDate) : base(sID, sName, sSex, dBirthday,
                 sAddress, iPhoneNumber)
         {
             this.iNumberOfProductsPurchased = iNumberOfProductsPurchased;
@@ -82,7 +82,7 @@ namespace SalesManagementApp.Models
 
         public override bool IsEquals(Person person)
         {
-            return base.iID == person.ID;
+            return base.sID == person.ID;
         }
     }
 }

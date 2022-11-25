@@ -69,10 +69,10 @@ namespace SalesManagementApp.DataStructure
             return null;
         }
 
-        public Manager SearchItemWithID(int id)
+        public Manager SearchItemWithID(StringCustom id)
         {
             for (int i = 0; i < base.iSize; i++)
-                if (id == base.list_[i].ID)
+                if (id.IsEquals(base.list_[i].ID))
                     return base.list_[i];
             return null;
         }

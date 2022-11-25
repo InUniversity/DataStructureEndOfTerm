@@ -86,7 +86,7 @@ namespace SalesManagementApp.Models
         // check duplicate
         public static bool IsValidID(int id)
         {
-            return id >= ID_WITH_MIN_VALUE && AccountData.GetInstance().FindById(id) == null;
+            return id >= ID_WITH_MIN_VALUE && AccountData.accountHash.FindById(id) == null;
         }
 
         // to do

@@ -7,9 +7,9 @@ namespace SalesManagementApp.Models
     {
 
         // fields
-        protected int iID;
+        protected StringCustom sID;
         protected StringCustom sName;
-        protected StringCustom sSex;
+        protected StringCustom sGender;
         protected Date dBirthday;
         protected StringCustom sAddress;
         protected StringCustom iPhoneNumber;
@@ -20,12 +20,12 @@ namespace SalesManagementApp.Models
             dBirthday = new Date(-1, -1, -1);
         }
 
-        public Person(int iID,StringCustom sName, StringCustom sSex,
+        public Person(string sID,StringCustom sName, StringCustom sGender,
             Date dBirthday, StringCustom sAddress, StringCustom iPhoneNumber)
         {
-            this.iID = iID;
+            this.sID = sID;
             this.sName = sName;
-            this.sSex = sSex;
+            this.sGender = sGender;
             this.dBirthday = dBirthday;
             this.sAddress = sAddress;
             this.iPhoneNumber = iPhoneNumber;
@@ -35,10 +35,10 @@ namespace SalesManagementApp.Models
         ~Person() { }
 
         // properties
-        public int ID
+        public string ID
         {
-            get { return iID; }
-            set { iID = value; }
+            get { return sID; }
+            set { sID = value; }
         }
 
         public StringCustom Name
@@ -47,10 +47,10 @@ namespace SalesManagementApp.Models
             set { sName = value; }
         }
 
-        public StringCustom Sex
+        public StringCustom Gender
         {
-            get { return sSex; }
-            set { sSex = value; }
+            get { return sGender; }
+            set { sGender = value; }
         }
 
         public Date Birthday
@@ -75,11 +75,11 @@ namespace SalesManagementApp.Models
         public virtual void Input()
         {
             Console.Write("ID: ");
-            iID = Convert.ToInt32(Console.ReadLine());
+            sID = Console.ReadLine();
             Console.Write("Name: ");
             sName = Console.ReadLine();
             Console.Write("Sex: ");
-            sSex = Console.ReadLine();
+            sGender = Console.ReadLine();
             Console.WriteLine("Enter birthday:");
             Console.WriteLine("{");
             dBirthday.Input();
@@ -92,9 +92,9 @@ namespace SalesManagementApp.Models
 
         public virtual void Print()
         {
-            Console.WriteLine("ID: " + iID);
+            Console.WriteLine("ID: " + sID);
             Console.WriteLine("Name: " + sName);
-            Console.WriteLine("Sex: " + sSex);
+            Console.WriteLine("Sex: " + sGender);
             Console.WriteLine("Birhday: " + dBirthday);
             Console.WriteLine("Address: " + sAddress);
             Console.WriteLine("Phone number: " + iPhoneNumber);

@@ -31,7 +31,7 @@ namespace SalesManagementApp.Models
         // methods
         public bool IsEqual(Manager manager)
         {
-            if (this.iID == manager.ID) return true;
+            if (this.sID == manager.ID) return true;
             else return false;
         }
 
@@ -53,7 +53,7 @@ namespace SalesManagementApp.Models
 
         public override bool IsEquals(Person person)
         {
-            if (this.iID == person.ID) return true;
+            if (this.sID == person.ID) return true;
             return false;
         }
     }
