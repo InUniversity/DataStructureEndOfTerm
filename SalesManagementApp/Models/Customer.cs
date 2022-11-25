@@ -11,6 +11,7 @@ namespace SalesManagementApp.Models
         private int iPoint;
         private StringCustom sTypeOfMember;
         private Date dLastPurchaseDate;
+        private LinkedLst<StringCustom> lPurchasedOrders;
 
         // constructor
         public Customer() : base()
@@ -53,6 +54,12 @@ namespace SalesManagementApp.Models
         {
             get { return dLastPurchaseDate; }
             set { dLastPurchaseDate = value; }
+        }
+
+        public LinkedLst<StringCustom> PurchasedOrders
+        {
+            get { return lPurchasedOrders; }
+            set { lPurchasedOrders = value; }
         }
 
         // methods
