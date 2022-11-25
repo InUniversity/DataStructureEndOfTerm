@@ -96,8 +96,17 @@ namespace SalesManagementApp.Models
             do
             {
                 c = Console.ReadKey(true).KeyChar;
-                Console.Write("*");
-                sPassword += c;
+                if (c == 13) break;
+                if (c == 8)
+                {
+                    Console.WriteLine("\b \b");
+                  //  sPassword.
+                }
+                else
+                {
+                    Console.Write("*");
+                    sPassword += c;
+                }
             } while (c != 13);
         }
     }
