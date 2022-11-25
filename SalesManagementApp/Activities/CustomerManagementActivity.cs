@@ -11,13 +11,12 @@ namespace SalesManagementApp.Activities
 
         public static int RunActivity()
         {
-            CustomerHash customerHash = CustomerData.GetInstance();
+            CustomerHash customerHash = CustomerData.customerHash;
             CustomerHash tempHash;
             Customer tempCustomer;
             StringCustom tempStr, tempStr1;
             Date start, end;
             int choose = 10;
-            int tempID;
             while (true)
             {
                 Console.Clear();
@@ -61,8 +60,8 @@ namespace SalesManagementApp.Activities
                         break;
                     case 2:
                         Console.Write("Enter ID: ");
-                        tempID = Convert.ToInt32(Console.ReadLine());
-                        tempCustomer = customerHash.GetValue(tempID);
+                        tempStr = Console.ReadLine();
+                        tempCustomer = customerHash.GetValue(tempStr);
                         if (tempCustomer == null)
                         {
                             Console.WriteLine(Constant.NOT_FOUND_MESSAGE);
@@ -96,8 +95,8 @@ namespace SalesManagementApp.Activities
                         break;
                     case 6:
                         Console.Write("Enter ID: ");
-                        tempID = Convert.ToInt32(Console.ReadLine());
-                        tempCustomer = customerHash.GetValue(tempID);
+                        tempStr = Console.ReadLine();
+                        tempCustomer = customerHash.GetValue(tempStr);
                         if (tempCustomer == null)
                         {
                             Console.WriteLine(Constant.NOT_FOUND_MESSAGE);

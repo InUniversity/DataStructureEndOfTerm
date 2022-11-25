@@ -91,7 +91,7 @@ namespace SalesManagementApp.DataStructure
 
                this.list_[i].ID, // 0
                this.list_[i].Name, // 1
-               this.list_[i].Sex, // 2
+               this.list_[i].Gender, // 2
                this.list_[i].Birthday, // 3
                this.list_[i].Address, // 4
                this.list_[i].PhoneNumber, // 5

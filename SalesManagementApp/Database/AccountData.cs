@@ -5,12 +5,7 @@ namespace SalesManagementApp.Database
 {
 	public class AccountData
 	{
-        private static AccountList accountHash = Init();
-
-        public static AccountList GetInstance()
-        {
-            return accountHash;
-        }
+        public static AccountList accountHash = Init();
 
         private static AccountList Init()
         {

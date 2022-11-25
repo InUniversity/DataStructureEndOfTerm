@@ -124,7 +124,7 @@ namespace SalesManagementApp.DataStructure
             for (int i = 0; i < base.iSize; i++)
             {
                 StringCustom list = base.list_[i].Name;
-                if (list.IsEqual(name))
+                if (list.IsEquals(name))
                 {
                     temp.AddLast(base.list_[i]);
                 }

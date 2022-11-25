@@ -33,7 +33,7 @@ namespace SalesManagementApp.Activities
 
                 if (ManagerAccount.CheckValidAccount(manager))
                 {
-                    AccountData.GetInstance().AddLast(manager);
+                    AccountData.accountHash.AddLast(manager);
                     return Constant.MAIN_ACTIVITY;
                 }
                 Console.WriteLine(Constant.NOT_VALID_MESSAGE);

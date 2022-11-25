@@ -6,12 +6,7 @@ namespace SalesManagementApp.Database
 {
     public class CustomerData
     {
-        private static CustomerHash customerHash = Init();
-
-        public static CustomerHash GetInstance()
-        {
-            return customerHash;
-        }
+        public static CustomerHash customerHash = Init();
 
         private static CustomerHash Init()
         {
