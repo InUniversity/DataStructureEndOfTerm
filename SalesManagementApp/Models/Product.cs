@@ -9,6 +9,7 @@ namespace SalesManagementApp.Models
         private int iNumberOfProduct;
         private Date dDayStartedUsing;
         private Date dDateExpires;
+        private int iPrice;
 
         public int ID
         {
@@ -40,13 +41,19 @@ namespace SalesManagementApp.Models
             set { dDateExpires = value; }
         }
 
+        public int Price
+        {
+            get { return iPrice; }
+            set { iPrice = value; }
+        }
+
         public Product()
         {
             dDayStartedUsing = new Date();
             dDateExpires = new Date();
         }
 
-        public Product(int iID, StringCustom sName, int iNumberOfProduct, Date dDayStartedUsing, Date dDateExpires)
+        public Product(int iID, StringCustom sName, int iNumberOfProduct, Date dDayStartedUsing, Date dDateExpires,int iPrice)
         {
 
             this.iID = iID;
@@ -54,6 +61,7 @@ namespace SalesManagementApp.Models
             this.iNumberOfProduct = iNumberOfProduct;
             this.DayStartedUsing = dDayStartedUsing;
             this.DateExpires = dDateExpires;
+            this.iPrice=iPrice;
         }
 
         public bool IsEqual(Product item)
@@ -74,6 +82,8 @@ namespace SalesManagementApp.Models
             this.dDayStartedUsing.Input();
             Console.WriteLine("dDateExpires:");
             this.dDateExpires.Input();
+            Console.WriteLine("Enter price:");
+            this.iPrice = Convert.ToInt32(Console.ReadLine());
         }
 
         public void Print()
@@ -83,6 +93,7 @@ namespace SalesManagementApp.Models
             Console.WriteLine(this.iNumberOfProduct);
             Console.WriteLine(this.dDayStartedUsing);
             Console.WriteLine(this.dDateExpires);
+            Console.WriteLine(this.iPrice);
         }
     }
 }

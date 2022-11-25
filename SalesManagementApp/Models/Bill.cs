@@ -10,11 +10,18 @@ namespace SalesManagementApp.Models
 {
     public class Bill
     {
-
+        private int iID;
         private ProductList lProducts;
-        private Employee eSalesman;
-        private Customer cBuyer;
+        private int iEmployeeID;
+        private int iCustomerID;
         private Date dPurchaseDate;
+        private int iPrice;
+
+        public int ID 
+        { 
+            get { return iID; }
+            set { iID = value; }
+        }
 
         public ProductList Products
         {
@@ -22,16 +29,16 @@ namespace SalesManagementApp.Models
             set { lProducts = value; }
         }
 
-        public Employee Salesman
+        public int EmployeeID
         {
-            get { return eSalesman; }
-            set { eSalesman = value; }
+            get { return iEmployeeID; }
+            set { iEmployeeID = value; }
         }
 
-        public Customer Buyer
+        public int CustomerID
         {
-            get { return cBuyer; }
-            set { cBuyer = value; }
+            get { return iCustomerID; }
+            set { iCustomerID = value; }
         }
 
         public Date PurchaseDate
@@ -40,56 +47,118 @@ namespace SalesManagementApp.Models
             set { dPurchaseDate = value; }
         }
 
-        public Bill(ProductList products, Employee salesman, Customer buyer, Date purchaseDate)
+        public int Price
         {
+            get { return iPrice; }
+            set { iPrice = value; }
+        }
 
+        public Bill(int id,ProductList products, int employeeID, int customerID, Date purchaseDate)
+        {
+            this.iID = id;
             this.lProducts = products;
-            this.eSalesman = salesman;
-            this.cBuyer = buyer;
+            this.iEmployeeID = employeeID;
+            this.iCustomerID = customerID;
             this.dPurchaseDate = purchaseDate;
+        }
+
+        public Bill()
+        {
+            dPurchaseDate = new Date();
+            lProducts = new ProductList(1000);
         }
 
         public void Input(ProductList tempproductlist)
         {
+            Product temp = new Product();
+            Product lh = new Product();
+            Product lk = new Product();
+
+            Console.WriteLine("Enter bill ID");
+            this.iID = Convert.ToInt32(Console.ReadLine());
+
             Console.WriteLine("Enter the number of products: ");
             int sl = Convert.ToInt32(Console.ReadLine());
+
             for (int i = 0; i < sl; i++)
             {
-                Product lh = new Product();
-                lh.Input();
                 Console.WriteLine("Enter product ID: ");
                 lh.ID = Convert.ToInt32(Console.ReadLine());
-                if (tempproductlist.SearchItemByID(lh)!=null)
+               
+                Console.WriteLine("Number of products with ID "+lh.ID);
+                int sl1 = Convert.ToInt32(Console.ReadLine());
+
+                //templist = tempproductlist.SearchItemByID(lh); // dua ra 1sp, còn list
+
+                // temlisst là sản phẩm cần tìm
+
+                //templist.Bill(sl1);
+                temp.Print();
+
+                //lh = temp; // bill sanPhamMua
+                //lh.NumberOfProduct = sl1;//so luong mua
+
+                //lk = temp;  //sản phâm trong kho
+
+                
+                if (temp != null)
                 {
-                    lProducts.AddLast(lh);
-                    tempproductlist.RemoveItemByID(lh);
+                    //if(lh.NumberOfProduct<=temp.NumberOfProduct)
+                    //{ 
+                        lProducts.AddLast(lh);
+                        //tempproductlist.DeleteByProductNumber(lk);
+                        
+                        
+                    //}
+                    //else
+                    //{
+                    //    lProducts.AddLast(temp);
+                    //    //int temp2 = tempproductlist.CheckStock(temp, sl1); //giam sl
+
+
+                    //    //if (temp2 != 0)
+                    //    //{
+                    //    //    Console.WriteLine("thieu" + temp2 + "sanPham");
+                    //    //    sl1 -= temp2;
+                    //    //}
+                    //}
+
+
+                    this.Price += TotalPrice(temp,sl1);
                 }
                 else
                 {
+                    int j = i + 1;
+                    Console.WriteLine("product" + j);
                     Console.WriteLine("Out of stock");
-                }                      
+                }
+
             }
-            Console.WriteLine("seller information");
-            this.eSalesman.Input();
-            Console.WriteLine("Buyer information");
-            this.cBuyer.Input();
-            Console.WriteLine("purchaseDate:");
-            this.dPurchaseDate.Input();
+            Console.WriteLine("Customer ID : ");
+            this.CustomerID = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Employee ID : ");
+            this.EmployeeID = Convert.ToInt32(Console.ReadLine());
+            this.dPurchaseDate = Date.GetCurrentDate();
         }
 
         public void Print()
         {
-            Console.WriteLine("bill");
+            Console.WriteLine("Bill");
+            Console.WriteLine("Employee ID: " + this.EmployeeID);
+            Console.WriteLine("Customer ID: " + this.CustomerID);
             lProducts.Print();
-            //this.salesman = 
-            Console.WriteLine("Seller information" + this.eSalesman);
-            Console.WriteLine("Buyer information"+this.cBuyer);
-            this.dPurchaseDate = Date.GetCurrentDate();
+            Console.WriteLine("Total cost: "+this.Price);
+            dPurchaseDate.Print();
         }
 
-        public int TotalPrice()
+        public int TotalPrice(Product temp, int sl)
         {
-            return 0;
-        }
+            int sum=0;
+            for(int i=1; i<=sl;i++)
+            {
+                sum  += temp.Price;
+            }    
+            return sum;
+        } 
     }
 }
