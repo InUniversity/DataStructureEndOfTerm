@@ -14,7 +14,7 @@ namespace SalesManagementApp.Models
         protected int iOrderNumber;
         protected int iNoOfWork;
         protected List<Customer> lCustomer;
-        protected LinkedLst<StringCustom> lBillID;
+        protected LinkedLst<StringCustom> lOrdersSold;
   
         //properties
         public int Salary
@@ -37,24 +37,25 @@ namespace SalesManagementApp.Models
             set { this.LCustomer = value;  }
             get { return this.LCustomer; }
         }
-        public LinkedLst<StringCustom> LBillID
+        public LinkedLst<StringCustom> LOrdersSold
         {
-            set { this.lBillID = value; }
-            get { return this.lBillID; }
+            set { this.lOrdersSold = value; }
+            get { return this.lOrdersSold; }
         }
 
         //constructor
         public Sale():base()
         {
             this.lCustomer = new List<Customer>();
-            this.lBillID = new LinkedLst<StringCustom>();
+            this.lOrdersSold = new LinkedLst<StringCustom>();
         }
-        public Sale(int id, StringCustom name, StringCustom sex, Date birthday, StringCustom address, StringCustom phoneno,int salary, int orderNumber, int noOfWork , List<Customer> lcustomer) :base(id,name,sex,birthday,address, phoneno)
+        public Sale(int id, StringCustom name, StringCustom sex, Date birthday, StringCustom address, StringCustom phoneno, int salary, int orderNumber, int noOfWork, List<Customer> lcustomer, LinkedLst<StringCustom> lorderssold) :base(id,name,sex,birthday,address, phoneno)
         {
             this.iSalary = salary;
             this.iOrderNumber = orderNumber;
             this.iNoOfWork = noOfWork;
             this.lCustomer = lcustomer;
+            this.lOrdersSold = lorderssold;
         }
 
         //destruction
@@ -88,7 +89,7 @@ namespace SalesManagementApp.Models
         
         public LinkedLst<StringCustom> ListProduct()
         {
-            return this.lBillID;
+            return this.lOrdersSold;
         }
 
         public override bool IsEquals(Person person)
