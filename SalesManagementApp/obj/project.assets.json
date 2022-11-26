@@ -8,26 +8,24 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\infov\\.nuget\\packages\\": {}
+    "/Users/vanantran/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\SecondYearUni\\HKI\\Project\\Datastructure\\DataStructureEndOfTerm\\SalesManagementApp\\SalesManagementApp.csproj",
+      "projectUniqueName": "/Users/vanantran/Documents/DataStructureEndOfTerm/SalesManagementApp/SalesManagementApp.csproj",
       "projectName": "SalesManagementApp",
-      "projectPath": "E:\\SecondYearUni\\HKI\\Project\\Datastructure\\DataStructureEndOfTerm\\SalesManagementApp\\SalesManagementApp.csproj",
-      "packagesPath": "C:\\Users\\infov\\.nuget\\packages\\",
-      "outputPath": "E:\\SecondYearUni\\HKI\\Project\\Datastructure\\DataStructureEndOfTerm\\SalesManagementApp\\obj\\",
+      "projectPath": "/Users/vanantran/Documents/DataStructureEndOfTerm/SalesManagementApp/SalesManagementApp.csproj",
+      "packagesPath": "/Users/vanantran/.nuget/packages/",
+      "outputPath": "/Users/vanantran/Documents/DataStructureEndOfTerm/SalesManagementApp/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\infov\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/vanantran/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -61,7 +59,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.100/RuntimeIdentifierGraph.json"
       }
     }
   }

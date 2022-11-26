@@ -10,23 +10,22 @@ namespace SalesManagementApp.DataStructure
         {
         }
 
-        public BillHash FindByValue(Func<Bill, bool> compare)
+        public Bill FindByID(StringCustom id)
         {
-            BillHash result = new BillHash(BUCKET);
             Node<Pair<StringCustom, Bill>>? head = null;
-            Pair<StringCustom, Bill> temp = null;
+            Bill bill = null;
             for (int i = 0; i < BUCKET; i++)
             {
                 head = table[i].FirstItem;
                 while (head != null)
                 {
-                    temp = head.item;
-                    if (compare(temp.value))
-                        result.Insert(temp.key, temp.value);
+                    bill = head.item.value;
+                    if (id.IsEquals(bill.ID))
+                        return bill;
                     head = head.next;
                 }
             }
-            return result;
+            return null;
         }
 
         public override void Remove(StringCustom key)

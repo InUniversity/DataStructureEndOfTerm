@@ -9,45 +9,40 @@ using System.Threading.Tasks;
 
 namespace SalesManagementApp.DataStructure.Base
 {
-    public abstract class StackCustom<T>
+    public class StackCustom<T>
     {
-        // protected T[] list_;
-        protected T data;
-        protected StackCustom<T>? Next;
-        protected StackCustom<T>? Top;
+        public StackNode<T> TopItem { get; set; }
 
-        // properties
-        public T Data
-        {
-            set { this.Data = value; }
-            get { return this.data; }
-        }
-        public StackCustom<T>? Top_
-        {
-            get { return this.Top; }
-        }
-        public StackCustom<T>? Next_
-        {
-            get { return this.Next; }
-        }
+        public int Size { get; set; }
+
         //contructor
         public StackCustom()
         {
             //this.list_ = new T[capacity];
-            this.Next = null;
-            this.Top = null;
+            
         }
 
         // method
         public bool IsEmpty()
         {
-            return this.Top == null;
+            return this.TopItem == null;
         }
 
-        public abstract void PushItem(T item);
-        public abstract T PopItem();
+        public void Push(T item)
+        {
+            
+        }
+
+        public void Pop()
+        {
+
+        }
+
+        public T Peek()
+        {
+
+        }
 
 
     }
-
 }

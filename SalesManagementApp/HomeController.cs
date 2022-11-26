@@ -6,6 +6,7 @@ namespace SalesManagementApp
 {
     class HomeController
     {
+
         static void Main(string[] args)
         {
             // -1 = exit application
@@ -29,14 +30,17 @@ namespace SalesManagementApp
                     case Constant.MAIN_ACTIVITY:
                         activityOrder = MainActivity.RunActivity();
                         break;
-                    case Constant.PRODUCT_MANANGEMENT_ACTIVITY:
-                        activityOrder = ProductManangementActivity.RunActivity();
+                    case Constant.INVENTORY_MANANGEMENT_ACTIVITY:
+                        activityOrder = InventoryManangementActivity.RunActivity();
                         break;
-                    case Constant.EMPLOYEE_MANAGEMENT_ACTIVITY:
-                        activityOrder = EmployeeManagementActivity.RunActivity();
+                    case Constant.SALES_MANAGEMENT_ACTIVITY:
+                        activityOrder = SalesManagementActivity.RunActivity();
                         break;
                     case Constant.CUSTOMER_MANAGEMENT_ACTIVITY:
                         activityOrder = CustomerManagementActivity.RunActivity();
+                        break;
+                    case Constant.SALE_PRODUCT_ACTIVITY:
+                        activityOrder = SaleProductActivity.RunActivity();
                         break;
                     default:
                         Console.WriteLine(Constant.QUIT_APP_MESSAGE);
