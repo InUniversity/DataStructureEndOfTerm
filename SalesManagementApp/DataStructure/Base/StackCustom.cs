@@ -18,13 +18,12 @@ namespace SalesManagementApp.DataStructure.Base
 
         //contructor
         public StackCustom() {}
+
         // method
         public bool IsEmpty()
         {
             return this.TopItem == null;
         }
-
-        
 
         public void Push(T item)
         {
@@ -33,11 +32,9 @@ namespace SalesManagementApp.DataStructure.Base
             this.TopItem = temp;
         }
 
-        public T Pop()
+        public void Pop()
         {
-            T temp2 = this.TopItem.value;
             this.TopItem = this.TopItem.next;
-            return temp2;
         }
 
         public T Top()
