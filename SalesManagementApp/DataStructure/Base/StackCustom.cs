@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.FileIO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -16,31 +17,32 @@ namespace SalesManagementApp.DataStructure.Base
         public int Size { get; set; }
 
         //contructor
-        public StackCustom()
-        {
-            //this.list_ = new T[capacity];
-            
-        }
-
+        public StackCustom() {}
         // method
         public bool IsEmpty()
         {
             return this.TopItem == null;
         }
 
+        
+
         public void Push(T item)
         {
-            
+            StackNode<T> temp = new StackNode<T>(item);
+            temp.next = this.TopItem;
+            this.TopItem = temp;
         }
 
-        public void Pop()
+        public T Pop()
         {
-
+            T temp2 = this.TopItem.value;
+            this.TopItem = this.TopItem.next;
+            return temp2;
         }
 
-        public T Peek()
+        public T Top()
         {
-
+            return this.TopItem.value;
         }
 
 

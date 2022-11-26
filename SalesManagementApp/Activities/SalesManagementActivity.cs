@@ -11,9 +11,10 @@ namespace SalesManagementApp.Activities
     {
         public static int RunActivity()
         {
-            EmployeeList employeeList = EmployeeData.employeeList;
-            Employee temp = new Employee();
-            EmployeeList tempList = new EmployeeList(employeeList.Capacity);
+            SaleList saleList = SaleData.SaleList;
+            Sale temp = new Sale();
+            SaleList tempList = new  SaleList(saleList.Capacity);
+            Date Time = new Date();
             int index;
             int choose = -100;
             while (true)
@@ -46,57 +47,65 @@ namespace SalesManagementApp.Activities
                 {
                     case 1:
                         Console.WriteLine("...........Print employee list...........");
-                        employeeList.Print();
+                        saleList.Print();
                         Console.WriteLine(".........................................");
                         break;
                     case 2:
                         Console.WriteLine("............Add a employee to the last position...........");
                         Console.WriteLine("Insert the information of employee");
-                        temp = new Employee();
+                        temp = new Sale();
                         temp.Input();
                         Console.WriteLine("..........................................................");
-                        employeeList.AddLast(temp);
+                        saleList.AddLast(temp);
                         Console.WriteLine("Complete...");
                         Console.WriteLine("..........................................................");
                         break;
                     case 3:
-                        tempList = new EmployeeList(employeeList.Capacity);
+                        tempList = new SaleList(saleList.Capacity);
                         Console.WriteLine("..................Add to a employee list.................");
                         Console.WriteLine("Insert the information of employees");
-                        tempList = new EmployeeList(employeeList.Capacity);
+                        tempList = new SaleList(saleList.Capacity);
                         tempList.Input();
                         Console.WriteLine("..........................................................");
-                        employeeList.AddRange(tempList);
+                        saleList.AddRange(tempList);
                         Console.WriteLine("Complete...");
                         Console.WriteLine("..........................................................");
                         break;
                     case 4:
                         Console.WriteLine("..Print a list of employees who have worked for 30 days..");
-                        tempList = new EmployeeList(employeeList.Capacity);
-                        tempList = employeeList.Full30days();
+                        tempList = new SaleList(saleList.Capacity);
+                        Console.WriteLine("Input time: ");
+                        Time.Input();
+                        tempList = saleList.Full30days(Time);
                         tempList.Print();
                         Console.WriteLine(".........................................................");
                         break;
                     case 5:
                         Console.WriteLine("..Print the list of employees with the highest sales..");
-                        tempList = employeeList.MaxNumberOfSales();
+                        Console.WriteLine("Input time: ");
+                        Time.Input();
+                        tempList = saleList.MaxNumberOfSales(Time);
                         tempList.Print();
                         Console.WriteLine(".......................................................");
                         break;
                     case 6:
                         Console.WriteLine(".......Print the list of employees of the month........");
-                        tempList = new EmployeeList(employeeList.Capacity);
-                        tempList = employeeList.EmployeeOfMonth();
+                        tempList = new SaleList(saleList.Capacity);
+                        Console.WriteLine("Input time: ");
+                        Time.Input();
+                        tempList = saleList.EmployeeOfMonth(Time);
                         tempList.Print();
                         Console.WriteLine(".......................................................");
                         break;
                     case 7:
                          Console.WriteLine(".....Print a list of employees with insufficient sales......");
-                        tempList = new EmployeeList(employeeList.Capacity);
-                        tempList = employeeList.NotReachingSales();
-                         tempList.Print();
-                         Console.WriteLine("............................................................");
-                         break;
+                        tempList = new SaleList(saleList.Capacity);
+                        Console.WriteLine("Input time: ");
+                        Time.Input();
+                        tempList = saleList.NotReachingSales(Time);
+                        tempList.Print();
+                        Console.WriteLine("............................................................");
+                        break;
                     
                     case 8:
                         return 2;

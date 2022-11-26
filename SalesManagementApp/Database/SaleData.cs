@@ -11,7 +11,7 @@ namespace SalesManagementApp.Database
     public class SaleData
     {
         
-       public static SaleList employeeList = Init();
+       public static SaleList SaleList = Init();
 
        private static SaleList Init()
        {
