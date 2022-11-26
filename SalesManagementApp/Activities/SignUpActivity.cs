@@ -10,7 +10,7 @@ namespace SalesManagementApp.Activities
 
         public static int RunActivity()
         {
-            ManagerAccount manager = new ManagerAccount();
+            SaleAccount manager = new SaleAccount();
             int choose = 0;
             while (true)
             {
@@ -24,16 +24,16 @@ namespace SalesManagementApp.Activities
                     Console.Write("Password: ");
                     manager.InputPassword();
                     Console.Write("ID: ");
-                    manager.ManagerID = Convert.ToInt32(Console.ReadLine());
+                    manager.SaleID = Console.ReadLine();
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
                 }
 
-                if (ManagerAccount.CheckValidAccount(manager))
+                if (SaleAccount.CheckValidAccount(manager))
                 {
-                    AccountData.accountHash.AddLast(manager);
+                    AccountData.accountList.AddLast(manager);
                     return Constant.MAIN_ACTIVITY;
                 }
                 Console.WriteLine(Constant.NOT_VALID_MESSAGE);

@@ -5,7 +5,7 @@ using SalesManagementApp.Models;
 
 namespace SalesManagementApp.DataStructure
 {
-    public class AccountList : LinkedLst<ManagerAccount>, ILinkedLst<ManagerAccount>
+    public class AccountList : LinkedLst<SaleAccount>, ILinkedLst<SaleAccount>
     {
 
         public AccountList() : base()
@@ -19,15 +19,15 @@ namespace SalesManagementApp.DataStructure
             try
             {
                 StreamWriter sw = new StreamWriter(path);
-                Node<ManagerAccount>? head = nFirstItem;
-                ManagerAccount account = null;
+                Node<SaleAccount>? head = nFirstItem;
+                SaleAccount account = null;
                 while (head != null)
                 {
                     account = head.item;
                     sw.WriteLine("{0};{1};{2}",
                         account.Username, // 0
                         account.Password, // 1
-                        account.ManagerID); // 2
+                        account.SaleID); // 2
                     head = head.next;
                 }
                 sw.Close();
@@ -46,7 +46,7 @@ namespace SalesManagementApp.DataStructure
             path += "/../../../Database/" + fileName;
             try
             {
-                ManagerAccount account = new ManagerAccount();
+                SaleAccount account = new SaleAccount();
                 // read the whole file
                 string[] lines = File.ReadAllLines(path);
 
@@ -64,20 +64,20 @@ namespace SalesManagementApp.DataStructure
             return true;
         }
 
-        private ManagerAccount GetManagerAccountFromFile(StringCustom data)
+        private SaleAccount GetManagerAccountFromFile(StringCustom data)
         {
             LinkedLst<StringCustom> temp = data.Split(';');
 
-            ManagerAccount account = new ManagerAccount();
+            SaleAccount account = new SaleAccount();
             account.Username = temp.GetItem(0);
             account.Password = temp.GetItem(1);
-            account.ManagerID = temp.GetItem(2).ToInt();
+            account.SaleID = temp.GetItem(2);
             return account;
         }
 
-        public void AddNoDuplicate(ManagerAccount account)
+        public void AddNoDuplicate(SaleAccount account)
         {
-            if (FindById(account.ManagerID) != null)
+            if (FindById(account.SaleID) != null)
             {
                 Console.WriteLine(Constant.DUPLICATED_MESSAGE);
                 return;
@@ -85,10 +85,10 @@ namespace SalesManagementApp.DataStructure
             AddLast(account);
         }
 
-        public bool Exits(ManagerAccount account)
+        public bool Exits(SaleAccount account)
         {
-            Node<ManagerAccount>? head = nFirstItem;
-            ManagerAccount managerAccount = null;
+            Node<SaleAccount>? head = nFirstItem;
+            SaleAccount managerAccount = null;
             while (head != null)
             {
                 managerAccount = head.item;
@@ -100,14 +100,14 @@ namespace SalesManagementApp.DataStructure
             return false;
         }
 
-        public ManagerAccount FindById(int id)
+        public SaleAccount FindById(StringCustom id)
         {
-            Node<ManagerAccount>? head = nFirstItem;
-            ManagerAccount account = null;
+            Node<SaleAccount>? head = nFirstItem;
+            SaleAccount account = null;
             while (head != null)
             {
                 account = head.item;
-                if (id == account.ManagerID)
+                if (id == account.SaleID)
                     return account;
                 head = head.next;
             }
@@ -120,25 +120,25 @@ namespace SalesManagementApp.DataStructure
                 "Username",
                 "Password",
                 "Manager ID");
-            Node<ManagerAccount>? head = nFirstItem;
-            ManagerAccount account = null;
+            Node<SaleAccount>? head = nFirstItem;
+            SaleAccount account = null;
             while (head != null)
             {
                 account = head.item;
                 Console.WriteLine("|{0, 15}|{1, 20}|{2, 10}",
                 account.Username, // 0
                 account.Password, // 1
-                account.ManagerID); // 2
+                account.SaleID); // 2
                 head = head.next;
             }
         }
 
-        public void AddNode(int index, ManagerAccount item)
+        public void AddNode(int index, SaleAccount item)
         {
             if (item == null) return;
 
-            Node<ManagerAccount> newNode = new Node<ManagerAccount>(item);
-            Node<ManagerAccount>? curNode = GetNode(index);
+            Node<SaleAccount> newNode = new Node<SaleAccount>(item);
+            Node<SaleAccount>? curNode = GetNode(index);
             if (curNode == null) return;
 
             if (item.IsEquals(nFirstItem.item))
@@ -155,16 +155,16 @@ namespace SalesManagementApp.DataStructure
             iSize++;
         }
 
-        public void Remove(ManagerAccount item)
+        public void Remove(SaleAccount item)
         {
-            Node<ManagerAccount>? del = GetNode(item);
+            Node<SaleAccount>? del = GetNode(item);
             if (del == null) return;
             RemoveCurrentNode(del);
         }
 
         public void Remove(int index)
         {
-            Node<ManagerAccount>? del = GetNode(index);
+            Node<SaleAccount>? del = GetNode(index);
             if (del == null) return;
             RemoveCurrentNode(del);
         }
@@ -177,15 +177,15 @@ namespace SalesManagementApp.DataStructure
                 FirstItem = null;
             else
             {
-                Node<ManagerAccount>? head = nLastItem;
+                Node<SaleAccount>? head = nLastItem;
                 head.previous.next = null;
             }
             iSize--;
         }
 
-        public int IndexOf(ManagerAccount item)
+        public int IndexOf(SaleAccount item)
         {
-            Node<ManagerAccount>? head = nFirstItem;
+            Node<SaleAccount>? head = nFirstItem;
             int i = 0;
             while (head != null && !item.IsEquals(head.item))
             {
@@ -197,9 +197,9 @@ namespace SalesManagementApp.DataStructure
             return -1;
         }
 
-        public void AddRange(LinkedLst<ManagerAccount> sourceList)
+        public void AddRange(LinkedLst<SaleAccount> sourceList)
         {
-            Node<ManagerAccount>? head = sourceList.FirstItem;
+            Node<SaleAccount>? head = sourceList.FirstItem;
             while (head != null)
             {
                 AddLast(head.item);

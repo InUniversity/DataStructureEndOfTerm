@@ -5,18 +5,18 @@ namespace SalesManagementApp.Database
 {
 	public class AccountData
 	{
-        public static AccountList accountHash = Init();
+        public static AccountList accountList = Init();
 
         private static AccountList Init()
         {
-            accountHash = new AccountList();
-            accountHash.AddFromFile("AccountData.txt");
-            return accountHash;
+            accountList = new AccountList();
+            accountList.AddFromFile("AccountData.txt");
+            return accountList;
         }
 
         public static void SaveFile()
         {
-            accountHash.WriteFile("AccountData.txt");
+            accountList.WriteFile("AccountData.txt");
         }
     }
 }
