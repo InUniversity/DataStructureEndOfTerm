@@ -17,7 +17,11 @@ namespace SalesManagementApp.DataStructure.Base
         public int Size { get; set; }
 
         //contructor
-        public StackCustom() {}
+        public StackCustom()
+        {
+            TopItem = null;
+            Size = 0;
+        }
 
         // method
         public bool IsEmpty()
@@ -41,7 +45,5 @@ namespace SalesManagementApp.DataStructure.Base
         {
             return this.TopItem.value;
         }
-
-
     }
 }
