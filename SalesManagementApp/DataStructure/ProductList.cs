@@ -89,8 +89,7 @@ namespace SalesManagementApp.DataStructure
 
         public Product SearchItemByID(Product item)
         {
-            Product temp = new Product();
-            temp = null;
+            Product temp = null;
             for (int i = 0; i < base.iSize; i++)
             {
                 if (item.IsEqual(base.list_[i]))
@@ -103,27 +102,20 @@ namespace SalesManagementApp.DataStructure
             
         }
 
-        public int DeleteByProductNumber(Product tempproduct)
+        public ProductList DeleteByProductNumber(Product tempproduct, int n)
         {
             int temp = 0;
+            ProductList templist = new ProductList(100);
             for(int i = 0; i < base.iSize; i++)
             {
                 if (tempproduct.IsEqual(base.list_[i]))
                 {
-                    if (tempproduct.NumberOfProduct <= base.list_[i].NumberOfProduct)
-                    {
-                        base.list_[i].NumberOfProduct -= tempproduct.NumberOfProduct;
-                        return base.list_[i].NumberOfProduct;
-                    }    
-                    //else
-                    //{
-                    //    temp = n - base.list_[i].NumberOfProduct;
-                    //    base.list_[i].NumberOfProduct = 0;
-                    //    return temp;
-                    //}
+                    base.list_[i].NumberOfProduct = base.list_[i].NumberOfProduct-n;
+                    
+                    templist.AddLast(base.list_[i]);  
                 }      
             }
-            return temp;
+            return templist;
         }
 
         public bool Duplicate(Product item)
@@ -321,7 +313,7 @@ namespace SalesManagementApp.DataStructure
 
         public void AddLastNoDuplicate(Product product)
         {
-            if (FindByID(product.ID) != null)
+            if (FindByID(product.ID.ToInt()) != null)
             {
                 Console.WriteLine(Constant.DUPLICATED_MESSAGE);
                 return;
@@ -334,7 +326,7 @@ namespace SalesManagementApp.DataStructure
             Product product = null;
             for (int i = 0; i < base.iSize; i++)
             {
-                if (product.ID == id)
+                if (product.ID.ToInt() == id)
                     return product;
             }
             return null;
@@ -354,6 +346,19 @@ namespace SalesManagementApp.DataStructure
                     list_[i].DateExpires,
                     list_[i].Price);
             }
+        }
+
+        public Product Bill(Product temp ,int n)
+        {
+            Product a = new Product();
+            a.ID = temp.ID;
+            a.Name = temp.Name;
+            a.DayStartedUsing = temp.DayStartedUsing;
+            a.DateExpires = temp.DateExpires;
+            a.Price = temp.Price;
+            a.NumberOfProduct = n;
+            return a;
+
         }
     }
 }
