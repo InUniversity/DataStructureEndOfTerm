@@ -4,17 +4,17 @@ namespace SalesManagementApp.Models
 {
     public class Product
     {
-        private int iID;
+        private StringCustom sID;
         private StringCustom sName;
         private int iNumberOfProduct;
         private Date dDayStartedUsing;
         private Date dDateExpires;
         private int iPrice;
 
-        public int ID
+        public StringCustom ID
         {
-            get { return iID; }
-            set { iID = value; }
+            get { return sID; }
+            set { sID = value; }
         }
 
         public StringCustom Name
@@ -53,10 +53,10 @@ namespace SalesManagementApp.Models
             dDateExpires = new Date();
         }
 
-        public Product(int iID, StringCustom sName, int iNumberOfProduct, Date dDayStartedUsing, Date dDateExpires,int iPrice)
+        public Product(StringCustom iID, StringCustom sName, int iNumberOfProduct, Date dDayStartedUsing, Date dDateExpires,int iPrice)
         {
 
-            this.iID = iID;
+            this.sID = iID;
             this.sName = sName;
             this.iNumberOfProduct = iNumberOfProduct;
             this.DayStartedUsing = dDayStartedUsing;
@@ -66,14 +66,14 @@ namespace SalesManagementApp.Models
 
         public bool IsEqual(Product item)
         {
-            if (this.iID == item.ID) return true;
+            if (this.sID.ToInt() == item.ID.ToInt()) return true;
             else return false;
         }
 
         public void Input()
         {
             Console.WriteLine("ID:");
-            this.iID = Convert.ToInt32(Console.ReadLine());
+            this.sID = Console.ReadLine();
             Console.WriteLine("Name:");
             this.sName = (Console.ReadLine());
             Console.WriteLine("iNumberOfProduct:");
@@ -88,7 +88,7 @@ namespace SalesManagementApp.Models
 
         public void Print()
         {
-            Console.WriteLine(this.iID);
+            Console.WriteLine(this.sID);
             Console.WriteLine(this.sName);
             Console.WriteLine(this.iNumberOfProduct);
             Console.WriteLine(this.dDayStartedUsing);

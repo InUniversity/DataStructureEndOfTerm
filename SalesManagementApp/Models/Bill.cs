@@ -3,24 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SalesManagementApp.Database;
 using SalesManagementApp.DataStructure;
+using SalesManagementApp.DataStructure.Base;
 using SalesManagementApp.Models;
 
 namespace SalesManagementApp.Models
 {
     public class Bill
     {
-        private int iID;
+        private StringCustom sID;
         private ProductList lProducts;
-        private int iEmployeeID;
-        private int iCustomerID;
+        private StringCustom sEmployeeID;
+        private StringCustom sCustomerID;
         private Date dPurchaseDate;
         private int iPrice;
 
-        public int ID 
+        public StringCustom ID 
         { 
-            get { return iID; }
-            set { iID = value; }
+            get { return sID; }
+            set { sID = value; }
         }
 
         public ProductList Products
@@ -29,16 +31,16 @@ namespace SalesManagementApp.Models
             set { lProducts = value; }
         }
 
-        public int EmployeeID
+        public StringCustom EmployeeID
         {
-            get { return iEmployeeID; }
-            set { iEmployeeID = value; }
+            get { return sEmployeeID; }
+            set { sEmployeeID = value; }
         }
 
-        public int CustomerID
+        public StringCustom CustomerID
         {
-            get { return iCustomerID; }
-            set { iCustomerID = value; }
+            get { return sCustomerID; }
+            set { sCustomerID = value; }
         }
 
         public Date PurchaseDate
@@ -53,78 +55,68 @@ namespace SalesManagementApp.Models
             set { iPrice = value; }
         }
 
-        public Bill(int id,ProductList products, int employeeID, int customerID, Date purchaseDate)
+        public Bill(StringCustom id, ProductList products, StringCustom employeeID, StringCustom customerID, Date purchaseDate, int iPrice)
         {
-            this.iID = id;
+            this.sID = id;
             this.lProducts = products;
-            this.iEmployeeID = employeeID;
-            this.iCustomerID = customerID;
+            this.sEmployeeID = employeeID;
+            this.sCustomerID = customerID;
             this.dPurchaseDate = purchaseDate;
+            this.iPrice = iPrice;
         }
 
         public Bill()
         {
             dPurchaseDate = new Date();
-            lProducts = new ProductList(1000);
+            lProducts = new ProductList(100);
         }
 
-        public void Input(ProductList tempproductlist)
+        public void Input()
         {
+            ProductList tempproductlist = ProductData.productList;
             Product temp = new Product();
-            Product lh = new Product();
-            Product lk = new Product();
-
+            Product tempID = new Product();
             Console.WriteLine("Enter bill ID");
-            this.iID = Convert.ToInt32(Console.ReadLine());
-
+            this.sID = Console.ReadLine();
             Console.WriteLine("Enter the number of products: ");
             int sl = Convert.ToInt32(Console.ReadLine());
-
             for (int i = 0; i < sl; i++)
             {
                 Console.WriteLine("Enter product ID: ");
-                lh.ID = Convert.ToInt32(Console.ReadLine());
-               
-                Console.WriteLine("Number of products with ID "+lh.ID);
+                tempID.ID = Console.ReadLine();
+                Console.WriteLine("Number of products with ID "+tempID.ID);
                 int sl1 = Convert.ToInt32(Console.ReadLine());
 
-                //templist = tempproductlist.SearchItemByID(lh); // dua ra 1sp, còn list
+                temp = tempproductlist.SearchItemByID(tempID);
 
-                // temlisst là sản phẩm cần tìm
-
-                //templist.Bill(sl1);
-                temp.Print();
-
-                //lh = temp; // bill sanPhamMua
-                //lh.NumberOfProduct = sl1;//so luong mua
-
-                //lk = temp;  //sản phâm trong kho
-
-                
                 if (temp != null)
                 {
-                    //if(lh.NumberOfProduct<=temp.NumberOfProduct)
-                    //{ 
-                        lProducts.AddLast(lh);
-                        //tempproductlist.DeleteByProductNumber(lk);
-                        
-                        
-                    //}
-                    //else
-                    //{
-                    //    lProducts.AddLast(temp);
-                    //    //int temp2 = tempproductlist.CheckStock(temp, sl1); //giam sl
+                    int d = temp.NumberOfProduct;
+                    if(temp.NumberOfProduct>=sl1)
+                    {
+                        lProducts.AddLast(tempproductlist.Bill(temp, sl1));
+                        temp.NumberOfProduct -= sl1;
+                    }    
+                    else
+                    {
+                        Console.WriteLine("The store does not have enough goods for you");
+                        Console.WriteLine("There are currently "+d+ " products in stock");
+                        Console.WriteLine("Do you want to buy all products ? ");
+                        Console.WriteLine("1.I agree ");
+                        Console.WriteLine("any key.I don't agree ");
+                        int choose;
+                        choose = Convert.ToInt32(Console.ReadLine());
+                        if(choose==1)
+                        {
+                            temp.NumberOfProduct -= (d);
+                            lProducts.AddLast(tempproductlist.Bill(temp, d));
+                        }
+                        else
+                        {
+                            Console.WriteLine("Goodbye!!!");
+                        }
+                    }    
 
-
-                    //    //if (temp2 != 0)
-                    //    //{
-                    //    //    Console.WriteLine("thieu" + temp2 + "sanPham");
-                    //    //    sl1 -= temp2;
-                    //    //}
-                    //}
-
-
-                    this.Price += TotalPrice(temp,sl1);
                 }
                 else
                 {
@@ -132,13 +124,13 @@ namespace SalesManagementApp.Models
                     Console.WriteLine("product" + j);
                     Console.WriteLine("Out of stock");
                 }
-
             }
             Console.WriteLine("Customer ID : ");
-            this.CustomerID = Convert.ToInt32(Console.ReadLine());
+            this.CustomerID = Console.ReadLine();
             Console.WriteLine("Employee ID : ");
-            this.EmployeeID = Convert.ToInt32(Console.ReadLine());
+            this.EmployeeID = Console.ReadLine();
             this.dPurchaseDate = Date.GetCurrentDate();
+            this.Price=  TotalPrice(lProducts);
         }
 
         public void Print()
@@ -151,14 +143,16 @@ namespace SalesManagementApp.Models
             dPurchaseDate.Print();
         }
 
-        public int TotalPrice(Product temp, int sl)
+        public int TotalPrice(ProductList temp)
         {
-            int sum=0;
-            for(int i=1; i<=sl;i++)
+            int sum = 0;
+            Product product = new Product();
+            for(int i=0; i<temp.Size; i++)
             {
-                sum  += temp.Price;
-            }    
+                product = temp.Get(i);
+                sum = sum + (product.NumberOfProduct*product.Price);
+            }
             return sum;
-        } 
+        }
     }
 }

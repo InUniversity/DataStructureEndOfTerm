@@ -105,17 +105,17 @@ namespace SalesManagementApp.Models
                 result += month;
             result += "-";
             result += year;
-            result +=";";
+            result +=" ";
             if (hour < 10)
                 result += ("0" + hour);
             else
                 result += hour;
-            result += "-";
+            result += ":";
             if (minute < 10)
                 result += ("0" + minute);
             else
                 result += minute;
-            result += "-";
+            result += ":";
             if (second < 10)
                 result += ("0" + second);
             else
@@ -223,13 +223,14 @@ namespace SalesManagementApp.Models
         {
             
             DateTime dateTime = DateTime.UtcNow.Date;
+            DateTime dateTimeOfDay = DateTime.Now;
             return new Date(
                 dateTime.Day, 
                 dateTime.Month,
                 dateTime.Year,
-                dateTime.Hour,
-                dateTime.Minute,
-                dateTime.Second);
+                dateTimeOfDay.Hour,
+                dateTimeOfDay.Minute,
+                dateTimeOfDay.Second);
         }
 
         public void Print()
