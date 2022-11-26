@@ -12,8 +12,8 @@ namespace SalesManagementApp.DataStructure
    
     public class SaleList : ArrayList<Sale>
     {
-        private const int minium = 10;
-        private const int maxdayoff = 5;
+        private const int MIN_INUM = 10;
+        private const int MAX_DAY_OFF = 5;
         public SaleList(int capacity) : base(capacity)
         {
         }
@@ -91,7 +91,7 @@ namespace SalesManagementApp.DataStructure
 
                this.list_[i].ID, // 0
                this.list_[i].Name, // 1
-               this.list_[i].Sex, // 2
+               this.list_[i].Gender, // 2
                this.list_[i].Birthday, // 3
                this.list_[i].Address, // 4
                this.list_[i].PhoneNumber, // 5
@@ -122,7 +122,7 @@ namespace SalesManagementApp.DataStructure
         }
 
         // Xuất ra danh sách nhân viên đi làm đủ 30 ngày trong tháng
-        public SaleList Full30days()
+        public SaleList Full30days(Date input)
         {
             SaleList temp = new SaleList(base.iSize);
             for(int i = 0; i<base.iSize; i++)
@@ -136,7 +136,7 @@ namespace SalesManagementApp.DataStructure
         }
 
         // Xuất danh sách nhân viên có doanh số lớn nhất
-        public SaleList MaxNumberOfSales()
+        public SaleList MaxNumberOfSales(Date input)
         {
             SaleList temp = new SaleList(base.iSize);
             int max = base.list_[0].Ordernumber;
@@ -156,34 +156,25 @@ namespace SalesManagementApp.DataStructure
         }
 
         // Xuất danh sách nhân viên của tháng
-        public SaleList EmployeeOfMonth()
+        public SaleList EmployeeOfMonth(Date input)
         {
-            SaleList temp = new SaleList(iCapacity);
-            SaleList a = this.Full30days();
-            SaleList b = this.MaxNumberOfSales();
-            for(int i = 0; i<a.iSize; i++)
+            SaleList a = this.Full30days(input);
+            SaleList b = a.MaxNumberOfSales(input);
+
+            if (b.iSize == 0)
             {
-                for(int j = i; j < b.iSize; j++)
-                {
-                    if (a.list_[i].Equals(b.list_[j]))
-                    {
-                        temp.AddLast(a.list_[i]);
-                        break;
-                    }    
-                }    
-            }
-            if(temp.iSize == 0)
                 Console.WriteLine("(Empty)");
-            return temp;
+            }
+            return b;
         }
 
         //Xuất danh sách nhân viên không đạt doanh thu tối thiểu
-        public SaleList NotReachingSales()
+        public SaleList NotReachingSales(Date input)
         {
             SaleList temp = new SaleList(iCapacity);
             for (int i = 0; i<base.iSize; i++)
             {
-                if(base.list_[i].Ordernumber < minium)
+                if(base.list_[i].Ordernumber < MIN_INUM)
                 {
                     temp.AddLast(base.list_[i]);
                 }    
@@ -194,12 +185,12 @@ namespace SalesManagementApp.DataStructure
         }
 
         //Xuất danh sách nhân viên nghỉ quá số buổi quy định
-        public SaleList AbsenceBeyondTheNorm()
+        public SaleList AbsenceBeyondTheNorm(Date input)
         {
             SaleList temp = new SaleList(iCapacity);
             for (int i = 0; i < base.iSize; i++)
             {
-                if (base.list_[i].NoOfWork < 30 - maxdayoff)
+                if (base.list_[i].NoOfWork < 30 - MAX_DAY_OFF)
                 {
                     temp.AddLast(base.list_[i]);
                 }
@@ -208,5 +199,6 @@ namespace SalesManagementApp.DataStructure
                 Console.WriteLine("(Empty)");
             return temp;
         }
+        
     }
 }

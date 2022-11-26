@@ -10,6 +10,7 @@ namespace SalesManagementApp
         public const int ENTER_KEY = 13;
         public const char LINE_SYMBOL = (char)9552;
 
+        public const string FULL_MESSAGE = "-> List is Full!!!";
         public const string EMPTY_MESSAGE = "-> List is Empty!!!";
         public const string NOT_FOUND_MESSAGE = "-> Not found!!!";
         public const string DUPLICATED_MESSAGE = "-> Duplicated!!!";
