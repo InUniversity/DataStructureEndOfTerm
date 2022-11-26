@@ -31,11 +31,11 @@ namespace SalesManagementApp.Activities
                 switch (choose)
                 {
                     case 1:
-                        return Constant.PRODUCT_MANANGEMENT_ACTIVITY;
+                        return Constant.INVENTORY_MANANGEMENT_ACTIVITY;
                     case 2:
                         return Constant.CUSTOMER_MANAGEMENT_ACTIVITY;
                     case 3:
-                        return Constant.EMPLOYEE_MANAGEMENT_ACTIVITY;
+                        return Constant.SALES_MANAGEMENT_ACTIVITY;
                     case 4:
                         return Constant.EXIT_APPLICATION;
                     default:
