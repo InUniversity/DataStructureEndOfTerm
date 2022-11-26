@@ -10,23 +10,34 @@ namespace SalesManagementApp.DataStructure
         {
         }
 
-        public Bill FindByID(StringCustom id)
+        public bool WriteFile(StringCustom fileName)
         {
-            Node<Pair<StringCustom, Bill>>? head = null;
-            Bill bill = null;
-            for (int i = 0; i < BUCKET; i++)
-            {
-                head = table[i].FirstItem;
-                while (head != null)
-                {
-                    bill = head.item.value;
-                    if (id.IsEquals(bill.ID))
-                        return bill;
-                    head = head.next;
-                }
-            }
-            return null;
+            return true;
         }
+
+        public bool AddFromFile(StringCustom fileName)
+        {
+            return true;
+        }
+
+
+        //public Bill FindByID(StringCustom id)
+        //{
+        //    Node<Pair<StringCustom, Bill>>? head = null;
+        //    Bill bill = null;
+        //    for (int i = 0; i < BUCKET; i++)
+        //    {
+        //        head = table[i].FirstItem;
+        //        while (head != null)
+        //        {
+        //            bill = head.item.value;
+        //            if (id.IsEquals(bill.ID))
+        //                return bill;
+        //            head = head.next;
+        //        }
+        //    }
+        //    return null;
+        //}
 
         public override void Remove(StringCustom key)
         {
