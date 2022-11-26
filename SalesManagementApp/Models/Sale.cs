@@ -3,6 +3,7 @@ using SalesManagementApp.DataStructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -49,7 +50,8 @@ namespace SalesManagementApp.Models
             this.lCustomer = new List<Customer>();
             this.lOrdersSold = new LinkedLst<StringCustom>();
         }
-        public Sale(int id, StringCustom name, StringCustom sex, Date birthday, StringCustom address, StringCustom phoneno, int salary, int orderNumber, int noOfWork, List<Customer> lcustomer, LinkedLst<StringCustom> lorderssold) :base(id,name,sex,birthday,address, phoneno)
+        public Sale(string id, StringCustom name, StringCustom sex, Date birthday, StringCustom address, StringCustom phoneno, int salary,
+            int orderNumber, int noOfWork, List<Customer> lcustomer, LinkedLst<StringCustom> lorderssold) :base(id,name,sex,birthday,address, phoneno)
         {
             this.iSalary = salary;
             this.iOrderNumber = orderNumber;
@@ -81,9 +83,9 @@ namespace SalesManagementApp.Models
         public void PrintListCustomer()
         {
             Console.WriteLine("The List Customer Of Sale" + this.ID +": ") ;
-            foreach(Customer x in this.LCustomer)
+            foreach (Customer customer in this.lCustomer)
             {
-                x.Print();
+                customer.Print();
             }
         }
         
@@ -97,6 +99,64 @@ namespace SalesManagementApp.Models
             if(this.ID == person.ID)
                 return true;
             return false;
+        }
+       
+        //Sắp xếp danh sách khách hàng theo id
+        public static void QuickSortCustomerMạin(List<Customer> lCustomer)
+        {
+            int left = 0, right = lCustomer.Count;
+            QuickSort(lCustomer, left, right);
+            foreach (Customer x in lCustomer)
+                x.Print();
+
+        }
+        public static void QuickSort(List<Customer> customers, int left, int right)
+        {
+            int pivot = Patation(customers, left, right);
+            if(pivot>1)
+            {
+                QuickSort(customers, left, pivot - 1);
+            }    
+            if(pivot +1 <right)
+            {
+                QuickSort(customers, pivot +1, right);
+            }    
+        }
+        public static int Patation(List<Customer> customers, int left, int right)
+        {
+            int pivot = left;
+            while(true)
+            {
+                int k;
+                do
+                {
+                    k = customers[left].ID.CompareTo(customers[pivot].ID);
+                    if (k < 0) left++;
+                } while (k < 0);
+                do
+                {
+                    k = customers[right].ID.CompareTo(customers[pivot].ID);
+                    if (k> 0) right++;
+                } while (k > 0);
+                do
+                {
+                    k = customers[left].ID.CompareTo(customers[right].ID);
+                    if (k < 0)
+                    {
+                        int h = customers[left].ID.CompareTo(customers[left].ID);
+                        if (h == 0) return right;
+
+                        Customer a = customers[left];
+                        customers[left] = customers[right];
+                        customers[right] = a;
+                    }
+                    else
+                    {
+                        return right;
+                    }
+                        
+                } while (k < 0);
+            }    
         }
     }
 }
