@@ -92,22 +92,30 @@ namespace SalesManagementApp.Models
         // to do
         public void InputPassword()
         {
+
+            PasswordStack pass = new PasswordStack();
             char c;
+            int i = 0;
             do
             {
                 c = Console.ReadKey(true).KeyChar;
-                if (c == 13) break;
+                if (c == 13)
+                {
+                    break;
+                }
                 if (c == 8)
                 {
-                    Console.WriteLine("\b \b");
-                  //  sPassword.
+                    Console.Write("\b \b");
+                    pass.PopItem();
                 }
                 else
                 {
                     Console.Write("*");
-                    sPassword += c;
+                    pass.PushItem(Convert.ToString(c)); //Viết thêm 1 cái chuyển char thanh string
                 }
             } while (c != 13);
+            //Viết thêm cái đưa pass vào sPassword
+
         }
     }
 }
