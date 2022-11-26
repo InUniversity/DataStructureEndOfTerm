@@ -11,7 +11,7 @@ namespace SalesManagementApp.Activities
 
         public static int RunActivity()
         {
-            ManagerAccount account = new ManagerAccount();
+            SaleAccount account = new SaleAccount();
             int choose = 0;
             while (true)
             {
@@ -30,7 +30,7 @@ namespace SalesManagementApp.Activities
                     Console.WriteLine(e.Message);
                 }
 
-                if (AccountData.accountHash.Exits(account))
+                if (AccountData.accountList.Exits(account))
                     return Constant.MAIN_ACTIVITY;
 
                 Console.Clear();

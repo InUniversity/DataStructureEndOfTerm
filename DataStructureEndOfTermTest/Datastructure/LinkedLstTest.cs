@@ -19,8 +19,7 @@ namespace DataStructureEndOfTermTest.DataStructure
             _list.AddLast(11);
             _list.AddLast(12);
             _list.AddLast(13);
-            Assert.Equals(4, _list.Size);
-            Assert.Pass();
+            Assert.AreEqual(4, _list.Size);
         }
     }
 }
