@@ -129,7 +129,10 @@ namespace SalesManagementApp.Models
             int month = (date.CharAt(3) - '0') * 10 + (date.CharAt(4) - '0');
             int year = (((date.CharAt(6) - '0') * 10 + (date.CharAt(7) - '0')) * 10 +
                 (date.CharAt(8) - '0')) * 10 + (date.CharAt(9) - '0');
-            return new Date(day, month, year);
+            int hour = (((date.CharAt(11)) - '0') * 10) + ((date.CharAt(12)) - '0');
+            int minute = (((date.CharAt(14)) - '0') * 10) + ((date.CharAt(15)) - '0');
+            int second = (((date.CharAt(17)) - '0') * 10) + ((date.CharAt(18)) - '0');
+            return new Date(day, month, year, hour, minute, second);
         }
 
         public static bool operator >(Date a, Date b)
@@ -232,17 +235,6 @@ namespace SalesManagementApp.Models
                 dateTimeOfDay.Minute,
                 dateTimeOfDay.Second);
         }
-
-        public void Print()
-        {
-            Console.WriteLine("Day:"+this.Day);
-            Console.WriteLine("Month:" + this.Month);
-            Console.WriteLine("Year:" + this.Year);
-            Console.WriteLine("Hour:" + this.Hour);
-            Console.WriteLine("Minute:" + this.Minute);
-            Console.WriteLine("Second:" + this.Second);
-        }
-
     }
 }
 
