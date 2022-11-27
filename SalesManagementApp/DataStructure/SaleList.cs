@@ -196,5 +196,18 @@ namespace SalesManagementApp.DataStructure
             }
             return temp;
         }
+
+        public void DeleteSale(StringCustom id)
+        {
+            int i, j;
+            for (i = 0; i < this.Size; i++)
+                if (this.list_[i].ID == id)
+                    break;
+            for (j = i; j < this.Size - 1; j++)
+                this.list_[i] = this.list_[i + 1];
+            this.Size--;
+        }
+
+
     }
 }
