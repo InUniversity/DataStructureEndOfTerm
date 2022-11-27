@@ -19,32 +19,29 @@ namespace SalesManagementApp.Activities
             StringCustom tempName;
             int index;
             int sum;
-            int choose = 18;
+            int choose = 17;
             while (true)
             {
                 Console.Clear();
-
                 Printer.PrintGroupInformation(70);
                 Console.Write("=========================MENU==========================\n");
-                Console.Write("|0. Print product in stock                            |\n");
-                Console.Write("|1. Add products to the top of stock                  |\n");
-                Console.Write("|2. Add products to the end of the stock              |\n");
+                Console.Write("|1. Print product in stock                            |\n");
+                Console.Write("|2. Add products to stock                             |\n");
                 Console.Write("|3. Insert the product in any position                |\n");
-                Console.Write("|4. Delete product by index                           |\n");
+                Console.Write("|4. Delete any product in stock                       |\n");
                 Console.Write("|5. Delete product by ID                              |\n");
                 Console.Write("|6. Search product by ID                              |\n");
                 Console.Write("|7. Search product by Name                            |\n");
                 Console.Write("|8. Sort By NumberOfProduct                           |\n");
-                Console.Write("|9. Expired Products                                  |\n");
+                Console.Write("|9. Print expired products                            |\n");
                 Console.Write("|10. Total products in stock                          |\n");
-                Console.Write("|11. Find product quantity by ID                      |\n");
+                Console.Write("|11. Find product quantity                            |\n");
                 Console.Write("|12. List of products with quantity more than 100     |\n");
                 Console.Write("|13. Products with the most quantity                  |\n");
                 Console.Write("|14. Products with the least quantity                 |\n");
                 Console.Write("|15. Check the quantity of any product                |\n");
-                Console.Write("|16. Expired product                                  |\n");
-                Console.Write("|17. Export file                                      |\n");
-                Console.Write("|18. Back to Main activity                            |\n");
+                Console.Write("|16. Export file                                      |\n");
+                Console.Write("|17. Back to Main activity                            |\n");
                 Console.Write("|any key. Quit app                                    |\n");
                 Console.Write("=========================MENU==========================\n");
                 Console.Write("Choose: ");
@@ -59,23 +56,9 @@ namespace SalesManagementApp.Activities
                 Console.WriteLine();
                 switch (choose)
                 {
-                    case 0:
+                    case 1:
                         Console.WriteLine("---------------------------------------------------Result-----------------------------------------");
                         productList.Print();
-                        break;
-                    case 1:
-                        tempProduct = new Product();
-                        tempProduct.Input();
-                        if (productList.Duplicate(tempProduct) == false)
-                        {
-                            Console.WriteLine("ID already exists");
-                        }
-                        else
-                        {
-                            productList.AddFirst(tempProduct);
-                            Console.WriteLine("---------------------------------------------------Result-----------------------------------------");
-                            productList.Print();
-                        }
                         break;
                     case 2:
                         tempProduct = new Product();
@@ -221,22 +204,6 @@ namespace SalesManagementApp.Activities
                         }
                         break;
                     case 16:
-                        Date dayStart = new Date();
-                        Date dayEnd = new Date();
-                        tempList = new ProductList(100);
-                        Console.WriteLine("DayStart: ");
-                        dayStart.Input();
-                        Console.WriteLine("nhapEnd: ");
-                        dayEnd.Input();
-                        tempList = productList.FindByDate(dayStart, dayEnd);
-                        if (tempList == null)
-                            Console.WriteLine(Constant.NOT_FOUND_PRODUCT_MESSAGE);
-                        else
-                        {
-                            tempList.Print();
-                        }
-                        break;
-                    case 17:
                         Console.WriteLine("Enter file name: ");
                         tempName = Console.ReadLine();
                         if (!productList.WriteFile(tempName))
@@ -247,7 +214,7 @@ namespace SalesManagementApp.Activities
                             productList.Print();
                         }
                         break;
-                    case 18:
+                    case 17:
                         return Constant.MAIN_ACTIVITY;
                     default:
                         return Constant.EXIT_APPLICATION;
