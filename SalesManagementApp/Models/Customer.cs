@@ -7,37 +7,26 @@ namespace SalesManagementApp.Models
     {
 
         // fields
-        private int iNumberOfProductsPurchased;
         private int iPoint;
         private StringCustom sTypeOfMember;
-        private Date dLastPurchaseDate;
         private LinkedLst<StringCustom> lPurchasedOrders;
 
         // constructor
         public Customer() : base()
         {
-            dLastPurchaseDate = new Date(-1, -1, -1);
+            lPurchasedOrders = new LinkedLst<StringCustom>();
         }
 
         public Customer(StringCustom sID, StringCustom sName, StringCustom sSex,
             Date dBirthday, StringCustom sAddress, StringCustom iPhoneNumber,
-            int iNumberOfProductsPurchased, int iPoint, StringCustom sTypeOfMember,
-            Date dLastPurchaseDate) : base(sID, sName, sSex, dBirthday,
-                sAddress, iPhoneNumber)
+            int iPoint, StringCustom sTypeOfMember
+            ) : base(sID, sName, sSex, dBirthday, sAddress, iPhoneNumber)
         {
-            this.iNumberOfProductsPurchased = iNumberOfProductsPurchased;
             this.iPoint = iPoint;
             this.sTypeOfMember = sTypeOfMember;
-            this.dLastPurchaseDate = dLastPurchaseDate;
         }
 
         // properties
-        public int NumberOfProductsPurchased
-        {
-            get { return iNumberOfProductsPurchased; }
-            set { iNumberOfProductsPurchased = value; }
-        }
-
         public int Point
         {
             get { return iPoint; }
@@ -50,41 +39,48 @@ namespace SalesManagementApp.Models
             set { sTypeOfMember = value; }
         }
 
-        public Date LastPurchaseDate
-        {
-            get { return dLastPurchaseDate; }
-            set { dLastPurchaseDate = value; }
-        }
-
         public LinkedLst<StringCustom> PurchasedOrders
         {
             get { return lPurchasedOrders; }
-            set { lPurchasedOrders = value; }
         }
 
         // methods
+        public static bool IsValidID(StringCustom tempID)
+        {
+            return tempID != null &&
+                tempID.CharAt(0) == 'C' &&
+                tempID.CharAt(0) == 'U' &&
+                tempID.CharAt(0) == 'S';
+        }
+
         public override void Input()
         {
             base.Input();
-            Console.Write("Number of product purchased: ");
-            iNumberOfProductsPurchased = Convert.ToInt32(Console.ReadLine());
             Console.Write("Point: ");
             iPoint = Convert.ToInt32(Console.ReadLine());
             Console.Write("Type of member: ");
             sTypeOfMember = Console.ReadLine();
-            Console.WriteLine("Enter last purchase date:");
-            Console.WriteLine("{");
-            dLastPurchaseDate.Input();
-            Console.WriteLine("}");
         }
 
         public override void Print()
         {
             base.Print();
-            Console.WriteLine("Number of product purchased: " + iNumberOfProductsPurchased);            
             Console.WriteLine("Point: " + iPhoneNumber);
             Console.WriteLine("Type of member: " + sTypeOfMember);
-            Console.WriteLine("Enter last purchase date:" + dLastPurchaseDate);
+            Console.WriteLine("Purchased orders:");
+            Console.WriteLine("{");
+            PrintPurchasedOrders();
+            Console.WriteLine("}");
+        }
+
+        public void PrintPurchasedOrders()
+        {
+            Node<StringCustom> head = lPurchasedOrders.FirstItem;
+            while (head != null)
+            {
+                Console.WriteLine("{0}", head.item);
+                head = head.next;
+            }
         }
 
         public override bool IsEquals(Person person)

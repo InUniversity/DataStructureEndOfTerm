@@ -45,17 +45,15 @@ namespace SalesManagementApp.DataStructure
                     while (head != null)
                     {
                         customer = head.item.value;
-                        sw.WriteLine("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9}",
+                        sw.WriteLine("|{0, 8}|{1, 25}|{2, 7}|{3, 10}|{4, 20}|{5, 12}|{6, 6}|{7, 14}|",
                         customer.ID, // 0
                         customer.Name, // 1
                         customer.Gender, // 2
                         customer.Birthday, // 3
                         customer.Address, // 4
-                        customer.PhoneNumber, // 5
-                        customer.NumberOfProductsPurchased, //6
-                        customer.Point, // 7
-                        customer.TypeOfMember, // 8
-                        customer.LastPurchaseDate); // 9
+                        customer.PhoneNumber.ToString(), // 5
+                        customer.Point, // 6
+                        customer.TypeOfMember); // 7
                         head = head.next;
                     }
                 }
@@ -104,10 +102,8 @@ namespace SalesManagementApp.DataStructure
             customer.Birthday = (Date) temp.GetItem(3);
             customer.Address = temp.GetItem(4);
             customer.PhoneNumber = temp.GetItem(5);
-            customer.NumberOfProductsPurchased = temp.GetItem(6).ToInt();
-            customer.Point = temp.GetItem(7).ToInt();
-            customer.TypeOfMember = temp.GetItem(8);
-            customer.LastPurchaseDate = (Date) temp.GetItem(9);
+            customer.Point = temp.GetItem(6).ToInt();
+            customer.TypeOfMember = temp.GetItem(7);
             return customer;
         }
 
@@ -148,14 +144,14 @@ namespace SalesManagementApp.DataStructure
 
         public void SortByLastPurchaseDate()
         {
-            Func<Customer, Customer, int> compare = (item1, item2) =>
-            {
-                if (item1.LastPurchaseDate < item2.LastPurchaseDate)
-                    return 1;
-                else
-                    return -1;
-            };
-            PrintLinkedLst(GetOrderedList(compare));
+            //Func<Customer, Customer, int> compare = (item1, item2) =>
+            //{
+            //    if (item1.LastPurchaseDate < item2.LastPurchaseDate)
+            //        return 1;
+            //    else
+            //        return -1;
+            //};
+            //PrintLinkedLst(GetOrderedList(compare));
         }
 
         public void SortByGender()
@@ -172,34 +168,30 @@ namespace SalesManagementApp.DataStructure
 
         private void PrintLinkedLst(LinkedLst<Customer> customers)
         {
-            Console.WriteLine("|{0, -8}|{1, -25}|{2, -4}|{3, -10}|{4, -20}|{5, -12}|{6, -19}|{7, -6}|{8, -14}|{9, -18}|",
-                "ID",
-                "Name",
-                "Sex",
-                "Birthday",
-                "Address",
-                "Phone number",
-                "Number of purchased",
-                "Point",
-                "Type of member",
-                "Last purchase date");
+            Console.WriteLine("|{0, 8}|{1, 25}|{2, 7}|{3, 10}|{4, 20}|{5, 12}|{6, 6}|{7, 14}|",
+                "ID", // 0
+                "Name", // 1
+                "Gender", // 2
+                "Birthday", // 3
+                "Address", // 4
+                "Phone number", // 5
+                "Point", // 6
+                "Type of member"); // 7
 
             Node<Customer>? head = customers.FirstItem;
             Customer customer = null;
             while (head != null)
             {
                 customer = head.item;
-                Console.WriteLine("|{0, 8}|{1, 25}|{2, 4}|{3, 10}|{4, 20}|{5, 12}|{6, 19}|{7, 6}|{8, 14}|{9, 18}|",
+                Console.WriteLine("|{0, 8}|{1, 25}|{2, 7}|{3, 10}|{4, 20}|{5, 12}|{6, 6}|{7, 14}|",
                     customer.ID, // 0
                     customer.Name, // 1
                     customer.Gender, // 2
                     customer.Birthday, // 3
                     customer.Address, // 4
                     customer.PhoneNumber.ToString(), // 5
-                    customer.NumberOfProductsPurchased, //6
-                    customer.Point, // 7
-                    customer.TypeOfMember, // 8
-                    customer.LastPurchaseDate); // 9
+                    customer.Point, // 6
+                    customer.TypeOfMember); // 7
                 head = head.next;
             }
         }
@@ -215,8 +207,8 @@ namespace SalesManagementApp.DataStructure
                 while (head != null)
                 {
                     customer = head.item.value;
-                    if (customer.LastPurchaseDate >= start && customer.LastPurchaseDate <= end)
-                        result.Insert(customer.ID, customer);
+                    //if (customer.LastPurchaseDate >= start && customer.LastPurchaseDate <= end)
+                    //    result.Insert(customer.ID, customer);
                     head = head.next;
                 }
             }
@@ -253,8 +245,8 @@ namespace SalesManagementApp.DataStructure
                 while (head != null)
                 {
                     customer = head.item.value;
-                    if (customer.NumberOfProductsPurchased >= QUANTITY_OF_PRODUCTS_REQUIRED)
-                        result.Insert(customer.ID, customer);
+                    //if (customer.NumberOfProductsPurchased >= QUANTITY_OF_PRODUCTS_REQUIRED)
+                    //    result.Insert(customer.ID, customer);
                     head = head.next;
                 }
             }
@@ -280,7 +272,7 @@ namespace SalesManagementApp.DataStructure
             return result;
         }
 
-        public CustomerHash FindBySexAndMemberType(StringCustom sex, StringCustom memberType)
+        public CustomerHash FindByGenderAndMemberType(StringCustom sex, StringCustom memberType)
         {
             CustomerHash result = new CustomerHash(BUCKET);
             Node<Pair<StringCustom, Customer>>? head = null;
@@ -301,17 +293,15 @@ namespace SalesManagementApp.DataStructure
 
         public void Print()
         {
-            Console.WriteLine("|{0, -8}|{1, -25}|{2, -4}|{3, -10}|{4, -20}|{5, -12}|{6, -19}|{7, -6}|{8, -14}|{9, -18}|",
-                "ID",
-                "Name",
-                "Sex",
-                "Birthday",
-                "Address",
-                "Phone number",
-                "Number of purchased",
-                "Point",
-                "Type of member",
-                "Last purchase date");
+            Console.WriteLine("|{0, 8}|{1, 25}|{2, 7}|{3, 10}|{4, 20}|{5, 12}|{6, 6}|{7, 14}|",
+                "ID", // 0
+                "Name", // 1
+                "Gender", // 2
+                "Birthday", // 3
+                "Address", // 4
+                "Phone number", // 5
+                "Point", // 6
+                "Type of member"); // 7
 
             Node<Pair<StringCustom, Customer>>? head = null;
             Customer customer = null;
@@ -321,17 +311,15 @@ namespace SalesManagementApp.DataStructure
                 while (head != null)
                 {
                     customer = head.item.value;
-                    Console.WriteLine("|{0, 8}|{1, 25}|{2, 4}|{3, 10}|{4, 20}|{5, 12}|{6, 19}|{7, 6}|{8, 14}|{9, 18}|",
-                        customer.ID, // 0
-                        customer.Name, // 1
-                        customer.Gender, // 2
-                        customer.Birthday, // 3
-                        customer.Address, // 4
-                        customer.PhoneNumber.ToString(), // 5
-                        customer.NumberOfProductsPurchased, //6
-                        customer.Point, // 7
-                        customer.TypeOfMember, // 8
-                        customer.LastPurchaseDate); // 9
+                    Console.WriteLine("|{0, 8}|{1, 25}|{2, 7}|{3, 10}|{4, 20}|{5, 12}|{6, 6}|{7, 14}|",
+                    customer.ID, // 0
+                    customer.Name, // 1
+                    customer.Gender, // 2
+                    customer.Birthday, // 3
+                    customer.Address, // 4
+                    customer.PhoneNumber.ToString(), // 5
+                    customer.Point, // 6
+                    customer.TypeOfMember); // 7
                     head = head.next;
                 }
             }
