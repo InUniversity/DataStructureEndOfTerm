@@ -19,10 +19,10 @@
   <ItemGroup>
     <ProjectReference Include="..\SalesManagementApp\SalesManagementApp.csproj" />
   </ItemGroup>
+
   <ItemGroup>
-    <None Remove="DataStructure\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DataStructure\" />
+    <Folder Include="Database" />
+    <Folder Include="DataStructure\Base" />
+    <Folder Include="Models\Base" />
   </ItemGroup>
 </Project>

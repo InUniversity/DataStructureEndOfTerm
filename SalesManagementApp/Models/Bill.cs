@@ -16,8 +16,8 @@ namespace SalesManagementApp.Models
         private StringCustom sSaleID;
         private StringCustom sCustomerID;
         private LinkedLst<Pair<StringCustom, int>> lProducts;
-        private int iPrice;
         private Date dPurchaseDate;
+        private int iPrice;
 
         public StringCustom ID 
         { 
@@ -43,28 +43,27 @@ namespace SalesManagementApp.Models
             set { lProducts = value; }
         }
 
-        public int Price
-        {
-            get { return iPrice; }
-            set { iPrice = value; }
-        }
-
         public Date PurchaseDate
         {
             get { return dPurchaseDate; }
             set { dPurchaseDate = value; }
         }
 
+        public int Price
+        {
+            get { return iPrice; }
+            set { iPrice = value; }
+        }
 
         public Bill(StringCustom id, LinkedLst<Pair<StringCustom, int>> products,
-            StringCustom saleID, StringCustom customerID, Date purchaseDate, int iPrice)
+            StringCustom saleID, StringCustom customerID, Date purchaseDate)
         {
             this.sID = id;
             this.lProducts = products;
             this.sSaleID = saleID;
             this.sCustomerID = customerID;
             this.dPurchaseDate = purchaseDate;
-            this.iPrice = iPrice;
+            this.iPrice = GetTotalPrice();
         }
 
         public Bill()
@@ -80,38 +79,39 @@ namespace SalesManagementApp.Models
             int tempNumber;
             int numberOfProducts;
 
-            Console.WriteLine("Enter bill id: ");
+            //  auto fill
+            Console.Write("Enter bill id: ");
             sID = Console.ReadLine();
+            while (BillData.billHash.GetValue(sID) != null)
+            {
+                Console.WriteLine(Constant.NOT_FOUND_MESSAGE);
+                Console.Write("Re-enter bill id: ");
+                sID = Console.ReadLine();
+            }
 
             // get current account
             sSaleID = AccountData.currentAccount.SaleID;
 
-            Console.WriteLine("Enter customer id: ");
+            Console.Write("Enter customer id: ");
             sCustomerID = Console.ReadLine();
-            while (!Customer.IsValidID(sCustomerID))
-            {
-                Console.WriteLine(Constant.NOT_FOUND_MESSAGE);
-                Console.WriteLine("Re-enter customer id: ");
-                sCustomerID = Console.ReadLine();
-            }
 
             // enter product list
-            Console.WriteLine("Enter the number of products: ");
+            Console.Write("Enter the number of products: ");
             numberOfProducts = Convert.ToInt32(Console.ReadLine());
             for (int i = 0; i < numberOfProducts; i++)
             {
                 // enter product id
-                Console.WriteLine("Enter product id: ");
+                Console.Write("Enter product id: ");
                 tempID = Console.ReadLine();
                 while (ProductData.productList.FindByID(tempID) == null)
                 {
                     Console.WriteLine(Constant.NOT_FOUND_MESSAGE);
-                    Console.WriteLine("Re-enter product id: ");
+                    Console.Write("Re-enter product id: ");
                     tempID = Console.ReadLine();
                 }
 
                 // enter quantity
-                Console.WriteLine("Enter the quantity: ");
+                Console.Write("Enter the quantity: ");
                 tempNumber = Convert.ToInt32(Console.ReadLine());
                 while (ProductData.productList.FindByID(tempID).NumberOfProduct < tempNumber)
                 {
@@ -121,8 +121,8 @@ namespace SalesManagementApp.Models
                     tempNumber = Convert.ToInt32(Console.ReadLine());
                 }
             }
-            iPrice = GetTotalPrice();
             dPurchaseDate = Date.GetCurrentDate();
+            iPrice = GetTotalPrice();
         }
 
         public void Print()
@@ -132,33 +132,36 @@ namespace SalesManagementApp.Models
             Console.WriteLine("Customer ID: " + CustomerID);
             Console.WriteLine("Product list:");
             Console.WriteLine("{");
+            if (lProducts.IsEmpty())
+                Console.WriteLine(Constant.EMPTY_MESSAGE);
             PrintProductList();
             Console.WriteLine("}");
-            Console.WriteLine("Total cost: " + Price);
-            Console.WriteLine(dPurchaseDate);
+            Console.WriteLine("Purchased date: " + dPurchaseDate);
+            Console.WriteLine("Total cost: " + iPrice);
         }
 
         public void PrintProductList()
         {
-            Node<Pair<StringCustom, int>> head = lProducts.FirstItem;
+            Node<Pair<StringCustom, int>>? head = lProducts.FirstItem;
             Pair<StringCustom, int> item = null;
             while (head != null)
             {
                 item = head.item;
-                Console.WriteLine("ID: {0} => Quantity: {1}", item.key, item.value);
+                Console.WriteLine("Product ID: {0} => Quantity: {1}", item.key, item.value);
                 head = head.next;
             }
         }
 
         public int GetTotalPrice()
         {
-            int price = 0;
+            int price = 0, quantity;
             Node<Pair<StringCustom, int>>? head = lProducts.FirstItem;
             Product product = null;
             while (head != null)
             {
                 product = ProductData.productList.FindByID(head.item.key);
-                price += product.Price;
+                quantity = head.item.value;
+                price += (product.Price * quantity);
             }
             return price;
         }
