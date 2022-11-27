@@ -33,7 +33,7 @@ namespace SalesManagementApp
                         activityOrder = InventoryManangementActivity.RunActivity();
                         break;
                     case Constant.EMPLOYEE_MANAGEMENT_ACTIVITY:
-                        activityOrder = SalesManagementActivity.RunActivity();
+                        activityOrder = EmployeeManagementActivity.RunActivity();
                         break;
                     case Constant.CUSTOMER_MANAGEMENT_ACTIVITY:
                         activityOrder = CustomerManagementActivity.RunActivity();
