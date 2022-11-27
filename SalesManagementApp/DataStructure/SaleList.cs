@@ -201,13 +201,11 @@ namespace SalesManagementApp.DataStructure
 
         public void DeleteSale(StringCustom id)
         {
-            int i, j;
+            int i;
             for (i = 0; i < this.Size; i++)
                 if (this.list_[i].ID == id)
                     break;
-            for (j = i; j < this.Size - 1; j++)
-                this.list_[i] = this.list_[i + 1];
-            this.Size--;
+            this.RemoveItem(i);
         }
 
         public static void SortByBirthDay(SaleList lSale)
