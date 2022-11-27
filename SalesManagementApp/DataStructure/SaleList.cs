@@ -1,7 +1,10 @@
-﻿using SalesManagementApp.Models;
+﻿using SalesManagementApp.Database;
+using SalesManagementApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -75,7 +78,7 @@ namespace SalesManagementApp.DataStructure
         //In danh sách nhân viên
         public override void Print()
         {
-            Console.WriteLine("|{0, -8}|{1, -25}|{2, -4}|{3, -10}|{4, -25}|{5, -12}|{6, -9}|{7, -12}|{8, -14}|",
+            Console.WriteLine("|{0, -8}|{1, -25}|{2, -4}|{3, -10}|{4, -25}|{5, -12}|{6, -9}|{7, -12}|",
                 "ID",//0
                 "Name",//1
                 "Sex",//2
@@ -83,21 +86,21 @@ namespace SalesManagementApp.DataStructure
                 "Address",//4
                 "Phone number",//5
                 "Salary",//6
-                "Order Number", //7
-                "Number of Work"); //8
+                "Order Number" //7
+            );
             for (int i = 0; i < this.iSize; i++)
             {
-               Console.WriteLine("|{0, -8}|{1, -25}|{2, -4}|{3, -10}|{4, -25}|{5, -12}|{6, -9}|{7, -12}|{8, -14}|",
+                Console.WriteLine("|{0, -8}|{1, -25}|{2, -4}|{3, -10}|{4, -25}|{5, -12}|{6, -9}|{7, -12}|",
 
-               this.list_[i].ID, // 0
-               this.list_[i].Name, // 1
-               this.list_[i].Gender, // 2
-               this.list_[i].Birthday, // 3
-               this.list_[i].Address, // 4
-               this.list_[i].PhoneNumber, // 5
-               this.list_[i].Salary, //6
-               this.list_[i].Ordernumber, // 7
-               this.list_[i].NoOfWork);// 8
+                this.list_[i].ID, // 0
+                this.list_[i].Name, // 1
+                this.list_[i].Gender, // 2
+                this.list_[i].Birthday, // 3
+                this.list_[i].Address, // 4
+                this.list_[i].PhoneNumber, // 5
+                this.list_[i].Salary, //6
+                this.list_[i].Ordernumber// 7
+                );
             }
         }
 
@@ -120,85 +123,129 @@ namespace SalesManagementApp.DataStructure
            
             return null;
         }
-
-        // Xuất ra danh sách nhân viên đi làm đủ 30 ngày trong tháng
-        public SaleList Full30days(Date input)
+        public int NumberSale(Sale people, int month, int year)
         {
-            SaleList temp = new SaleList(base.iSize);
-            for(int i = 0; i<base.iSize; i++)
-                if (base.list_[i].NoOfWork == 30)
-                {
-                    temp.AddLast(base.list_[i]);
-                }
-            if (temp.iSize == 0)
-                Console.WriteLine("(Empty)");
-            return temp;
-        }
-
-        // Xuất danh sách nhân viên có doanh số lớn nhất
-        public SaleList MaxNumberOfSales(Date input)
-        {
-            SaleList temp = new SaleList(base.iSize);
-            int max = base.list_[0].Ordernumber;
-            for (int i = 0; i < base.iSize; i++)
-                if (base.list_[i].Ordernumber >max)
-                {
-                    max = base.list_[i].Ordernumber;
-                }
-            for (int i = 0; i < base.iSize; i++)
-                if (base.list_[i].Ordernumber == max)
-                {
-                    temp.AddLast(base.list_[i]);
-                }
-            if (temp.iSize == 0)
-                Console.WriteLine("(Empty)");
-            return temp;
-        }
-
-        // Xuất danh sách nhân viên của tháng
-        public SaleList EmployeeOfMonth(Date input)
-        {
-            SaleList a = this.Full30days(input);
-            SaleList b = a.MaxNumberOfSales(input);
-
-            if (b.iSize == 0)
+            BillHash TEMP = BillData.billHash;
+            Sale temp = people;
+            int num = 0;
+            for(int i = 0; i<temp.LOrdersSold.Size; i++)
             {
-                Console.WriteLine("(Empty)");
-            }
-            return b;
-        }
-
-        //Xuất danh sách nhân viên không đạt doanh thu tối thiểu
-        public SaleList NotReachingSales(Date input)
-        {
-            SaleList temp = new SaleList(iCapacity);
-            for (int i = 0; i<base.iSize; i++)
-            {
-                if(base.list_[i].Ordernumber < MIN_INUM)
+                StringCustom temp2 = temp.LOrdersSold.GetItem(i);
+                Bill temp3 = TEMP.GetValue(temp2);
+                if(temp3.PurchaseDate.Month == month && temp3.PurchaseDate.Year == year)
                 {
-                    temp.AddLast(base.list_[i]);
+                    num++;
                 }    
+            }    
+            return num;
+        }
+        public int PriceSale(Sale people, int month, int year)
+        {
+            BillHash TEMP = BillData.billHash;
+            Sale temp = people;
+            int price = 0;
+            for (int i = 0; i < temp.LOrdersSold.Size; i++)
+            {
+                StringCustom temp2 = temp.LOrdersSold.GetItem(i);
+                Bill temp3 = TEMP.GetValue(temp2);
+                if (temp3.PurchaseDate.Month == month && temp3.PurchaseDate.Year == year)
+                {
+                    price += temp3.Price;
+                }
             }
-            if (temp.iSize == 0)
-                Console.WriteLine("(Empty)");
+            return price;
+        }
+        public int MaxNoSale(ArrayList<Sale> SaleList, int month, int year)
+        {
+            int max = 0;
+            for(int i = 0; i<SaleList.Size; i++)
+            {
+                int temp = NumberSale(SaleList.Get(i), month, year);
+                if (max < temp) max = temp;
+            }
+            return max;
+        }
+        public int MaxPriceSale(ArrayList<Sale> SaleList, int month, int year)
+        {
+            int max = 0;
+            for (int i = 0; i < SaleList.Size; i++)
+            {
+                int temp = PriceSale(SaleList.Get(i), month, year);
+                if (max < temp) max = temp;
+            }
+            return max;
+        }
+
+        public SaleList BestNoSaler(int month, int year)
+        {
+            int max = MaxNoSale(this, month, year);
+            SaleList temp = new SaleList(this.iCapacity);
+            for(int i = 0; i<this   .iSize; i++)
+            {
+                if (NumberSale(this.Get(i), month, year) == max)
+                    temp.AddLast(this.Get(i));
+            } 
+            return temp;
+        }
+        public SaleList BestPriceSaler(int month, int year)
+        {
+            int max = MaxPriceSale(this, month, year);
+            SaleList temp = new SaleList(this.iCapacity);
+            for (int i = 0; i < this.iSize; i++)
+            {
+                if (PriceSale(this.Get(i), month, year) == max)
+                    temp.AddLast(this.Get(i));
+            }
             return temp;
         }
 
-        //Xuất danh sách nhân viên nghỉ quá số buổi quy định
-        public SaleList AbsenceBeyondTheNorm(Date input)
+        public void DeleteSale(StringCustom id)
         {
-            SaleList temp = new SaleList(iCapacity);
-            for (int i = 0; i < base.iSize; i++)
-            {
-                if (base.list_[i].NoOfWork < 30 - MAX_DAY_OFF)
-                {
-                    temp.AddLast(base.list_[i]);
-                }
-            }
-            if (temp.iSize == 0)
-                Console.WriteLine("(Empty)");
-            return temp;
+            int i;
+            for (i = 0; i < this.Size; i++)
+                if (this.list_[i].ID == id)
+                    break;
+            this.RemoveItem(i);
         }
-        
+
+        public static void SortByBirthDay(SaleList lSale)
+        {
+            int left = 0, right = lSale.Size -1;
+            QuickSort(lSale, left, right); ;
+            lSale.Print();
+
+        }
+        public static void QuickSort(SaleList lSale, int left, int right)
+        {
+            int pivot = Patation(lSale, left, right);
+            if (pivot > 1)
+            {
+                QuickSort(lSale, left, pivot - 1);
+            }
+            if (pivot + 1 < right)
+            {
+                QuickSort(lSale, pivot + 1, right);
+            }
+        }
+        public static int Patation(SaleList lSale, int left, int right)
+        {
+            int pivot = left;
+            while (true)
+            {
+                while (lSale.list_[left].Birthday < lSale.list_[pivot].Birthday)
+                    left++;
+                while (lSale.list_[right].Birthday > lSale.list_[pivot].Birthday)
+                    right--;
+                if (left < right)
+                {
+                    if (lSale.list_[left].Birthday == lSale.list_[right].Birthday) return right;
+
+                    Sale temp = lSale.list_[left];
+                    lSale.list_[left] = lSale.list_[pivot];
+                    lSale.list_[pivot] = temp;
+                }
+                else return right;
+            }
+        }
     }
 }
