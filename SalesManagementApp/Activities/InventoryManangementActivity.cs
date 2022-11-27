@@ -153,7 +153,6 @@ namespace SalesManagementApp.Activities
                         break;
                     case 11:
                         tempProduct = new Product();
-                        tempList = new ProductList(100);
                         Console.WriteLine("Enter product ID : ");
                         tempProduct.ID = Console.ReadLine();
                         int tam = productList.CheckNumberProduct(tempProduct);
