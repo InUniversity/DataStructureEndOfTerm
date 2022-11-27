@@ -1,4 +1,5 @@
-﻿using SalesManagementApp.Models;
+﻿using SalesManagementApp.Database;
+using SalesManagementApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,7 +76,7 @@ namespace SalesManagementApp.DataStructure
         //In danh sách nhân viên
         public override void Print()
         {
-            Console.WriteLine("|{0, -8}|{1, -25}|{2, -4}|{3, -10}|{4, -25}|{5, -12}|{6, -9}|{7, -12}|{8, -14}|",
+            Console.WriteLine("|{0, -8}|{1, -25}|{2, -4}|{3, -10}|{4, -25}|{5, -12}|{6, -9}|{7, -12}|",
                 "ID",//0
                 "Name",//1
                 "Sex",//2
@@ -83,21 +84,21 @@ namespace SalesManagementApp.DataStructure
                 "Address",//4
                 "Phone number",//5
                 "Salary",//6
-                "Order Number", //7
-                "Number of Work"); //8
+                "Order Number" //7
+            );
             for (int i = 0; i < this.iSize; i++)
             {
-               Console.WriteLine("|{0, -8}|{1, -25}|{2, -4}|{3, -10}|{4, -25}|{5, -12}|{6, -9}|{7, -12}|{8, -14}|",
+                Console.WriteLine("|{0, -8}|{1, -25}|{2, -4}|{3, -10}|{4, -25}|{5, -12}|{6, -9}|{7, -12}|",
 
-               this.list_[i].ID, // 0
-               this.list_[i].Name, // 1
-               this.list_[i].Gender, // 2
-               this.list_[i].Birthday, // 3
-               this.list_[i].Address, // 4
-               this.list_[i].PhoneNumber, // 5
-               this.list_[i].Salary, //6
-               this.list_[i].Ordernumber, // 7
-               this.list_[i].NoOfWork);// 8
+                this.list_[i].ID, // 0
+                this.list_[i].Name, // 1
+                this.list_[i].Gender, // 2
+                this.list_[i].Birthday, // 3
+                this.list_[i].Address, // 4
+                this.list_[i].PhoneNumber, // 5
+                this.list_[i].Salary, //6
+                this.list_[i].Ordernumber// 7
+                );
             }
         }
 
@@ -120,85 +121,80 @@ namespace SalesManagementApp.DataStructure
            
             return null;
         }
-
-        // Xuất ra danh sách nhân viên đi làm đủ 30 ngày trong tháng
-        public SaleList Full30days(Date input)
+        public int NumberSale(Sale people, int month, int year)
         {
-            SaleList temp = new SaleList(base.iSize);
-            for(int i = 0; i<base.iSize; i++)
-                if (base.list_[i].NoOfWork == 30)
-                {
-                    temp.AddLast(base.list_[i]);
-                }
-            if (temp.iSize == 0)
-                Console.WriteLine("(Empty)");
-            return temp;
-        }
-
-        // Xuất danh sách nhân viên có doanh số lớn nhất
-        public SaleList MaxNumberOfSales(Date input)
-        {
-            SaleList temp = new SaleList(base.iSize);
-            int max = base.list_[0].Ordernumber;
-            for (int i = 0; i < base.iSize; i++)
-                if (base.list_[i].Ordernumber >max)
-                {
-                    max = base.list_[i].Ordernumber;
-                }
-            for (int i = 0; i < base.iSize; i++)
-                if (base.list_[i].Ordernumber == max)
-                {
-                    temp.AddLast(base.list_[i]);
-                }
-            if (temp.iSize == 0)
-                Console.WriteLine("(Empty)");
-            return temp;
-        }
-
-        // Xuất danh sách nhân viên của tháng
-        public SaleList EmployeeOfMonth(Date input)
-        {
-            SaleList a = this.Full30days(input);
-            SaleList b = a.MaxNumberOfSales(input);
-
-            if (b.iSize == 0)
+            BillHash TEMP = BillData.billHash;
+            Sale temp = people;
+            int num = 0;
+            for(int i = 0; i<temp.LOrdersSold.Size; i++)
             {
-                Console.WriteLine("(Empty)");
-            }
-            return b;
-        }
-
-        //Xuất danh sách nhân viên không đạt doanh thu tối thiểu
-        public SaleList NotReachingSales(Date input)
-        {
-            SaleList temp = new SaleList(iCapacity);
-            for (int i = 0; i<base.iSize; i++)
-            {
-                if(base.list_[i].Ordernumber < MIN_INUM)
+                StringCustom temp2 = temp.LOrdersSold.GetItem(i);
+                Bill temp3 = TEMP.GetValue(temp2);
+                if(temp3.PurchaseDate.Month == month && temp3.PurchaseDate.Year == year)
                 {
-                    temp.AddLast(base.list_[i]);
+                    num++;
                 }    
-            }
-            if (temp.iSize == 0)
-                Console.WriteLine("(Empty)");
-            return temp;
+            }    
+            return num;
         }
-
-        //Xuất danh sách nhân viên nghỉ quá số buổi quy định
-        public SaleList AbsenceBeyondTheNorm(Date input)
+        public int PriceSale(Sale people, int month, int year)
         {
-            SaleList temp = new SaleList(iCapacity);
-            for (int i = 0; i < base.iSize; i++)
+            BillHash TEMP = BillData.billHash;
+            Sale temp = people;
+            int price = 0;
+            for (int i = 0; i < temp.LOrdersSold.Size; i++)
             {
-                if (base.list_[i].NoOfWork < 30 - MAX_DAY_OFF)
+                StringCustom temp2 = temp.LOrdersSold.GetItem(i);
+                Bill temp3 = TEMP.GetValue(temp2);
+                if (temp3.PurchaseDate.Month == month && temp3.PurchaseDate.Year == year)
                 {
-                    temp.AddLast(base.list_[i]);
+                    price += temp3.Price;
                 }
             }
-            if (temp.iSize == 0)
-                Console.WriteLine("(Empty)");
+            return price;
+        }
+        public int MaxNoSale(ArrayList<Sale> SaleList, int month, int year)
+        {
+            int max = 0;
+            for(int i = 0; i<SaleList.Size; i++)
+            {
+                int temp = NumberSale(SaleList.Get(i), month, year);
+                if (max < temp) max = temp;
+            }
+            return max;
+        }
+        public int MaxPriceSale(ArrayList<Sale> SaleList, int month, int year)
+        {
+            int max = 0;
+            for (int i = 0; i < SaleList.Size; i++)
+            {
+                int temp = PriceSale(SaleList.Get(i), month, year);
+                if (max < temp) max = temp;
+            }
+            return max;
+        }
+
+        public SaleList BestNoSaler(int month, int year)
+        {
+            int max = MaxNoSale(this, month, year);
+            SaleList temp = new SaleList(this.iCapacity);
+            for(int i = 0; i<this   .iSize; i++)
+            {
+                if (NumberSale(this.Get(i), month, year) == max)
+                    temp.AddLast(this.Get(i));
+            } 
             return temp;
         }
-        
+        public SaleList BestPriceSaler(int month, int year)
+        {
+            int max = MaxPriceSale(this, month, year);
+            SaleList temp = new SaleList(this.iCapacity);
+            for (int i = 0; i < this.iSize; i++)
+            {
+                if (PriceSale(this.Get(i), month, year) == max)
+                    temp.AddLast(this.Get(i));
+            }
+            return temp;
+        }
     }
 }

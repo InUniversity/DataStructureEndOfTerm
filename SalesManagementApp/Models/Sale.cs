@@ -13,8 +13,6 @@ namespace SalesManagementApp.Models
     {
         protected int iSalary;
         protected int iOrderNumber;
-        protected int iNoOfWork;
-        protected List<Customer> lCustomer;
         protected LinkedLst<StringCustom> lOrdersSold;
   
         //properties
@@ -27,11 +25,6 @@ namespace SalesManagementApp.Models
         {
             set { this.iSalary = value; }
             get { return this.iOrderNumber; }
-        }
-        public int NoOfWork
-        {
-            set { this.iNoOfWork = value; }
-            get { return this.iNoOfWork; }
         }
         public List<Customer> LCustomer
         {
@@ -47,16 +40,13 @@ namespace SalesManagementApp.Models
         //constructor
         public Sale():base()
         {
-            this.lCustomer = new List<Customer>();
             this.lOrdersSold = new LinkedLst<StringCustom>();
         }
         public Sale(string id, StringCustom name, StringCustom sex, Date birthday, StringCustom address, StringCustom phoneno, int salary,
-            int orderNumber, int noOfWork, List<Customer> lcustomer, LinkedLst<StringCustom> lorderssold) :base(id,name,sex,birthday,address, phoneno)
+            int orderNumber, LinkedLst<StringCustom> lorderssold) :base(id,name,sex,birthday,address, phoneno)
         {
             this.iSalary = salary;
             this.iOrderNumber = orderNumber;
-            this.iNoOfWork = noOfWork;
-            this.lCustomer = lcustomer;
             this.lOrdersSold = lorderssold;
         }
 
@@ -69,25 +59,16 @@ namespace SalesManagementApp.Models
             base.Input();
             Console.WriteLine("Salary: "); this.iSalary = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Totals Order Number: "); this.iOrderNumber = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Totals No Of Work: "); this.iNoOfWork = Convert.ToInt32(Console.ReadLine());
         }
 
         public override void Print()
         {
             base.Print();
             Console.WriteLine("Salary: " + this.iSalary);
-            Console.WriteLine("Totals Order Number: "+this.iOrderNumber);
-            Console.WriteLine("Totals No Of Work: " +this.iNoOfWork);
+            Console.WriteLine("Totals Order Number: " + this.iOrderNumber);
         }
 
-        public void PrintListCustomer()
-        {
-            Console.WriteLine("The List Customer Of Sale" + this.ID +": ") ;
-            foreach (Customer customer in this.lCustomer)
-            {
-                customer.Print();
-            }
-        }
+     
         
         public LinkedLst<StringCustom> ListProduct()
         {
