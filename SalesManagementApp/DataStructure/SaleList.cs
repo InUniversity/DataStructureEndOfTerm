@@ -2,7 +2,9 @@
 using SalesManagementApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -208,6 +210,44 @@ namespace SalesManagementApp.DataStructure
             this.Size--;
         }
 
+        public static void SortByBirthDay(SaleList lSale)
+        {
+            int left = 0, right = lSale.Size -1;
+            QuickSort(lSale, left, right); ;
+            lSale.Print();
 
+        }
+        public static void QuickSort(SaleList lSale, int left, int right)
+        {
+            int pivot = Patation(lSale, left, right);
+            if (pivot > 1)
+            {
+                QuickSort(lSale, left, pivot - 1);
+            }
+            if (pivot + 1 < right)
+            {
+                QuickSort(lSale, pivot + 1, right);
+            }
+        }
+        public static int Patation(SaleList lSale, int left, int right)
+        {
+            int pivot = left;
+            while (true)
+            {
+                while (lSale.list_[left].Birthday < lSale.list_[pivot].Birthday)
+                    left++;
+                while (lSale.list_[right].Birthday > lSale.list_[pivot].Birthday)
+                    right--;
+                if (left < right)
+                {
+                    if (lSale.list_[left].Birthday == lSale.list_[right].Birthday) return right;
+
+                    Sale temp = lSale.list_[left];
+                    lSale.list_[left] = lSale.list_[pivot];
+                    lSale.list_[pivot] = temp;
+                }
+                else return right;
+            }
+        }
     }
 }

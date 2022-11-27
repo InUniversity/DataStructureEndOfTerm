@@ -28,8 +28,9 @@ namespace SalesManagementApp.Activities
                 Console.WriteLine("|  4. Delete a employee                                                        |");
                 Console.WriteLine("|  5. Print the list of employees with the highest num sales                   |");
                 Console.WriteLine("|  6. Print the list of employees with the highest sales                       |");
-                Console.WriteLine("|  7. Back                                                                     |");
-                Console.WriteLine("|  8. Quit app                                                                 |");
+                Console.WriteLine("|  7. Sort sales employee by birthday                                          |");
+                Console.WriteLine("|  8. Back                                                                     |");
+                Console.WriteLine("|  9. Quit app                                                                 |");
                 Console.WriteLine("======================================MENU======================================");
                 Console.Write("Choose: "); 
                 
@@ -93,8 +94,14 @@ namespace SalesManagementApp.Activities
                         Console.WriteLine(".................................................................................");
                         break;
                     case 7:
+                        Console.WriteLine(".........................Sort sales employee by birthday.........................");
+                        SaleList.SortByBirthDay(employeeList);
+                        employeeList.Print();
+                        Console.WriteLine(".................................................................................");
+                        break;
+                    case 8:
                         return 2;
-                    case 8: 
+                    case 9: 
                         return -1;
                     default:
                         Console.WriteLine("Cancel!");
