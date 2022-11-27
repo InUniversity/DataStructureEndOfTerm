@@ -13,11 +13,11 @@ namespace SalesManagementApp.Models
     public class Bill
     {
         private StringCustom sID;
-        private ProductList lProducts;
-        private StringCustom sEmployeeID;
+        private StringCustom sSaleID;
         private StringCustom sCustomerID;
-        private Date dPurchaseDate;
+        private LinkedLst<Pair<StringCustom, int>> lProducts;
         private int iPrice;
+        private Date dPurchaseDate;
 
         public StringCustom ID 
         { 
@@ -25,16 +25,10 @@ namespace SalesManagementApp.Models
             set { sID = value; }
         }
 
-        public ProductList Products
+        public StringCustom SaleID
         {
-            get { return lProducts; }
-            set { lProducts = value; }
-        }
-
-        public StringCustom EmployeeID
-        {
-            get { return sEmployeeID; }
-            set { sEmployeeID = value; }
+            get { return sSaleID; }
+            set { sSaleID = value; }
         }
 
         public StringCustom CustomerID
@@ -43,10 +37,10 @@ namespace SalesManagementApp.Models
             set { sCustomerID = value; }
         }
 
-        public Date PurchaseDate
+        public LinkedLst<Pair<StringCustom, int>> Products
         {
-            get { return dPurchaseDate; }
-            set { dPurchaseDate = value; }
+            get { return lProducts; }
+            set { lProducts = value; }
         }
 
         public int Price
@@ -55,11 +49,19 @@ namespace SalesManagementApp.Models
             set { iPrice = value; }
         }
 
-        public Bill(StringCustom id, ProductList products, StringCustom employeeID, StringCustom customerID, Date purchaseDate, int iPrice)
+        public Date PurchaseDate
+        {
+            get { return dPurchaseDate; }
+            set { dPurchaseDate = value; }
+        }
+
+
+        public Bill(StringCustom id, LinkedLst<Pair<StringCustom, int>> products,
+            StringCustom saleID, StringCustom customerID, Date purchaseDate, int iPrice)
         {
             this.sID = id;
             this.lProducts = products;
-            this.sEmployeeID = employeeID;
+            this.sSaleID = saleID;
             this.sCustomerID = customerID;
             this.dPurchaseDate = purchaseDate;
             this.iPrice = iPrice;
@@ -68,91 +70,97 @@ namespace SalesManagementApp.Models
         public Bill()
         {
             dPurchaseDate = new Date();
-            lProducts = new ProductList(100);
+            lProducts = new LinkedLst<Pair<StringCustom, int>>();
         }
 
         public void Input()
         {
-            ProductList tempproductlist = ProductData.productList;
-            Product temp = new Product();
-            Product tempID = new Product();
-            Console.WriteLine("Enter bill ID");
-            this.sID = Console.ReadLine();
-            Console.WriteLine("Enter the number of products: ");
-            int sl = Convert.ToInt32(Console.ReadLine());
-            for (int i = 0; i < sl; i++)
+            LinkedLst<Pair<StringCustom, int>> products = new LinkedLst<Pair<StringCustom, int>>();
+            StringCustom tempID;
+            int tempNumber;
+            int numberOfProducts;
+
+            Console.WriteLine("Enter bill id: ");
+            sID = Console.ReadLine();
+
+            // get current account
+            sSaleID = AccountData.currentAccount.SaleID;
+
+            Console.WriteLine("Enter customer id: ");
+            sCustomerID = Console.ReadLine();
+            while (!Customer.IsValidID(sCustomerID))
             {
-                Console.WriteLine("Enter product ID: ");
-                tempID.ID = Console.ReadLine();
-                Console.WriteLine("Number of products with ID "+tempID.ID);
-                int sl1 = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine(Constant.NOT_FOUND_MESSAGE);
+                Console.WriteLine("Re-enter customer id: ");
+                sCustomerID = Console.ReadLine();
+            }
 
-                temp = tempproductlist.SearchItemByID(tempID);
-
-                if (temp != null)
+            // enter product list
+            Console.WriteLine("Enter the number of products: ");
+            numberOfProducts = Convert.ToInt32(Console.ReadLine());
+            for (int i = 0; i < numberOfProducts; i++)
+            {
+                // enter product id
+                Console.WriteLine("Enter product id: ");
+                tempID = Console.ReadLine();
+                while (ProductData.productList.FindByID(tempID) == null)
                 {
-                    int d = temp.NumberOfProduct;
-                    if(temp.NumberOfProduct>=sl1)
-                    {
-                        lProducts.AddLast(tempproductlist.Bill(temp, sl1));
-                        temp.NumberOfProduct -= sl1;
-                    }    
-                    else
-                    {
-                        Console.WriteLine("The store does not have enough goods for you");
-                        Console.WriteLine("There are currently "+d+ " products in stock");
-                        Console.WriteLine("Do you want to buy all products ? ");
-                        Console.WriteLine("1.I agree ");
-                        Console.WriteLine("any key.I don't agree ");
-                        int choose;
-                        choose = Convert.ToInt32(Console.ReadLine());
-                        if(choose==1)
-                        {
-                            temp.NumberOfProduct -= (d);
-                            lProducts.AddLast(tempproductlist.Bill(temp, d));
-                        }
-                        else
-                        {
-                            Console.WriteLine("Goodbye!!!");
-                        }
-                    }    
-
+                    Console.WriteLine(Constant.NOT_FOUND_MESSAGE);
+                    Console.WriteLine("Re-enter product id: ");
+                    tempID = Console.ReadLine();
                 }
-                else
+
+                // enter quantity
+                Console.WriteLine("Enter the quantity: ");
+                tempNumber = Convert.ToInt32(Console.ReadLine());
+                while (ProductData.productList.FindByID(tempID).NumberOfProduct < tempNumber)
                 {
-                    int j = i + 1;
-                    Console.WriteLine("product" + j);
-                    Console.WriteLine("Out of stock");
+                    Console.WriteLine("-> Not enough quantity!!!");
+                    Console.WriteLine("-> Current quantity is {0}", ProductData.productList.FindByID(tempID).NumberOfProduct);
+                    Console.Write("Re-enter the quantity: ");
+                    tempNumber = Convert.ToInt32(Console.ReadLine());
                 }
             }
-            Console.WriteLine("Customer ID : ");
-            this.CustomerID = Console.ReadLine();
-            Console.WriteLine("Employee ID : ");
-            this.EmployeeID = Console.ReadLine();
-            this.dPurchaseDate = Date.GetCurrentDate();
-            this.Price=  TotalPrice(lProducts);
+            iPrice = GetTotalPrice();
+            dPurchaseDate = Date.GetCurrentDate();
         }
 
         public void Print()
         {
-            Console.WriteLine("Bill");
-            Console.WriteLine("Employee ID: " + this.EmployeeID);
-            Console.WriteLine("Customer ID: " + this.CustomerID);
-            lProducts.Print();
-            Console.WriteLine("Total cost: "+this.Price);
-            dPurchaseDate.Print();
+            Console.WriteLine("Bill ID: " + sID);
+            Console.WriteLine("Employee ID: " + SaleID);
+            Console.WriteLine("Customer ID: " + CustomerID);
+            Console.WriteLine("Product list:");
+            Console.WriteLine("{");
+            PrintProductList();
+            Console.WriteLine("}");
+            Console.WriteLine("Total cost: " + Price);
+            Console.WriteLine(dPurchaseDate);
         }
 
-        public int TotalPrice(ProductList temp)
+        public void PrintProductList()
         {
-            int sum = 0;
-            Product product = new Product();
-            for(int i=0; i<temp.Size; i++)
+            Node<Pair<StringCustom, int>> head = lProducts.FirstItem;
+            Pair<StringCustom, int> item = null;
+            while (head != null)
             {
-                product = temp.Get(i);
-                sum = sum + (product.NumberOfProduct*product.Price);
+                item = head.item;
+                Console.WriteLine("ID: {0} => Quantity: {1}", item.key, item.value);
+                head = head.next;
             }
-            return sum;
+        }
+
+        public int GetTotalPrice()
+        {
+            int price = 0;
+            Node<Pair<StringCustom, int>>? head = lProducts.FirstItem;
+            Product product = null;
+            while (head != null)
+            {
+                product = ProductData.productList.FindByID(head.item.key);
+                price += product.Price;
+            }
+            return price;
         }
     }
 }

@@ -313,7 +313,7 @@ namespace SalesManagementApp.DataStructure
 
         public void AddLastNoDuplicate(Product product)
         {
-            if (FindByID(product.ID.ToInt()) != null)
+            if (FindByID(product.ID) != null)
             {
                 Console.WriteLine(Constant.DUPLICATED_MESSAGE);
                 return;
@@ -321,12 +321,13 @@ namespace SalesManagementApp.DataStructure
             AddLast(product);
         }
 
-        public Product FindByID(int id)
+        public Product FindByID(StringCustom id)
         {
             Product product = null;
             for (int i = 0; i < base.iSize; i++)
             {
-                if (product.ID.ToInt() == id)
+                product = Get(i);
+                if (id.IsEquals(product.ID))
                     return product;
             }
             return null;
@@ -358,7 +359,6 @@ namespace SalesManagementApp.DataStructure
             a.Price = temp.Price;
             a.NumberOfProduct = n;
             return a;
-
         }
     }
 }

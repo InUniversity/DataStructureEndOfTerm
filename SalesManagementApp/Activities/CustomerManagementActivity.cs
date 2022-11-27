@@ -134,7 +134,7 @@ namespace SalesManagementApp.Activities
                         tempStr = Console.ReadLine();
                         Console.Write("Enter member type: ");
                         tempStr1 = Console.ReadLine();
-                        tempHash = customerHash.FindBySexAndMemberType(tempStr, tempStr1);
+                        tempHash = customerHash.FindByGenderAndMemberType(tempStr, tempStr1);
                         if (tempHash.IsEmpty())
                         {
                             Console.WriteLine(Constant.EMPTY_MESSAGE);

@@ -15,9 +15,9 @@ namespace SalesManagementApp.Database
 			return billHash;
 		}
 
-		public static void SaveFile(StringCustom fileName)
+		public static void SaveFile()
 		{
-			billHash.WriteFile(fileName);
+			billHash.WriteFile("BillData.txt");
         }
 	}
 }

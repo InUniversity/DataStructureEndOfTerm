@@ -31,7 +31,10 @@ namespace SalesManagementApp.Activities
                 }
 
                 if (AccountData.accountList.Exits(account))
+                {
+                    AccountData.currentAccount = account;
                     return Constant.MAIN_ACTIVITY;
+                }
 
                 Console.Clear();
                 Printer.PrintGroupInformation(80);
