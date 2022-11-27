@@ -26,9 +26,9 @@ namespace SalesManagementApp
         public const int SIGNIN_ACTIVITY = 1;
         public const int MAIN_ACTIVITY = 2;
         public const int INVENTORY_MANANGEMENT_ACTIVITY = 3;
-        public const int SALES_MANAGEMENT_ACTIVITY = 4;
+        public const int EMPLOYEE_MANAGEMENT_ACTIVITY = 4;
         public const int CUSTOMER_MANAGEMENT_ACTIVITY = 5;
-        public const int SALE_PRODUCT_ACTIVITY = 6;
+        public const int SALES_ACTIVITY = 6;
     }
 }
 

@@ -88,12 +88,12 @@ namespace SalesManagementApp.Models
 
         public void Print()
         {
-            Console.WriteLine(this.sID);
-            Console.WriteLine(this.sName);
-            Console.WriteLine(this.iNumberOfProduct);
-            Console.WriteLine(this.dDayStartedUsing);
-            Console.WriteLine(this.dDateExpires);
-            Console.WriteLine(this.iPrice);
+            Console.WriteLine("Product ID: " + this.sID);
+            Console.WriteLine("Product name: " + this.sName);
+            Console.WriteLine("Number of Product: " + this.iNumberOfProduct);
+            Console.WriteLine("Day started using: " + this.dDayStartedUsing);
+            Console.WriteLine("Date expires: " + this.dDateExpires);
+            Console.WriteLine("Price: " + this.iPrice);
         }
     }
 }

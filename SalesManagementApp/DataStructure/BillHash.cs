@@ -42,7 +42,6 @@ namespace SalesManagementApp.DataStructure
                 {
                     bill = GetBillFromFile(new StringCustom(str));
                     InsertNoDuplicate(bill);
-                    IssueAnBill(bill);
                 }
             }
             catch (Exception e)
@@ -56,9 +55,10 @@ namespace SalesManagementApp.DataStructure
         private Bill GetBillFromFile(StringCustom data)
         {
             LinkedLst<StringCustom> temp = data.Split(';');
-            LinkedLst<StringCustom> tempList, product;
+            LinkedLst<StringCustom> tempProductList, tempProduct;
             Node<StringCustom>? head;
             Pair<StringCustom, int> item;
+            StringCustom tempStr;
             Bill bill = new Bill();
 
             bill.ID = temp.GetItem(0);
@@ -66,12 +66,13 @@ namespace SalesManagementApp.DataStructure
             bill.CustomerID = temp.GetItem(2);
 
             // read product list
-            tempList = data.Split(',');
-            head = tempList.FirstItem;
+            tempStr = temp.GetItem(3);
+            tempProductList = tempStr.Split(',');
+            head = tempProductList.FirstItem;
             while (head != null)
             {
-                product = data.Split('=');
-                item = new Pair<StringCustom, int>(product.GetItem(0), product.GetItem(1).ToInt());
+                tempProduct = head.item.Split('=');
+                item = new Pair<StringCustom, int>(tempProduct.GetItem(0), tempProduct.GetItem(1).ToInt());
                 bill.Products.AddLast(item);
                 head = head.next;
             }
@@ -80,10 +81,94 @@ namespace SalesManagementApp.DataStructure
             bill.Price = temp.GetItem(5).ToInt();
             return bill;
         }
-
-        public Bill GetTheBiggestBillOfTheMonth(int month, int year)
+        
+        
+        public Product FindBestSellingProducts(int months, int years)
         {
-            return null;
+            ProductList _productList = ProductData.productList;
+            LinkedLst<Pair<Product, int>> saleList = new LinkedLst<Pair<Product, int>>();
+            Node<Pair<Product, int>>? headSaleList;
+            // instance
+            for (int i = 0; i < _productList.Size; i++)
+                saleList.AddLast(new Pair<Product, int>(_productList.Get(i), 0));
+
+            // get quantity
+            Node<Pair<StringCustom, Bill>>? head = null;
+            for (int i = 0; i < BUCKET; i++)
+            {
+                head = table[i].FirstItem;
+                while (head != null)
+                {
+                    if (head.item.value.PurchaseDate.Month == months && head.item.value.PurchaseDate.Year == years)
+                    {
+                        Node<Pair<StringCustom, int>>? headProductList = head.item.value.Products.FirstItem;
+                        while (headProductList != null)
+                        {
+
+                            headSaleList = saleList.FirstItem;
+                            while (headSaleList != null)
+                            {
+                                if (headSaleList.item.key.ID.IsEquals(headProductList.item.key))
+                                {
+                                    headSaleList.item.value += headProductList.item.value;
+                                    break;
+                                }
+                                headSaleList = headSaleList.next;
+                            }
+                            
+                            headProductList = headProductList.next;
+                        }
+                    }
+                    head = head.next;
+                }
+            }
+            
+            // find max
+            Product bestSellingProducts = null;
+            headSaleList = saleList.FirstItem;
+            int theMostSoldQuantity = 0;
+            while (headSaleList != null)
+            {
+                if (headSaleList.item.value > theMostSoldQuantity)
+                {
+                    theMostSoldQuantity = headSaleList.item.value;
+                    bestSellingProducts = headSaleList.item.key;
+                }
+                headSaleList = headSaleList.next;
+            }
+
+            return bestSellingProducts;
+        }
+
+        public Product FindProductThatSellsTheLeast(int months, int years)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Bill GetTheBiggestBillOfTheMonth(int months, int years)
+        {
+            Date currentDate;
+            Bill biggestBill = null, currentBill;
+            Node<Pair<StringCustom, Bill>>? head;
+            int maxPrice = -1, currentPrice;
+            for (int i = 0; i < BUCKET; i++)
+            {
+                head = table[i].FirstItem;
+                while (head != null)
+                {
+                    currentBill = head.item.value;
+                    currentDate = currentBill.PurchaseDate;
+                    currentPrice = currentBill.Price;
+                    if (currentDate.Month == months && currentDate.Year == years
+                        && currentPrice > maxPrice)
+                    {
+                        biggestBill = currentBill;
+                        maxPrice = currentPrice;
+                    }
+                    head = head.next;
+                }
+            }
+            return biggestBill;
         }
 
         public void IssueAnBill(Bill bill)
@@ -92,6 +177,7 @@ namespace SalesManagementApp.DataStructure
             StringCustom tempID;
             int quantity;
             ProductList productList = ProductData.productList;
+            
             BillData.billHash.Insert(bill.ID, bill);
 
             // get product from inventory
@@ -106,6 +192,11 @@ namespace SalesManagementApp.DataStructure
 
             // get customer with id
             Customer customer = CustomerData.customerHash.GetValue(bill.CustomerID);
+            if (customer == null)
+            {
+                customer = new Customer();
+                customer.Input();
+            }
             customer.PurchasedOrders.AddLast(bill.ID);
         }
 
@@ -157,7 +248,7 @@ namespace SalesManagementApp.DataStructure
             Node<Pair<StringCustom, Bill>>? head = table[index].FirstItem;
             while (head != null)
             {
-                if (key == head.item.key)
+                if (key.IsEquals(head.item.key))
                     return head.item.value;
                 head = head.next;
             }

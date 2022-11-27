@@ -1,7 +1,7 @@
 ﻿using System;
 namespace SalesManagementApp.DataStructure
 {
-    public class StringCustom
+    public class StringCustom : IComparable
     {
 
         private char[] data;
@@ -37,10 +37,10 @@ namespace SalesManagementApp.DataStructure
                 start++;
             while (this.CharAt(end) == ' ')
                 end--;
-            return substring(start, end);
+            return Substring(start, end);
         }
 
-        public StringCustom substring(int start, int end)
+        public StringCustom Substring(int start, int end)
         {
             if (iSize == 0 && start < 0 && end > iSize) return this;
             StringCustom result = "";
@@ -71,6 +71,22 @@ namespace SalesManagementApp.DataStructure
             for (int i = 0; i < iSize; i++)
                 number = number * 10 + (CharAt(i) - '0');
             return number;
+        }
+
+        public int CompareTo(object? obj)
+        {
+            StringCustom str = (StringCustom)obj;
+            if (iSize > str.Size) return 1;
+            if (iSize < str.Size) return -1;
+
+            for (int i = 0; i < iSize; i++)
+            {
+                if (this.CharAt(i) > str.CharAt(i))
+                    return 1;
+                if (this.CharAt(i) < str.CharAt(i))
+                    return -1;
+            }
+            return 0;
         }
 
         public bool Contain(StringCustom sequence)

@@ -1,4 +1,5 @@
 ﻿using System;
+using SalesManagementApp.Database;
 using SalesManagementApp.DataStructure;
 
 namespace SalesManagementApp.Models
@@ -45,6 +46,21 @@ namespace SalesManagementApp.Models
         }
 
         // methods
+        public int FindTotalOrderValueForMonth(int months, int years)
+        {
+            int sum = 0;
+            Node<StringCustom>? head = PurchasedOrders.FirstItem;
+            Bill bill;
+            while (head != null)
+            {
+                bill = BillData.billHash.GetValue(head.item);
+                if (bill.PurchaseDate.Month == months && bill.PurchaseDate.Year == years)
+                    sum += bill.Price;
+                head = head.next;
+            }
+            return sum;
+        }
+        
         public static bool IsValidID(StringCustom tempID)
         {
             return tempID != null &&
@@ -78,7 +94,7 @@ namespace SalesManagementApp.Models
             Node<StringCustom> head = lPurchasedOrders.FirstItem;
             while (head != null)
             {
-                Console.WriteLine("{0}", head.item);
+                Console.WriteLine("Bill ID: {0}", head.item);
                 head = head.next;
             }
         }

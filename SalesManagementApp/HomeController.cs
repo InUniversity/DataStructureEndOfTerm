@@ -6,7 +6,6 @@ namespace SalesManagementApp
 {
     class HomeController
     {
-
         static void Main(string[] args)
         {
             // -1 = exit application
@@ -16,7 +15,7 @@ namespace SalesManagementApp
             // 3 = ProductManangementActivity
             // 4 = EmployeeManagementActivity
             // 5 = CustomerManagementActivity
-            int activityOrder = Constant.SIGNIN_ACTIVITY;
+            int activityOrder = Constant.MAIN_ACTIVITY;
             while (true)
             {
                 switch (activityOrder)
@@ -33,14 +32,14 @@ namespace SalesManagementApp
                     case Constant.INVENTORY_MANANGEMENT_ACTIVITY:
                         activityOrder = InventoryManangementActivity.RunActivity();
                         break;
-                    case Constant.SALES_MANAGEMENT_ACTIVITY:
+                    case Constant.EMPLOYEE_MANAGEMENT_ACTIVITY:
                         activityOrder = SalesManagementActivity.RunActivity();
                         break;
                     case Constant.CUSTOMER_MANAGEMENT_ACTIVITY:
                         activityOrder = CustomerManagementActivity.RunActivity();
                         break;
-                    case Constant.SALE_PRODUCT_ACTIVITY:
-                        activityOrder = SaleProductActivity.RunActivity();
+                    case Constant.SALES_ACTIVITY:
+                        activityOrder = SalesActivity.RunActivity();
                         break;
                     default:
                         Console.WriteLine(Constant.QUIT_APP_MESSAGE);
@@ -48,10 +47,12 @@ namespace SalesManagementApp
                         // save file after run program
                         CustomerData.SaveFile();
                         AccountData.SaveFile();
+                        BillData.SaveFile();
                         Console.ReadKey();
                         return;
                 }
             }
         }
+
     }
 }

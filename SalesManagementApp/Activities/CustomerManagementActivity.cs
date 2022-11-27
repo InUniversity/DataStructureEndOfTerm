@@ -15,7 +15,8 @@ namespace SalesManagementApp.Activities
             CustomerHash tempHash;
             Customer tempCustomer;
             StringCustom tempStr, tempStr1;
-            Date start, end;
+            Date date;
+            int months, years;
             int choose = 10;
             while (true)
             {
@@ -26,16 +27,15 @@ namespace SalesManagementApp.Activities
                 Console.Write("| 2. Delete customer with ID                             |\n");
                 Console.Write("| 3. Display customer list                               |\n");
                 Console.Write("| 4. Sort by LAST purchased date                         |\n");
-                Console.Write("| 5. Find by date of purchase                            |\n");
+                Console.Write("| 5. Find customer with the largest order price of months|\n");
                 Console.Write("| 6. Find by ID                                          |\n");
                 Console.Write("| 7. Find by Name                                        |\n");
-                Console.Write("| 8. Find customers who buy multiple products            |\n");
-                Console.Write("| 9. Find by member type                                 |\n");
-                Console.Write("|10. Find by sex and member type                         |\n");
-                Console.Write("|11. Write file                                          |\n");
-                Console.Write("|12. Reload customer data                                |\n");
-                Console.Write("|13. Group by gender                                     |\n");
-                Console.Write("|14. Back to Main activity                               |\n");
+                Console.Write("| 8. Find by member type                                 |\n");
+                Console.Write("| 9. Find by sex and member type                         |\n");
+                Console.Write("|10. Write file                                          |\n");
+                Console.Write("|11. Reload customer data                                |\n");
+                Console.Write("|12. Group by gender                                     |\n");
+                Console.Write("|13. Back to Main activity                               |\n");
                 Console.Write("| 0. Quit app                                            |\n");
                 Console.Write("===========================MENU===========================\n");
                 Console.Write("Choose: ");
@@ -82,16 +82,12 @@ namespace SalesManagementApp.Activities
                         customerHash.SortByLastPurchaseDate();
                         break;
                     case 5:
-                        start = new Date(-1, -1, -1);
-                        end = new Date(-1, -1, -1);
-                        Console.WriteLine("Enter start date:\n{");
-                        start.Input();
-                        Console.WriteLine("}");
-                        Console.WriteLine("Enter end date:\n{");
-                        end.Input();
-                        Console.WriteLine("}");
-                        tempHash = customerHash.FindByDateOfPurchase(start, end);
-                        tempHash.Print();
+                        Console.Write("Enter months: ");
+                        months = Convert.ToInt32(Console.ReadLine());
+                        Console.Write("Enter years: ");
+                        years = Convert.ToInt32(Console.ReadLine());
+                        tempCustomer = customerHash.FindCustomerWithLargestOrderPriceOfMonths(months, years);
+                        tempCustomer.Print();
                         break;
                     case 6:
                         Console.Write("Enter ID: ");
@@ -116,9 +112,6 @@ namespace SalesManagementApp.Activities
                         tempHash.Print();
                         break;
                     case 8:
-                        customerHash.FindCustomersWhoBuyMultipleProducts().Print();
-                        break;
-                    case 9:
                         Console.Write("Enter member type: ");
                         tempStr = Console.ReadLine();
                         tempHash = customerHash.FindByMemberType(tempStr);
@@ -129,7 +122,7 @@ namespace SalesManagementApp.Activities
                         }
                         tempHash.Print();
                         break;
-                    case 10:
+                    case 9:
                         Console.Write("Enter gender: ");
                         tempStr = Console.ReadLine();
                         Console.Write("Enter member type: ");
@@ -142,7 +135,7 @@ namespace SalesManagementApp.Activities
                         }
                         tempHash.Print();
                         break;
-                    case 11:
+                    case 10:
                         Console.WriteLine("Enter file name: ");
                         tempStr = Console.ReadLine();
                         if (!customerHash.WriteFile(tempStr))
@@ -153,7 +146,7 @@ namespace SalesManagementApp.Activities
                             customerHash.Print();
                         }
                         break;
-                    case 12:
+                    case 11:
                         tempStr = "CustomerData.txt";
                         Console.WriteLine("File name: " + tempStr);
                         if (!customerHash.AddFromFile(tempStr))
@@ -164,10 +157,10 @@ namespace SalesManagementApp.Activities
                             customerHash.Print();
                         }
                         break;
-                    case 13:
+                    case 12:
                         customerHash.SortByGender();
                         break;
-                    case 14:
+                    case 13:
                         return Constant.MAIN_ACTIVITY;
                     case 0:
                         return Constant.EXIT_APPLICATION;
