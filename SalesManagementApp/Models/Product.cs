@@ -72,17 +72,17 @@ namespace SalesManagementApp.Models
 
         public void Input()
         {
-            Console.WriteLine("ID:");
+            Console.Write("ID:");
             this.sID = Console.ReadLine();
-            Console.WriteLine("Name:");
+            Console.Write("Name:");
             this.sName = (Console.ReadLine());
-            Console.WriteLine("iNumberOfProduct:");
+            Console.Write("iNumberOfProduct:");
             this.iNumberOfProduct = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("dDayStartedUsing:");
             this.dDayStartedUsing.Input();
             Console.WriteLine("dDateExpires:");
             this.dDateExpires.Input();
-            Console.WriteLine("Enter price:");
+            Console.Write("Enter price:");
             this.iPrice = Convert.ToInt32(Console.ReadLine());
         }
 
