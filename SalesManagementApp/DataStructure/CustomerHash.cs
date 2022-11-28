@@ -56,7 +56,7 @@ namespace SalesManagementApp.DataStructure
                         customer.PhoneNumber, // 5
                         customer.Point, // 6
                         customer.TypeOfMember); // 7
-
+                        
                         purchasedOrders = customer.PurchasedOrders;
                         headPurchasedOrders = purchasedOrders.FirstItem;
                         while (headPurchasedOrders.next != null)
@@ -66,6 +66,8 @@ namespace SalesManagementApp.DataStructure
                         }
                         if (headPurchasedOrders != null)
                             sw.Write("{0}", headPurchasedOrders.item);
+                        else
+                            sw.Write(" ");
                         sw.WriteLine();
                         
                         head = head.next;

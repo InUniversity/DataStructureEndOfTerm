@@ -85,19 +85,19 @@ namespace SalesManagementApp.DataStructure
             AddLast(account);
         }
 
-        public bool Exits(SaleAccount account)
+        public StringCustom GetID(SaleAccount account)
         {
             Node<SaleAccount>? head = nFirstItem;
-            SaleAccount managerAccount = null;
+            SaleAccount saleAccount = null;
             while (head != null)
             {
-                managerAccount = head.item;
-                if (account.Username.IsEquals(managerAccount.Username) &&
-                    account.Password.IsEquals(managerAccount.Password))
-                    return true;
+                saleAccount = head.item;
+                if (account.Username.IsEquals(saleAccount.Username) &&
+                    account.Password.IsEquals(saleAccount.Password))
+                    return saleAccount.SaleID;
                 head = head.next;
             }
-            return false;
+            return null;
         }
 
         public SaleAccount FindById(StringCustom id)
