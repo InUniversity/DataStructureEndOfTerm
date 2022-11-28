@@ -2,6 +2,7 @@
 using SalesManagementApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -128,27 +129,28 @@ namespace SalesManagementApp.DataStructure
             int num = 0;
             for(int i = 0; i<temp.OrdersSold.Size; i++)
             {
-                StringCustom temp2 = temp.OrdersSold.GetItem(i);
-                Bill temp3 = TEMP.GetValue(temp2);
-                if(temp3.PurchaseDate.Month == month && temp3.PurchaseDate.Year == year)
+               
+                Bill temp2 = TEMP.GetValue(temp.OrdersSold.GetItem(i));
+
+                if (temp2 != null && temp2.PurchaseDate.Month == month && temp2.PurchaseDate.Year == year)
                 {
                     num++;
                 }    
-            }    
+            }
             return num;
         }
         public int PriceSale(Sale people, int month, int year)
         {
             BillHash TEMP = BillData.billHash;
+            
             Sale temp = people;
             int price = 0;
             for (int i = 0; i < temp.OrdersSold.Size; i++)
             {
-                StringCustom temp2 = temp.OrdersSold.GetItem(i);
-                Bill temp3 = TEMP.GetValue(temp2);
-                if (temp3.PurchaseDate.Month == month && temp3.PurchaseDate.Year == year)
+                Bill temp2 = TEMP.GetValue(temp.OrdersSold.GetItem(i));
+                if (temp2 != null && temp2.PurchaseDate.Month == month && temp2.PurchaseDate.Year == year) 
                 {
-                    price += temp3.Price;
+                    price += temp2.Price;
                 }
             }
             return price;
@@ -209,41 +211,33 @@ namespace SalesManagementApp.DataStructure
         public static void SortByBirthDay(SaleList lSale)
         {
             int left = 0, right = lSale.Size -1;
-            QuickSort(lSale, left, right); ;
-            lSale.Print();
-
+            QuickSort(lSale, left, right); 
         }
         public static void QuickSort(SaleList lSale, int left, int right)
         {
-            int pivot = Patation(lSale, left, right);
-            if (pivot > 1)
-            {
-                QuickSort(lSale, left, pivot - 1);
-            }
-            if (pivot + 1 < right)
-            {
-                QuickSort(lSale, pivot + 1, right);
-            }
-        }
-        public static int Patation(SaleList lSale, int left, int right)
-        {
-            int pivot = left;
-            while (true)
-            {
-                while (lSale.list_[left].Birthday < lSale.list_[pivot].Birthday)
-                    left++;
-                while (lSale.list_[right].Birthday > lSale.list_[pivot].Birthday)
-                    right--;
-                if (left < right)
-                {
-                    if (lSale.list_[left].Birthday == lSale.list_[right].Birthday) return right;
+           
+            int i = left, j = right;
 
-                    Sale temp = lSale.list_[left];
-                    lSale.list_[left] = lSale.list_[pivot];
-                    lSale.list_[pivot] = temp;
-                }
-                else return right;
+            int pivot = right;
+            while(i<=j)
+            {
+                while (lSale.list_[i].Birthday < lSale.list_[pivot].Birthday)
+                    i++;
+                while (lSale.list_[j].Birthday > lSale.list_[pivot].Birthday)
+                    j--;
+                if(i<=j)
+                {
+                    Sale temp = lSale.list_[i];
+                    lSale.list_[i] = lSale.list_[j];
+                    lSale.list_[j] = temp;
+                    i++;
+                    j--;
+                }    
             }
+            if (left < j)
+                QuickSort(lSale, left, j);
+            if(i<right)
+                QuickSort(lSale, i, right);
         }
     }
 }

@@ -32,12 +32,12 @@ namespace SalesManagementApp.Models
         {
             this.lOrdersSold = new LinkedLst<StringCustom>();
         }
-        public Sale(string id, StringCustom name, StringCustom sex, Date birthday, 
-            StringCustom address, StringCustom phoneno, int salary
-            ) :base(id,name,sex,birthday,address, phoneno)
+        public Sale(StringCustom id, StringCustom name, StringCustom sex, Date birthday, 
+            StringCustom address, StringCustom phoneno, int salary, 
+            LinkedLst<StringCustom> ordersSold) :base(id,name,sex,birthday,address, phoneno)
         {
             this.iSalary = salary;
-            this.lOrdersSold = new LinkedLst<StringCustom>();
+            this.lOrdersSold = ordersSold;
         }
 
         //destruction
