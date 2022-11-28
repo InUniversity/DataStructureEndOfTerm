@@ -194,8 +194,10 @@ namespace SalesManagementApp.DataStructure
             Customer customer = CustomerData.customerHash.GetValue(bill.CustomerID);
             if (customer == null)
             {
+                Console.WriteLine("Enter new customer (re-enter id again):");
                 customer = new Customer();
                 customer.Input();
+                bill.CustomerID = customer.ID;
             }
             customer.PurchasedOrders.AddLast(bill.ID);
         }

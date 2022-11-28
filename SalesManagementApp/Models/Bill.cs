@@ -80,8 +80,8 @@ namespace SalesManagementApp.Models
             int numberOfProducts;
 
             //  auto fill
-            Console.Write("Enter bill id: ");
-            sID = Console.ReadLine();
+            sID = GetNewID();
+            
             while (BillData.billHash.GetValue(sID) != null)
             {
                 Console.WriteLine(Constant.NOT_FOUND_MESSAGE);
@@ -164,6 +164,11 @@ namespace SalesManagementApp.Models
                 price += (product.Price * quantity);
             }
             return price;
+        }
+
+        public StringCustom GetNewID()
+        {
+            return null;
         }
     }
 }

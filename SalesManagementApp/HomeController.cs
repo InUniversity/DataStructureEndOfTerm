@@ -8,13 +8,6 @@ namespace SalesManagementApp
     {
         static void Main(string[] args)
         {
-            // -1 = exit application
-            // 0 = SignUpActivity
-            // 1 = SignInActivity
-            // 2 = MainAcitivty
-            // 3 = ProductManangementActivity
-            // 4 = EmployeeManagementActivity
-            // 5 = CustomerManagementActivity
             int activityOrder = Constant.MAIN_ACTIVITY;
             while (true)
             {
@@ -53,6 +46,5 @@ namespace SalesManagementApp
                 }
             }
         }
-
     }
 }

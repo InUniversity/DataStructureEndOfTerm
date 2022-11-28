@@ -11,7 +11,7 @@ namespace SalesManagementApp.Activities
     {
         public static int RunActivity()
         {
-            SaleList employeeList = SaleData.SaleList;
+            SaleList employeeList = SaleData.saleList;
             Sale temp = new Sale();
             SaleList tempList = new  SaleList(employeeList.Capacity);
             Date Time = new Date();
