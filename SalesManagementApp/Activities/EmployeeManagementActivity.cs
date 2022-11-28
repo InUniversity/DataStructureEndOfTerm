@@ -21,17 +21,18 @@ namespace SalesManagementApp.Activities
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("======================================MENU======================================");
-                Console.WriteLine("|...................................EMPLOYEE...................................|");
-                Console.WriteLine("|  1. Print employee list                                                      |");
-                Console.WriteLine("|  2. Add a employee to the last position                                      |");
-                Console.WriteLine("|  3. Add to a employee list                                                   |");
-                Console.WriteLine("|  4. Print the list of employees with the highest num sales                   |");
-                Console.WriteLine("|  5. Print the list of employees with the highest sales                       |");
-                Console.WriteLine("|  6. Sort sales employee by birthday                                          |");
-                Console.WriteLine("|  7. Back                                                                     |");
-                Console.WriteLine("|  8. Quit app                                                                 |");
-                Console.WriteLine("======================================MENU======================================");
+                Printer.PrintGroupInformation(80);
+                Console.WriteLine("==============================MENU=============================");
+                Console.WriteLine("|..........................EMPLOYEE..........................|");
+                Console.WriteLine("|  1. Print employee list                                    |");
+                Console.WriteLine("|  2. Add a employee to the last position                    |");
+                Console.WriteLine("|  3. Add to a employee list                                 |");
+                Console.WriteLine("|  4. Print the list of employees with the highest num sales |");
+                Console.WriteLine("|  5. Print the list of employees with the highest sales     |");
+                Console.WriteLine("|  6. Sort sales employee by birthday                        |");
+                Console.WriteLine("|  7. Back                                                   |");
+                Console.WriteLine("|  8. Quit app                                               |");
+                Console.WriteLine("=============================MENU=============================");
                 Console.Write("Choose: "); 
                 
                 try
@@ -46,9 +47,9 @@ namespace SalesManagementApp.Activities
                 switch (choose)
                 {
                     case 1:
-                        Console.WriteLine("...........Print employee list...........");
+                        Console.WriteLine(".........................................Print employee list.........................................");
                         employeeList.Print();
-                        Console.WriteLine(".........................................");
+                        Console.WriteLine(".....................................................................................................");
                         break;
                     case 2:
                         Console.WriteLine("............Add a employee to the last position...........");
@@ -63,10 +64,17 @@ namespace SalesManagementApp.Activities
                     case 3:
                         tempList = new SaleList(employeeList.Capacity);
                         Console.WriteLine("..................Add to a employee list.................");
-                        Console.WriteLine("Insert the information of employees");
-                        tempList = new SaleList(employeeList.Capacity);
-                        tempList.Input();
-                        Console.WriteLine("..........................................................");
+                        Console.WriteLine("Insert number of member: ");
+                        int no = Convert.ToInt32(Console.ReadLine());
+                        for(int i = 0; i<no; i++)
+                        {
+                            Console.WriteLine("No: " + (i + 1));
+                            temp = new Sale();
+                            Console.WriteLine("..........................................................");
+                            temp.Input();
+                            Console.WriteLine("..........................................................");
+                            tempList.AddLast(temp);
+                        }    
                         employeeList.AddRange(tempList);
                         Console.WriteLine("Complete...");
                         Console.WriteLine("..........................................................");
@@ -74,17 +82,31 @@ namespace SalesManagementApp.Activities
                     case 4:
                         Console.WriteLine("..............Print the list of employees with the highest num sales.............");
                         Console.WriteLine("Insert time: ");
+                        Time = new Date();
                         Console.Write("Month: "); Time.Month = Convert.ToInt32(Console.ReadLine());
                         Console.Write("Year : "); Time.Year = Convert.ToInt32(Console.ReadLine());
-                        employeeList.BestNoSaler(Time.Month, Time.Year);
+                        tempList =  employeeList.BestNoSaler(Time.Month, Time.Year);
+                        if (tempList == null)
+                        {
+                            Console.WriteLine(Constant.NOT_FOUND_MESSAGE);
+                        }
+                        else 
+                            tempList.Print();
                         Console.WriteLine(".................................................................................");
                         break;
                     case 5:
                         Console.WriteLine("................Print the list of employees with the highest sales...............");
                         Console.WriteLine("Insert time: ");
+                        Time = new Date();
                         Console.Write("Month: "); Time.Month = Convert.ToInt32(Console.ReadLine());
                         Console.Write("Year : "); Time.Year = Convert.ToInt32(Console.ReadLine());
-                        employeeList.BestPriceSaler(Time.Month, Time.Year);
+                        tempList =  employeeList.BestPriceSaler(Time.Month, Time.Year);
+                        if (tempList == null)
+                        {
+                            Console.WriteLine(Constant.NOT_FOUND_MESSAGE);
+                        }
+                        else
+                            tempList.Print();
                         Console.WriteLine(".................................................................................");
                         break;
                     case 6:
