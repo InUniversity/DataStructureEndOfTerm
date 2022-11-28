@@ -1,4 +1,5 @@
 ﻿using SalesManagementApp.Activities;
+using SalesManagementApp.Database;
 using SalesManagementApp.DataStructure;
 using System;
 using System.Collections.Generic;
@@ -15,12 +16,7 @@ namespace SalesManagementApp.Models
         private LinkedLst<StringCustom> lOrdersSold;
   
         //properties
-        public int Salary
-        {
-            get => iSalary;
-            set => iSalary = value;
-        }
-
+       
         public LinkedLst<StringCustom> OrdersSold
         {
             get => lOrdersSold;
@@ -54,6 +50,16 @@ namespace SalesManagementApp.Models
         {
             base.Print();
             Console.WriteLine("Salary: " + this.iSalary);
+        }
+        public int Salary()
+        {
+            BillHash TEMP = BillData.billHash;
+            for(int i = 0; i<lOrdersSold.Size; i++)
+            {
+                int temp = TEMP.GetValue(lOrdersSold.GetItem(i)).Price;
+                iSalary += Convert.ToInt32(temp * 0.01);
+            }    
+            return iSalary;
         }
 
         public override bool IsEquals(Person person)

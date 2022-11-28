@@ -99,7 +99,7 @@ namespace SalesManagementApp.DataStructure
                 this.list_[i].Birthday, // 3
                 this.list_[i].Address, // 4
                 this.list_[i].PhoneNumber, // 5
-                this.list_[i].Salary); // 6
+                this.list_[i].Salary()); // 6
             }
         }
 
