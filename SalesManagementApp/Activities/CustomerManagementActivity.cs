@@ -21,8 +21,7 @@ namespace SalesManagementApp.Activities
             while (true)
             {
                 Console.Clear();
-                Printer.PrintGroupInformation(80);
-                //Console.Write("| 2. Delete customer with ID                             |\n");
+                Printer.PrintGroupInformation(70);
                 Console.Write("===========================MENU===========================\n");
                 Console.Write("| 1. Add a customer                                      |\n");
                 Console.Write("| 2. Display customer list                               |\n");

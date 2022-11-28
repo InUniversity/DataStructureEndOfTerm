@@ -76,11 +76,11 @@ namespace SalesManagementApp.Models
         {
             LinkedLst<Pair<StringCustom, int>> products = new LinkedLst<Pair<StringCustom, int>>();
             StringCustom tempID;
-            int tempNumber;
-            int numberOfProducts;
+            int tempNumber, numberOfProducts;
+            lProducts = new LinkedLst<Pair<StringCustom, int>>();
 
             //  auto fill
-            sID = GetNewID();
+            sID = GetRandomID();
             
             while (BillData.billHash.GetValue(sID) != null)
             {
@@ -120,6 +120,7 @@ namespace SalesManagementApp.Models
                     Console.Write("Re-enter the quantity: ");
                     tempNumber = Convert.ToInt32(Console.ReadLine());
                 }
+                lProducts.AddLast(new Pair<StringCustom, int>(tempID, tempNumber));
             }
             dPurchaseDate = Date.GetCurrentDate();
             iPrice = GetTotalPrice();
@@ -166,9 +167,17 @@ namespace SalesManagementApp.Models
             return price;
         }
 
-        public StringCustom GetNewID()
+        public StringCustom GetRandomID()
         {
-            return null;
+            Random ran = new Random();
+            StringCustom billID;
+            int num = 0;
+            do
+            {
+                num = ran.Next(1000, 10000);
+                billID = "BIL" + num.ToString();
+            } while (BillData.billHash.GetValue(billID) != null);
+            return billID;
         }
     }
 }
