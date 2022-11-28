@@ -11,7 +11,7 @@ namespace SalesManagementApp.Activities
         public static int RunActivity()
         {
             SaleAccount saleAccount = new SaleAccount();
-            Sale sale;
+            Sale sale = new Sale();
             int choose = 0;
             while (true)
             {
@@ -19,11 +19,12 @@ namespace SalesManagementApp.Activities
                 Printer.PrintGroupInformation(80);
                 try
                 {
+                    saleAccount = new SaleAccount();
                     Console.WriteLine("===========SIGN UP===========");
                     Console.Write("Username: ");
                     saleAccount.Username = Console.ReadLine();
                     Console.Write("Password: ");
-                    saleAccount.InputPassword();
+                    saleAccount.Password = Console.ReadLine();
                     Console.WriteLine("Enter sale:");
                     sale = new Sale();
                     sale.Input();
@@ -38,6 +39,7 @@ namespace SalesManagementApp.Activities
                 {
                     AccountData.accountList.AddLast(saleAccount);
                     AccountData.currentAccount = saleAccount;
+                    SaleData.saleList.AddLast(sale);
                     return Constant.MAIN_ACTIVITY;
                 }
                 Printer.Pause();

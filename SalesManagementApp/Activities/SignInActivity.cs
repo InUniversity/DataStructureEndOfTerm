@@ -23,7 +23,7 @@ namespace SalesManagementApp.Activities
                     Console.Write("Username: ");
                     account.Username = Console.ReadLine();
                     Console.Write("Password: ");
-                    account.InputPassword();
+                    account.Password = Console.ReadLine();
                 }
                 catch (Exception e)
                 {

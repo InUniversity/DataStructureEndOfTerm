@@ -12,7 +12,7 @@ namespace SalesManagementApp.Models
         private StringCustom sPassword;
         private StringCustom sSaleID;
 
-        private const int ID_WITH_MIN_VALUE = 123456;
+        private const int MINIMUM_PASSWORD_LENGTH = 8;
 
         public SaleAccount()
         {
@@ -69,38 +69,15 @@ namespace SalesManagementApp.Models
         {
             return username != null;
         }
-
-        // to do
+        
         public static bool IsValidPassword(StringCustom password)
         {
-            return password != null;
+            return password != null && password.Size > MINIMUM_PASSWORD_LENGTH;
         }
-
-        // check duplicate
+        
         public static bool IsValidID(StringCustom id)
         {
             return id != null && AccountData.accountList.FindById(id) == null;
-        }
-
-        // to do
-        public void InputPassword()
-        {
-            char c;
-            do
-            {
-                c = Console.ReadKey(true).KeyChar;
-                if (c == 13) break;
-                if (c == 8)
-                {
-                    Console.WriteLine("\b \b");
-                    //  sPassword.
-                }
-                else
-                {
-                    Console.Write("*");
-                    sPassword += c;
-                }
-            } while (c != 13);
         }
     }
 }
