@@ -131,11 +131,13 @@ namespace SalesManagementApp.DataStructure
         }
         
         
-        public Product FindBestSellingProducts(int months, int years)
+        public Pair<Product, int> FindBestSellingProducts(int months, int years)
         {
             ProductList _productList = ProductData.productList;
             LinkedLst<Pair<Product, int>> saleList = new LinkedLst<Pair<Product, int>>();
             Node<Pair<Product, int>>? headSaleList;
+            Product bestSellingProducts;
+            int theMostSoldQuantity;
             // instance
             for (int i = 0; i < _productList.Size; i++)
                 saleList.AddLast(new Pair<Product, int>(_productList.Get(i), 0));
@@ -172,9 +174,9 @@ namespace SalesManagementApp.DataStructure
             }
             
             // find max
-            Product bestSellingProducts = null;
+            bestSellingProducts = null;
             headSaleList = saleList.FirstItem;
-            int theMostSoldQuantity = 0;
+            theMostSoldQuantity = 0;
             while (headSaleList != null)
             {
                 if (headSaleList.item.value > theMostSoldQuantity)
@@ -185,7 +187,7 @@ namespace SalesManagementApp.DataStructure
                 headSaleList = headSaleList.next;
             }
 
-            return bestSellingProducts;
+            return new Pair<Product, int>(bestSellingProducts, theMostSoldQuantity);
         }
 
         public Product FindProductThatSellsTheLeast(int months, int years)
@@ -193,6 +195,8 @@ namespace SalesManagementApp.DataStructure
             ProductList _productList = ProductData.productList;
             LinkedLst<Pair<Product, int>> saleList = new LinkedLst<Pair<Product, int>>();
             Node<Pair<Product, int>>? headSaleList;
+            int minimumQuantitySold;
+            Product salesTheLeast;
             // instance
             for (int i = 0; i < _productList.Size; i++)
                 saleList.AddLast(new Pair<Product, int>(_productList.Get(i), 0));
@@ -229,9 +233,9 @@ namespace SalesManagementApp.DataStructure
             }
             
             // find min
-            Product salesTheLeast = null;
+            salesTheLeast = null;
             headSaleList = saleList.FirstItem;
-            int minimumQuantitySold = Int32.MaxValue;
+            minimumQuantitySold = Int32.MaxValue;
             while (headSaleList != null)
             {
                 if (headSaleList.item.value < minimumQuantitySold)
@@ -241,7 +245,6 @@ namespace SalesManagementApp.DataStructure
                 }
                 headSaleList = headSaleList.next;
             }
-
             return salesTheLeast;
         }
 
@@ -304,6 +307,9 @@ namespace SalesManagementApp.DataStructure
 
         public void Print()
         {
+            Console.WriteLine("Number of bills: " + iSize);
+            Console.WriteLine("----------------------BILL LIST----------------------");
+            Console.WriteLine("----------------------------------------------");
             for (int i = 0; i < BUCKET; i++)
             {
                 Node<Pair<StringCustom, Bill>>? head = table[i].FirstItem;
@@ -313,8 +319,10 @@ namespace SalesManagementApp.DataStructure
                     bill = head.item.value;
                     bill.Print();
                     head = head.next;
+                    Console.WriteLine("----------------------------------------------");
                 }
             }
+            Console.WriteLine("----------------------BILL LIST----------------------");
         }
 
         public override void Remove(StringCustom key)

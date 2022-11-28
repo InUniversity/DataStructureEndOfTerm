@@ -38,6 +38,8 @@ namespace SalesManagementApp.Activities
                 if (SaleAccount.CheckValidAccount(saleAccount))
                 {
                     AccountData.accountList.AddLast(saleAccount);
+
+                    // add to sales list
                     AccountData.currentAccount = saleAccount;
                     SaleData.saleList.AddLast(sale);
                     return Constant.MAIN_ACTIVITY;

@@ -13,8 +13,6 @@ namespace SalesManagementApp.Activities
     {
         public static int RunActivity()
         {
-            AccountData.currentAccount.Print();
-            Printer.Pause();
             int choose = -100;
             while (true)
             {
