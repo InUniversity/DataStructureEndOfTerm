@@ -76,8 +76,8 @@ namespace SalesManagementApp.Models
         {
             LinkedLst<Pair<StringCustom, int>> products = new LinkedLst<Pair<StringCustom, int>>();
             StringCustom tempID;
-            int tempNumber;
-            int numberOfProducts;
+            int tempNumber, numberOfProducts;
+            lProducts = new LinkedLst<Pair<StringCustom, int>>();
 
             //  auto fill
             sID = GetRandomID();
@@ -120,6 +120,7 @@ namespace SalesManagementApp.Models
                     Console.Write("Re-enter the quantity: ");
                     tempNumber = Convert.ToInt32(Console.ReadLine());
                 }
+                lProducts.AddLast(new Pair<StringCustom, int>(tempID, tempNumber));
             }
             dPurchaseDate = Date.GetCurrentDate();
             iPrice = GetTotalPrice();

@@ -96,17 +96,6 @@ namespace SalesManagementApp.Activities
                         tempProduct.Print();
                         break;
                     case 7:
-                        Console.Write("Months: ");
-                        tempMonth = Convert.ToInt32(Console.ReadLine());
-                        Console.Write("Years: ");
-                        tempYear = Convert.ToInt32(Console.ReadLine());
-                        tempProduct = billHash.FindProductThatSellsTheLeast(tempMonth, tempYear);
-                        if (tempProduct == null)
-                        {
-                            Console.WriteLine(Constant.NOT_FOUND_MESSAGE);
-                            break;
-                        }
-                        tempProduct.Print();
                         return Constant.MAIN_ACTIVITY;
                     default:
                         return Constant.EXIT_APPLICATION;

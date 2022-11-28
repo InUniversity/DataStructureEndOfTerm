@@ -1,14 +1,22 @@
 ﻿using SalesManagementApp.Activities;
 using SalesManagementApp.Database;
+using SalesManagementApp.DataStructure;
 using SalesManagementApp.Models;
 
 namespace SalesManagementApp
 {
     class HomeController
     {
+        CustomerHash customerHash = CustomerData.customerHash;
+        SaleList saleList = SaleData.saleList;
+        ProductList productList = ProductData.productList;
+        BillHash billHash = BillData.billHash;
+        AccountList saleAccounts = AccountData.accountList;
+        SaleAccount saleAccount = AccountData.currentAccount; 
+
         static void Main(string[] args)
         {
-            int activityOrder = Constant.MAIN_ACTIVITY;
+            int activityOrder = Constant.SIGNIN_ACTIVITY;
             while (true)
             {
                 switch (activityOrder)
