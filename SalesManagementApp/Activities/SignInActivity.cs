@@ -8,9 +8,9 @@ namespace SalesManagementApp.Activities
 {
     public static class SignInActivity
     {
-
         public static int RunActivity()
         {
+            StringCustom tempStr;
             SaleAccount account = new SaleAccount();
             int choose = 0;
             while (true)
@@ -30,8 +30,10 @@ namespace SalesManagementApp.Activities
                     Console.WriteLine(e.Message);
                 }
 
-                if (AccountData.accountList.Exits(account))
+                tempStr = AccountData.accountList.GetID(account); 
+                if (tempStr != null)
                 {
+                    account.SaleID = tempStr;
                     AccountData.currentAccount = account;
                     return Constant.MAIN_ACTIVITY;
                 }

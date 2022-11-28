@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SalesManagementApp;
+using SalesManagementApp.Database;
 using SalesManagementApp.Utilities;
 
 namespace SalesManagementApp.Activities
@@ -12,6 +13,8 @@ namespace SalesManagementApp.Activities
     {
         public static int RunActivity()
         {
+            AccountData.currentAccount.Print();
+            Printer.Pause();
             int choose = -100;
             while (true)
             {
