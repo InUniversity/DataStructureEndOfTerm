@@ -22,31 +22,24 @@ namespace SalesManagementApp.Activities
             {
                 Console.Clear();
                 Printer.PrintGroupInformation(80);
+                //Console.Write("| 2. Delete customer with ID                             |\n");
                 Console.Write("===========================MENU===========================\n");
                 Console.Write("| 1. Add a customer                                      |\n");
-                Console.Write("| 2. Delete customer with ID                             |\n");
-                Console.Write("| 3. Display customer list                               |\n");
-                Console.Write("| 4. Sort by LAST purchased date                         |\n");
-                Console.Write("| 5. Find customer with the largest order price of months|\n");
-                Console.Write("| 6. Find by ID                                          |\n");
-                Console.Write("| 7. Find by Name                                        |\n");
-                Console.Write("| 8. Find by member type                                 |\n");
-                Console.Write("| 9. Find by sex and member type                         |\n");
-                Console.Write("|10. Write file                                          |\n");
-                Console.Write("|11. Reload customer data                                |\n");
-                Console.Write("|12. Group by gender                                     |\n");
-                Console.Write("|13. Back to Main activity                               |\n");
+                Console.Write("| 2. Display customer list                               |\n");
+                Console.Write("| 3. Find customer with the largest order price of months|\n");
+                Console.Write("| 4. Find by ID                                          |\n");
+                Console.Write("| 5. Find by Name                                        |\n");
+                Console.Write("| 6. Find by member type                                 |\n");
+                Console.Write("| 7. Find by gender and member type                      |\n");
+                Console.Write("| 8. Write file                                          |\n");
+                Console.Write("| 9. Reload customer data                                |\n");
+                Console.Write("|10. Group by gender                                     |\n");
+                Console.Write("|11. Back to Main activity                               |\n");
                 Console.Write("| 0. Quit app                                            |\n");
                 Console.Write("===========================MENU===========================\n");
                 Console.Write("Choose: ");
-                try
-                {
-                    choose = Convert.ToInt32(Console.ReadLine());
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
+                try { choose = Convert.ToInt32(Console.ReadLine()); }
+                catch (Exception e) { Console.WriteLine(e.Message); }
                 Console.WriteLine();
 
                 switch (choose)
@@ -59,18 +52,6 @@ namespace SalesManagementApp.Activities
                         customerHash.Print();
                         break;
                     case 2:
-                        Console.Write("Enter ID: ");
-                        tempStr = Console.ReadLine();
-                        tempCustomer = customerHash.GetValue(tempStr);
-                        if (tempCustomer == null)
-                        {
-                            Console.WriteLine(Constant.NOT_FOUND_MESSAGE);
-                            break;
-                        }
-                        customerHash.Remove(tempCustomer.ID);
-                        customerHash.Print();
-                        break;
-                    case 3:
                         if (customerHash.IsEmpty())
                         {
                             Console.WriteLine(Constant.EMPTY_MESSAGE);
@@ -78,18 +59,20 @@ namespace SalesManagementApp.Activities
                         }
                         customerHash.Print();
                         break;
-                    case 4:
-                        customerHash.SortByLastPurchaseDate();
-                        break;
-                    case 5:
+                    case 3:
                         Console.Write("Enter months: ");
                         months = Convert.ToInt32(Console.ReadLine());
                         Console.Write("Enter years: ");
                         years = Convert.ToInt32(Console.ReadLine());
                         tempCustomer = customerHash.FindCustomerWithLargestOrderPriceOfMonths(months, years);
+                        if (tempCustomer == null)
+                        {
+                            Console.WriteLine(Constant.NOT_FOUND_MESSAGE);
+                            break;
+                        }
                         tempCustomer.Print();
                         break;
-                    case 6:
+                    case 4:
                         Console.Write("Enter ID: ");
                         tempStr = Console.ReadLine();
                         tempCustomer = customerHash.GetValue(tempStr);
@@ -100,7 +83,7 @@ namespace SalesManagementApp.Activities
                         }
                         tempCustomer.Print();
                         break;
-                    case 7:
+                    case 5:
                         Console.Write("Enter name: ");
                         tempStr = Console.ReadLine();
                         tempHash = customerHash.FindByName(tempStr);
@@ -111,7 +94,7 @@ namespace SalesManagementApp.Activities
                         }
                         tempHash.Print();
                         break;
-                    case 8:
+                    case 6:
                         Console.Write("Enter member type: ");
                         tempStr = Console.ReadLine();
                         tempHash = customerHash.FindByMemberType(tempStr);
@@ -122,7 +105,7 @@ namespace SalesManagementApp.Activities
                         }
                         tempHash.Print();
                         break;
-                    case 9:
+                    case 7:
                         Console.Write("Enter gender: ");
                         tempStr = Console.ReadLine();
                         Console.Write("Enter member type: ");
@@ -135,10 +118,10 @@ namespace SalesManagementApp.Activities
                         }
                         tempHash.Print();
                         break;
-                    case 10:
+                    case 8:
                         Console.WriteLine("Enter file name: ");
                         tempStr = Console.ReadLine();
-                        if (!customerHash.WriteFile(tempStr))
+                        if (!tempStr.IsEquals("CustomerData.txt") && !customerHash.WriteFile(tempStr))
                             Console.WriteLine(Constant.NOT_FOUND_MESSAGE);
                         else
                         {
@@ -146,7 +129,7 @@ namespace SalesManagementApp.Activities
                             customerHash.Print();
                         }
                         break;
-                    case 11:
+                    case 9:
                         tempStr = "CustomerData.txt";
                         Console.WriteLine("File name: " + tempStr);
                         if (!customerHash.AddFromFile(tempStr))
@@ -157,10 +140,10 @@ namespace SalesManagementApp.Activities
                             customerHash.Print();
                         }
                         break;
-                    case 12:
+                    case 10:
                         customerHash.SortByGender();
                         break;
-                    case 13:
+                    case 11:
                         return Constant.MAIN_ACTIVITY;
                     case 0:
                         return Constant.EXIT_APPLICATION;
