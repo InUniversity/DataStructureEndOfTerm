@@ -234,7 +234,7 @@ namespace SalesManagementApp.DataStructure
                 while (head != null)
                 {
                     customer = head.item.value;
-                    if (name.Contain(customer.Name))
+                    if (name.IsEquals(customer.Name))
                         result.Insert(customer.ID, customer);
                     head = head.next;
                 }
