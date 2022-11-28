@@ -78,7 +78,7 @@ namespace SalesManagementApp.Models
             sID = Console.ReadLine();
             Console.Write("Name: ");
             sName = Console.ReadLine();
-            Console.Write("Sex: ");
+            Console.Write("Gender: ");
             sGender = Console.ReadLine();
             Console.WriteLine("Enter birthday:");
             Console.WriteLine("{");

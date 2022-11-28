@@ -133,46 +133,6 @@ namespace SalesManagementApp.DataStructure
             return customer;
         }
 
-        public void SortByLastPurchaseDate()
-        {
-            LinkedLst<Customer> orderedList = new LinkedLst<Customer>();
-
-            Node<Pair<StringCustom, Customer>>? head;
-            Customer account;
-            for (int i = 0; i < BUCKET; i++)
-            {
-                head = table[i].FirstItem;
-                while (head != null)
-                {
-                    account = head.item.value;
-                    AddByLastPurchaseDate(orderedList, account);
-                    head = head.next;
-                }
-            }
-            PrintLinkedLst(orderedList);
-        }
-        
-        private void AddByLastPurchaseDate(LinkedLst<Customer> orderedList, Customer customer)
-        {
-            if (orderedList.IsEmpty())
-                orderedList.AddLast(customer);
-            else
-            {
-                BillHash billHash = BillData.billHash;
-                Date currentDate = new Date();
-                Date targetDate = billHash.GetValue(customer.PurchasedOrders.LastItem.item).PurchaseDate;
-                Node<Customer>? head = orderedList.FirstItem;
-                do
-                {
-                    currentDate = billHash.GetValue(head.item.PurchasedOrders.LastItem.item).PurchaseDate;
-                    head = head.next;
-                } while (head != null && targetDate < currentDate);
-                
-                // prepend the current node
-                orderedList.PrependTheCurrentNode(head, customer);
-            }
-        }
-
         public void SortByGender()
         {
             LinkedLst<Customer> orderedList = new LinkedLst<Customer>();
@@ -241,7 +201,7 @@ namespace SalesManagementApp.DataStructure
         {
             Customer currentCustomer, maxCustomer = null;
             Node<Pair<StringCustom, Customer>>? head = null;
-            int maxPrice = -1, currentPrice = 0;
+            int maxPrice = 0, currentPrice = 0;
 
             for (int i = 0; i < BUCKET; i++)
             {

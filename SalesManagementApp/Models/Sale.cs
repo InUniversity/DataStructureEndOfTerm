@@ -11,30 +11,20 @@ namespace SalesManagementApp.Models
 {
     public class Sale : Person
     {
-        protected int iSalary;
-        protected int iOrderNumber;
-        protected LinkedLst<StringCustom> lOrdersSold;
+        private int iSalary;
+        private LinkedLst<StringCustom> lOrdersSold;
   
         //properties
         public int Salary
         {
-            set { this.iSalary = value; }
-            get { return this.iSalary; }
+            get => iSalary;
+            set => iSalary = value;
         }
-        public int Ordernumber
+
+        public LinkedLst<StringCustom> OrdersSold
         {
-            set { this.iSalary = value; }
-            get { return this.iOrderNumber; }
-        }
-        public List<Customer> LCustomer
-        {
-            set { this.LCustomer = value;  }
-            get { return this.LCustomer; }
-        }
-        public LinkedLst<StringCustom> LOrdersSold
-        {
-            set { this.lOrdersSold = value; }
-            get { return this.lOrdersSold; }
+            get => lOrdersSold;
+            set => lOrdersSold = value;
         }
 
         //constructor
@@ -42,12 +32,12 @@ namespace SalesManagementApp.Models
         {
             this.lOrdersSold = new LinkedLst<StringCustom>();
         }
-        public Sale(string id, StringCustom name, StringCustom sex, Date birthday, StringCustom address, StringCustom phoneno, int salary,
-            int orderNumber, LinkedLst<StringCustom> lorderssold) :base(id,name,sex,birthday,address, phoneno)
+        public Sale(string id, StringCustom name, StringCustom sex, Date birthday, 
+            StringCustom address, StringCustom phoneno, int salary
+            ) :base(id,name,sex,birthday,address, phoneno)
         {
             this.iSalary = salary;
-            this.iOrderNumber = orderNumber;
-            this.lOrdersSold = lorderssold;
+            this.lOrdersSold = new LinkedLst<StringCustom>();
         }
 
         //destruction
@@ -58,21 +48,12 @@ namespace SalesManagementApp.Models
         {
             base.Input();
             Console.WriteLine("Salary: "); this.iSalary = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Totals Order Number: "); this.iOrderNumber = Convert.ToInt32(Console.ReadLine());
         }
 
         public override void Print()
         {
             base.Print();
             Console.WriteLine("Salary: " + this.iSalary);
-            Console.WriteLine("Totals Order Number: " + this.iOrderNumber);
-        }
-
-     
-        
-        public LinkedLst<StringCustom> ListProduct()
-        {
-            return this.lOrdersSold;
         }
 
         public override bool IsEquals(Person person)
@@ -81,7 +62,5 @@ namespace SalesManagementApp.Models
                 return true;
             return false;
         }
-       
-        
     }
 }
