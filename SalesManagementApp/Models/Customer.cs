@@ -85,6 +85,8 @@ namespace SalesManagementApp.Models
             Console.WriteLine("Type of member: " + sTypeOfMember);
             Console.WriteLine("Purchased orders:");
             Console.WriteLine("{");
+            if (PurchasedOrders.IsEmpty())
+                Console.WriteLine(Constant.EMPTY_MESSAGE);
             PrintPurchasedOrders();
             Console.WriteLine("}");
         }

@@ -80,7 +80,7 @@ namespace SalesManagementApp.Models
             int numberOfProducts;
 
             //  auto fill
-            sID = GetNewID();
+            sID = GetRandomID();
             
             while (BillData.billHash.GetValue(sID) != null)
             {
@@ -166,9 +166,17 @@ namespace SalesManagementApp.Models
             return price;
         }
 
-        public StringCustom GetNewID()
+        public StringCustom GetRandomID()
         {
-            return null;
+            Random ran = new Random();
+            StringCustom billID;
+            int num = 0;
+            do
+            {
+                num = ran.Next(1000, 10000);
+                billID = "BIL" + num.ToString();
+            } while (BillData.billHash.GetValue(billID) != null);
+            return billID;
         }
     }
 }

@@ -25,6 +25,54 @@ namespace SalesManagementApp.DataStructure
 
         public bool WriteFile(StringCustom fileName)
         {
+            StringCustom path = Directory.GetCurrentDirectory();
+            path += "/../../../Database/" + fileName;
+            try
+            {
+                StreamWriter sw = new StreamWriter(path);
+                LinkedLst<Pair<StringCustom, int>> purchasedOrders;
+                Node<Pair<StringCustom, int>>? headPurchasedOrders;
+                Node<Pair<StringCustom, Bill>>? head = null;
+                Pair<StringCustom, Bill> temp = null;
+                Bill bill = null;
+                for (int i = 0; i < BUCKET; i++)
+                {
+                    head = table[i].FirstItem;
+                    while (head != null)
+                    {
+                        bill = head.item.value;
+                        sw.Write("{0};{1};{2};",
+                            bill.ID, // 0
+                            bill.SaleID, // 1
+                            bill.CustomerID); // 2
+
+                        purchasedOrders = bill.Products;
+                        headPurchasedOrders = purchasedOrders.FirstItem;
+                        while (headPurchasedOrders.next != null)
+                        {
+                            sw.Write("{0}={1},", 
+                                headPurchasedOrders.item.key, headPurchasedOrders.item.value);    
+                            headPurchasedOrders = headPurchasedOrders.next;
+                        }
+                        if (headPurchasedOrders != null)
+                            sw.Write("{0}={1}", 
+                                headPurchasedOrders.item.key, headPurchasedOrders.item.value);
+                        
+                        sw.Write(";{0};{1}",
+                            bill.PurchaseDate.GetDateTime(),
+                            bill.Price);
+                        sw.WriteLine();
+                        
+                        head = head.next;
+                    }
+                }
+                sw.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
             return true;
         }
 
