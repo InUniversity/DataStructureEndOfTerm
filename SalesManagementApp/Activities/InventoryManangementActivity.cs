@@ -25,23 +25,21 @@ namespace SalesManagementApp.Activities
                 Console.Clear();
                 Printer.PrintGroupInformation(70);
                 Console.Write("=========================MENU==========================\n");
-                Console.Write("|1. Print product in stock                            |\n");
-                Console.Write("|2. Add products to stock                             |\n");
-                Console.Write("|3. Insert the product in any position                |\n");
-                Console.Write("|4. Delete any product in stock                       |\n");
-                Console.Write("|5. Delete product by ID                              |\n");
-                Console.Write("|6. Search product by ID                              |\n");
-                Console.Write("|7. Search product by Name                            |\n");
-                Console.Write("|8. Sort By NumberOfProduct                           |\n");
-                Console.Write("|9. Print expired products                            |\n");
-                Console.Write("|10. Total products in stock                          |\n");
-                Console.Write("|11. Find product quantity                            |\n");
-                Console.Write("|12. List of products with quantity more than 100     |\n");
-                Console.Write("|13. Products with the most quantity                  |\n");
-                Console.Write("|14. Products with the least quantity                 |\n");
-                Console.Write("|15. Check the quantity of any product                |\n");
-                Console.Write("|16. Export file                                      |\n");
-                Console.Write("|17. Back to Main activity                            |\n");
+                Console.Write("| 1. Print product in stock                            |\n");
+                Console.Write("| 2. Add products to stock                             |\n");
+                Console.Write("| 3. Insert the product in any position                |\n");
+                Console.Write("| 4. Search product by ID                              |\n");
+                Console.Write("| 5. Search product by Name                            |\n");
+                Console.Write("| 6. Sort By NumberOfProduct                           |\n");
+                Console.Write("| 7. Print expired products                            |\n");
+                Console.Write("| 8. Total products in stock                          |\n");
+                Console.Write("| 9. Find product quantity                            |\n");
+                Console.Write("|10. List of products with quantity more than 100     |\n");
+                Console.Write("|11. Products with the most quantity                  |\n");
+                Console.Write("|12. Products with the least quantity                 |\n");
+                Console.Write("|13. Check the quantity of any product                |\n");
+                Console.Write("|14. Export file                                      |\n");
+                Console.Write("|15. Back to Main activity                            |\n");
                 Console.Write("|any key. Quit app                                    |\n");
                 Console.Write("=========================MENU==========================\n");
                 Console.Write("Choose: ");
@@ -85,26 +83,6 @@ namespace SalesManagementApp.Activities
                         productList.Print();
                         break;
                     case 4:
-                        Console.WriteLine("Enter the product location to delete.");
-                        index = Convert.ToInt32(Console.ReadLine());
-                        if (index >= productList.Size)
-                        {
-                            Console.WriteLine("Element not in stock.");
-                            break;
-                        }
-                        productList.RemoveItem(index);
-                        Console.WriteLine("---------------------------------------------------Result-----------------------------------------");
-                        productList.Print();
-                        break;
-                    case 5:
-                        tempProduct = new Product();
-                        Console.WriteLine("Enter the product ID to delete.");
-                        tempProduct.ID = Console.ReadLine();
-                        productList.RemoveItemByID(tempProduct);
-                        Console.WriteLine("---------------------------------------------------Result-----------------------------------------");
-                        productList.Print();
-                        break;
-                    case 6:
                         tempProduct = new Product();
                         Console.WriteLine("Enter product ID");
                         tempProduct.ID = Console.ReadLine();
@@ -117,7 +95,7 @@ namespace SalesManagementApp.Activities
                             tempProduct.Print();
                         }
                         break;
-                    case 7:
+                    case 5:
                         tempProduct = new Product();
                         Console.WriteLine("Enter product name ");
                         tempProduct.Name = Console.ReadLine();
@@ -131,11 +109,11 @@ namespace SalesManagementApp.Activities
                             tempList.Print();
                         }
                         break;
-                    case 8:
+                    case 6:
                         productList.SortByNumberOfProduct();
                         productList.Print();
                         break;
-                    case 9:
+                    case 7:
                         today = new Date();
                         Console.WriteLine("Enter the current date");
                         today.Input();
@@ -147,18 +125,18 @@ namespace SalesManagementApp.Activities
                             tempList.Print();
                         }
                         break;
-                    case 10:
+                    case 8:
                         sum = productList.TotalGoods();
                         Console.WriteLine(sum);
                         break;
-                    case 11:
+                    case 9:
                         tempProduct = new Product();
                         Console.WriteLine("Enter product ID : ");
                         tempProduct.ID = Console.ReadLine();
                         int tam = productList.CheckNumberProduct(tempProduct);
                         Console.WriteLine(tam);
                         break;
-                    case 12:
+                    case 10:
                         tempList = new ProductList(100); ;
                         tempList = productList.ProductQuantityMoreThan100();
                         if (tempList == null)
@@ -168,7 +146,7 @@ namespace SalesManagementApp.Activities
                             tempList.Print();
                         }
                         break;
-                    case 13:
+                    case 11:
                         tempList = new ProductList(100); ;
                         tempList = productList.MaximumNumberOfProducts();
                         if (tempList == null)
@@ -178,7 +156,7 @@ namespace SalesManagementApp.Activities
                             tempList.Print();
                         }
                         break;
-                    case 14:
+                    case 12:
                         tempList = new ProductList(100); ;
                         tempList = productList.MinimumNumberOfProducts();
                         if (tempList == null)
@@ -188,7 +166,7 @@ namespace SalesManagementApp.Activities
                             tempList.Print();
                         }
                         break;
-                    case 15:
+                    case 13:
                         tempProduct = new Product();
                         Console.WriteLine("Enter product name ");
                         tempProduct.Name = Console.ReadLine();
@@ -202,7 +180,7 @@ namespace SalesManagementApp.Activities
                             Console.WriteLine(tempProduct.NumberOfProduct);
                         }
                         break;
-                    case 16:
+                    case 14:
                         Console.WriteLine("Enter file name: ");
                         tempName = Console.ReadLine();
                         if (!productList.WriteFile(tempName))
@@ -213,13 +191,12 @@ namespace SalesManagementApp.Activities
                             productList.Print();
                         }
                         break;
-                    case 17:
+                    case 15:
                         return Constant.MAIN_ACTIVITY;
                     default:
                         return Constant.EXIT_APPLICATION;
                 }
-                Console.WriteLine("Enter To Continue");
-                Console.ReadKey();
+                Printer.Pause();
             }
         }
     }

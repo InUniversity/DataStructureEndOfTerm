@@ -151,8 +151,7 @@ namespace SalesManagementApp.Activities
                         Console.WriteLine(Constant.NOT_VALID_MESSAGE);
                         break;
                 }
-                Console.WriteLine("Press to continue...");
-                Console.ReadKey();
+                Printer.Pause();
             }
         }
     }

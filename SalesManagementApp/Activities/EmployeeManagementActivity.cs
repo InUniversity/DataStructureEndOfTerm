@@ -4,6 +4,7 @@ using SalesManagementApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using SalesManagementApp.Utilities;
 
 namespace SalesManagementApp.Activities
 {
@@ -25,12 +26,11 @@ namespace SalesManagementApp.Activities
                 Console.WriteLine("|  1. Print employee list                                                      |");
                 Console.WriteLine("|  2. Add a employee to the last position                                      |");
                 Console.WriteLine("|  3. Add to a employee list                                                   |");
-                Console.WriteLine("|  4. Delete a employee                                                        |");
-                Console.WriteLine("|  5. Print the list of employees with the highest num sales                   |");
-                Console.WriteLine("|  6. Print the list of employees with the highest sales                       |");
-                Console.WriteLine("|  7. Sort sales employee by birthday                                          |");
-                Console.WriteLine("|  8. Back                                                                     |");
-                Console.WriteLine("|  9. Quit app                                                                 |");
+                Console.WriteLine("|  4. Print the list of employees with the highest num sales                   |");
+                Console.WriteLine("|  5. Print the list of employees with the highest sales                       |");
+                Console.WriteLine("|  6. Sort sales employee by birthday                                          |");
+                Console.WriteLine("|  7. Back                                                                     |");
+                Console.WriteLine("|  8. Quit app                                                                 |");
                 Console.WriteLine("======================================MENU======================================");
                 Console.Write("Choose: "); 
                 
@@ -72,12 +72,6 @@ namespace SalesManagementApp.Activities
                         Console.WriteLine("..........................................................");
                         break;
                     case 4:
-                        Console.WriteLine("...........................Delete a employee...........................");
-                        Console.WriteLine("Input id: "); StringCustom id = Console.ReadLine();
-                        employeeList.DeleteSale(id);
-                        Console.WriteLine(".......................................................................");
-                        break;
-                    case 5:
                         Console.WriteLine("..............Print the list of employees with the highest num sales.............");
                         Console.WriteLine("Insert time: ");
                         Console.Write("Month: "); Time.Month = Convert.ToInt32(Console.ReadLine());
@@ -85,7 +79,7 @@ namespace SalesManagementApp.Activities
                         employeeList.BestNoSaler(Time.Month, Time.Year);
                         Console.WriteLine(".................................................................................");
                         break;
-                    case 6:
+                    case 5:
                         Console.WriteLine("................Print the list of employees with the highest sales...............");
                         Console.WriteLine("Insert time: ");
                         Console.Write("Month: "); Time.Month = Convert.ToInt32(Console.ReadLine());
@@ -93,22 +87,20 @@ namespace SalesManagementApp.Activities
                         employeeList.BestPriceSaler(Time.Month, Time.Year);
                         Console.WriteLine(".................................................................................");
                         break;
-                    case 7:
+                    case 6:
                         Console.WriteLine(".........................Sort sales employee by birthday.........................");
                         SaleList.SortByBirthDay(employeeList);
                         employeeList.Print();
                         Console.WriteLine(".................................................................................");
                         break;
-                    case 8:
-                        return 2;
-                    case 9: 
-                        return -1;
+                    case 7:
+                        return Constant.MAIN_ACTIVITY;
+                    case 8: 
+                        return Constant.EXIT_APPLICATION;
                     default:
-                        Console.WriteLine("Cancel!");
                         break;
                 }
-                Console.WriteLine("Press Enter to continue...");
-                Console.ReadKey();
+                Printer.Pause();
             }
         }
     }

@@ -11,6 +11,7 @@ namespace SalesManagementApp.Activities
         public static int RunActivity()
         {
             SaleAccount saleAccount = new SaleAccount();
+            Sale sale;
             int choose = 0;
             while (true)
             {
@@ -23,8 +24,10 @@ namespace SalesManagementApp.Activities
                     saleAccount.Username = Console.ReadLine();
                     Console.Write("Password: ");
                     saleAccount.InputPassword();
-                    Console.Write("ID: ");
-                    saleAccount.SaleID = Console.ReadLine();
+                    Console.WriteLine("Enter sale:");
+                    sale = new Sale();
+                    sale.Input();
+                    saleAccount.SaleID = sale.ID;
                 }
                 catch (Exception e)
                 {
@@ -37,8 +40,7 @@ namespace SalesManagementApp.Activities
                     AccountData.currentAccount = saleAccount;
                     return Constant.MAIN_ACTIVITY;
                 }
-                Console.WriteLine(Constant.NOT_VALID_MESSAGE);
-                Console.ReadKey();
+                Printer.Pause();
 
                 while (true)
                 {
@@ -48,16 +50,13 @@ namespace SalesManagementApp.Activities
                     Console.WriteLine("| Any key. Sign up           |");
                     Console.WriteLine("| 1. Quit app                |");
                     Console.WriteLine("=============MENU=============");
-
                     Console.Write("Enter choose: ");
-
                     try { choose = Convert.ToInt32(Console.ReadLine()); }
                     catch (Exception e) { Console.WriteLine(e.Message); }
                     Console.WriteLine();
 
                     if (choose == 1)
                         return Constant.EXIT_APPLICATION;
-                    break;
                 }
             }
         }
