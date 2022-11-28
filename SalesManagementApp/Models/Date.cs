@@ -79,6 +79,9 @@ namespace SalesManagementApp.Models
             Month = Convert.ToInt32(Console.ReadLine());
             Console.Write("Year: ");
             Year = Convert.ToInt32(Console.ReadLine());
+            iSecond = 0;
+            iMinute = 0;
+            iHour = 0;
         }
 
         public StringCustom GetDateTime()
@@ -119,7 +122,6 @@ namespace SalesManagementApp.Models
         public static implicit operator string(Date date)
         {
             int day = date.Day, month = date.Month, year = date.Year;
-            int hour = date.Hour, minute = date.Minute, second = date.Second;
             string result = "";
             if (day < 10)
                 result += ("0" + day);
@@ -142,6 +144,8 @@ namespace SalesManagementApp.Models
             int month = (date.CharAt(3) - '0') * 10 + (date.CharAt(4) - '0');
             int year = (((date.CharAt(6) - '0') * 10 + (date.CharAt(7) - '0')) * 10 +
                 (date.CharAt(8) - '0')) * 10 + (date.CharAt(9) - '0');
+            if (date.Size == 10)
+                return new Date(day, month, year);
             int hour = (((date.CharAt(11)) - '0') * 10) + ((date.CharAt(12)) - '0');
             int minute = (((date.CharAt(14)) - '0') * 10) + ((date.CharAt(15)) - '0');
             int second = (((date.CharAt(17)) - '0') * 10) + ((date.CharAt(18)) - '0');
@@ -237,7 +241,6 @@ namespace SalesManagementApp.Models
 
         public static Date GetCurrentDate()
         {
-            
             DateTime dateTime = DateTime.UtcNow.Date;
             DateTime dateTimeOfDay = DateTime.Now;
             return new Date(

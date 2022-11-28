@@ -25,5 +25,11 @@ namespace SalesManagementApp.Utilities
             Console.WriteLine(str + "╚" + line + "╝");
             Console.SetCursorPosition(left, top);
         }
+
+        public static void Pause()
+        {
+            Console.WriteLine("Enter To Continue...");
+            Console.ReadKey();
+        }
     }
 }

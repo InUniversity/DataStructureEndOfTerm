@@ -23,11 +23,10 @@ namespace SalesManagementApp.Activities
                 Console.Write("| 1. Issue an bill                                      |\n");
                 Console.Write("| 2. Print bill                                         |\n");
                 Console.Write("| 3. Print the bill with the largest value in the month |\n");
-                Console.Write("| 4. Remove bill by id                                  |\n");
-                Console.Write("| 5. Find bill by id                                    |\n");
-                Console.Write("| 6. Find Best selling products                         |\n");
-                Console.Write("| 7. Find the product that sells the least              |\n");
-                Console.Write("| 8. Back to Main activity                              |\n");
+                Console.Write("| 4. Find bill by id                                    |\n");
+                Console.Write("| 5. Find Best selling products                         |\n");
+                Console.Write("| 6. Find the product that sells the least              |\n");
+                Console.Write("| 7. Back to Main activity                              |\n");
                 Console.Write("|any key. Quit app                                      |\n");
                 Console.Write("==========================MENU===========================\n");
                 Console.Write("Choose: ");
@@ -62,16 +61,6 @@ namespace SalesManagementApp.Activities
                     case 4:
                         Console.Write("Enter id:");
                         tempID = Console.ReadLine();
-                        if (billHash.GetValue(tempID) == null)
-                        {
-                            Console.WriteLine(Constant.NOT_FOUND_MESSAGE);
-                            break;
-                        }
-                        billHash.Remove(tempID);
-                        break;
-                    case 5:
-                        Console.Write("Enter id:");
-                        tempID = Console.ReadLine();
                         bill = billHash.GetValue(tempID);
                         if (bill == null)
                         {
@@ -80,12 +69,25 @@ namespace SalesManagementApp.Activities
                         }
                         bill.Print();
                         break;
-                    case 6:
+                    case 5:
                         Console.Write("Months: ");
                         tempMonth = Convert.ToInt32(Console.ReadLine());
                         Console.Write("Years: ");
                         tempYear = Convert.ToInt32(Console.ReadLine());
                         tempProduct = billHash.FindBestSellingProducts(tempMonth, tempYear);
+                        if (tempProduct == null)
+                        {
+                            Console.WriteLine(Constant.NOT_FOUND_MESSAGE);
+                            break;
+                        }
+                        tempProduct.Print();
+                        break;
+                    case 6:
+                        Console.Write("Months: ");
+                        tempMonth = Convert.ToInt32(Console.ReadLine());
+                        Console.Write("Years: ");
+                        tempYear = Convert.ToInt32(Console.ReadLine());
+                        tempProduct = billHash.FindProductThatSellsTheLeast(tempMonth, tempYear);
                         if (tempProduct == null)
                         {
                             Console.WriteLine(Constant.NOT_FOUND_MESSAGE);
@@ -105,8 +107,6 @@ namespace SalesManagementApp.Activities
                             break;
                         }
                         tempProduct.Print();
-                        break;
-                    case 8:
                         return Constant.MAIN_ACTIVITY;
                     default:
                         return Constant.EXIT_APPLICATION;

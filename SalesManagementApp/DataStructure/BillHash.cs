@@ -142,7 +142,59 @@ namespace SalesManagementApp.DataStructure
 
         public Product FindProductThatSellsTheLeast(int months, int years)
         {
-            throw new NotImplementedException();
+            ProductList _productList = ProductData.productList;
+            LinkedLst<Pair<Product, int>> saleList = new LinkedLst<Pair<Product, int>>();
+            Node<Pair<Product, int>>? headSaleList;
+            // instance
+            for (int i = 0; i < _productList.Size; i++)
+                saleList.AddLast(new Pair<Product, int>(_productList.Get(i), 0));
+
+            // get quantity
+            Node<Pair<StringCustom, Bill>>? head = null;
+            for (int i = 0; i < BUCKET; i++)
+            {
+                head = table[i].FirstItem;
+                while (head != null)
+                {
+                    if (head.item.value.PurchaseDate.Month == months && head.item.value.PurchaseDate.Year == years)
+                    {
+                        Node<Pair<StringCustom, int>>? headProductList = head.item.value.Products.FirstItem;
+                        while (headProductList != null)
+                        {
+
+                            headSaleList = saleList.FirstItem;
+                            while (headSaleList != null)
+                            {
+                                if (headSaleList.item.key.ID.IsEquals(headProductList.item.key))
+                                {
+                                    headSaleList.item.value += headProductList.item.value;
+                                    break;
+                                }
+                                headSaleList = headSaleList.next;
+                            }
+                            
+                            headProductList = headProductList.next;
+                        }
+                    }
+                    head = head.next;
+                }
+            }
+            
+            // find min
+            Product salesTheLeast = null;
+            headSaleList = saleList.FirstItem;
+            int minimumQuantitySold = Int32.MaxValue;
+            while (headSaleList != null)
+            {
+                if (headSaleList.item.value < minimumQuantitySold)
+                {
+                    minimumQuantitySold = headSaleList.item.value;
+                    salesTheLeast = headSaleList.item.key;
+                }
+                headSaleList = headSaleList.next;
+            }
+
+            return salesTheLeast;
         }
 
         public Bill GetTheBiggestBillOfTheMonth(int months, int years)
