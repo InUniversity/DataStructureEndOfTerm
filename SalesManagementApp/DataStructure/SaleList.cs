@@ -78,7 +78,7 @@ namespace SalesManagementApp.DataStructure
         //In danh sách nhân viên
         public override void Print()
         {
-            Console.WriteLine("|{0, -8}|{1, -25}|{2, -4}|{3, -10}|{4, -25}|{5, -12}|{6, -9}|{7, -12}|",
+            Console.WriteLine("|{0, -8}|{1, -25}|{2, -4}|{3, -10}|{4, -25}|{5, -12}|{6, -9}|",
                 "ID",//0
                 "Name",//1
                 "Sex",//2
@@ -90,7 +90,7 @@ namespace SalesManagementApp.DataStructure
             );
             for (int i = 0; i < this.iSize; i++)
             {
-                Console.WriteLine("|{0, -8}|{1, -25}|{2, -4}|{3, -10}|{4, -25}|{5, -12}|{6, -9}|{7, -12}|",
+                Console.WriteLine("|{0, -8}|{1, -25}|{2, -4}|{3, -10}|{4, -25}|{5, -12}|{6, -9}|",
 
                 this.list_[i].ID, // 0
                 this.list_[i].Name, // 1
@@ -98,9 +98,7 @@ namespace SalesManagementApp.DataStructure
                 this.list_[i].Birthday, // 3
                 this.list_[i].Address, // 4
                 this.list_[i].PhoneNumber, // 5
-                this.list_[i].Salary, //6
-                this.list_[i].Ordernumber// 7
-                );
+                this.list_[i].Salary); // 6
             }
         }
 
@@ -128,9 +126,9 @@ namespace SalesManagementApp.DataStructure
             BillHash TEMP = BillData.billHash;
             Sale temp = people;
             int num = 0;
-            for(int i = 0; i<temp.LOrdersSold.Size; i++)
+            for(int i = 0; i<temp.OrdersSold.Size; i++)
             {
-                StringCustom temp2 = temp.LOrdersSold.GetItem(i);
+                StringCustom temp2 = temp.OrdersSold.GetItem(i);
                 Bill temp3 = TEMP.GetValue(temp2);
                 if(temp3.PurchaseDate.Month == month && temp3.PurchaseDate.Year == year)
                 {
@@ -144,9 +142,9 @@ namespace SalesManagementApp.DataStructure
             BillHash TEMP = BillData.billHash;
             Sale temp = people;
             int price = 0;
-            for (int i = 0; i < temp.LOrdersSold.Size; i++)
+            for (int i = 0; i < temp.OrdersSold.Size; i++)
             {
-                StringCustom temp2 = temp.LOrdersSold.GetItem(i);
+                StringCustom temp2 = temp.OrdersSold.GetItem(i);
                 Bill temp3 = TEMP.GetValue(temp2);
                 if (temp3.PurchaseDate.Month == month && temp3.PurchaseDate.Year == year)
                 {

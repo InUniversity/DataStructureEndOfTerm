@@ -136,7 +136,7 @@ namespace SalesManagementApp.Models
                 Console.WriteLine(Constant.EMPTY_MESSAGE);
             PrintProductList();
             Console.WriteLine("}");
-            Console.WriteLine("Purchased date: " + dPurchaseDate);
+            Console.WriteLine("Purchased date: " + dPurchaseDate.GetDateTime());
             Console.WriteLine("Total cost: " + iPrice);
         }
 

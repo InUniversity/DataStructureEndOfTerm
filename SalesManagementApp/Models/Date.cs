@@ -73,19 +73,47 @@ namespace SalesManagementApp.Models
 
         public void Input()
         {
-            Console.WriteLine("Enter Date:");
             Console.Write("Day: ");
             Day = Convert.ToInt32(Console.ReadLine());
             Console.Write("Month: ");
             Month = Convert.ToInt32(Console.ReadLine());
             Console.Write("Year: ");
             Year = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Hour: ");
-            Hour = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Minute: ");
-            Minute = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Second: ");
-            Second = Convert.ToInt32(Console.ReadLine());
+        }
+
+        public StringCustom GetDateTime()
+        {
+            int day = iDay, month = iMonth, year = iYear;
+            int second = iSecond, minute = iMinute, hour = iHour;
+            string dateTime = "";
+            if (day < 10)
+                dateTime += ("0" + day);
+            else
+                dateTime += day;
+            dateTime += "-";
+
+            if (month < 10)
+                dateTime += ("0" + month);
+            else
+                dateTime += month;
+            dateTime += "-";
+            dateTime += year;
+            dateTime +=" ";
+            if (hour < 10)
+                dateTime += ("0" + hour);
+            else
+                dateTime += hour;
+            dateTime += ":";
+            if (minute < 10)
+                dateTime += ("0" + minute);
+            else
+                dateTime += minute;
+            dateTime += ":";
+            if (second < 10)
+                dateTime += ("0" + second);
+            else
+                dateTime += second;
+            return new StringCustom(dateTime);
         }
 
         public static implicit operator string(Date date)
@@ -105,21 +133,6 @@ namespace SalesManagementApp.Models
                 result += month;
             result += "-";
             result += year;
-            result +=" ";
-            if (hour < 10)
-                result += ("0" + hour);
-            else
-                result += hour;
-            result += ":";
-            if (minute < 10)
-                result += ("0" + minute);
-            else
-                result += minute;
-            result += ":";
-            if (second < 10)
-                result += ("0" + second);
-            else
-                result += second;
             return result;
         }
 
