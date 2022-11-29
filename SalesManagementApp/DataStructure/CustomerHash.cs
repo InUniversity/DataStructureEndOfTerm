@@ -171,7 +171,7 @@ namespace SalesManagementApp.DataStructure
 
         private void PrintLinkedLst(LinkedLst<Customer> customers)
         {
-            Console.WriteLine("|{0, 8}|{1, 25}|{2, 7}|{3, 10}|{4, 20}|{5, 12}|{6, 6}|{7, 25}|",
+            Console.WriteLine("|{0, 8}|{1, 25}|{2, 7}|{3, 10}|{4, 20}|{5, 12}|{6, 6}|{7, 14}|",
                 "ID", // 0
                 "Name", // 1
                 "Gender", // 2
@@ -234,7 +234,7 @@ namespace SalesManagementApp.DataStructure
                 while (head != null)
                 {
                     customer = head.item.value;
-                    if (name.Contain(customer.Name))
+                    if (name.IsEquals(customer.Name))
                         result.Insert(customer.ID, customer);
                     head = head.next;
                 }

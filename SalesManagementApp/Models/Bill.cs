@@ -74,7 +74,6 @@ namespace SalesManagementApp.Models
 
         public void Input()
         {
-            LinkedLst<Pair<StringCustom, int>> products = new LinkedLst<Pair<StringCustom, int>>();
             StringCustom tempID;
             int tempNumber, numberOfProducts;
             lProducts = new LinkedLst<Pair<StringCustom, int>>();
@@ -163,6 +162,7 @@ namespace SalesManagementApp.Models
                 product = ProductData.productList.FindByID(head.item.key);
                 quantity = head.item.value;
                 price += (product.Price * quantity);
+                head = head.next;
             }
             return price;
         }

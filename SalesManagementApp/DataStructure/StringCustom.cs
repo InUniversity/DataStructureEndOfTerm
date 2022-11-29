@@ -89,29 +89,6 @@ namespace SalesManagementApp.DataStructure
             return 0;
         }
 
-        public bool Contain(StringCustom sequence)
-        {
-            int curSize = this.iSize, subSize = sequence.Size;
-            int i = 0, j = 1;
-            bool flag;
-            do
-            {
-                while (i < curSize && CharAt(i) != sequence.CharAt(0))
-                    i++;
-                i = 1;
-                flag = true;
-                while (i < curSize && j < subSize)
-                    if (CharAt(i++) != sequence.CharAt(j++))
-                    {
-                        flag = false;
-                        break;
-                    }
-                if (flag)
-                    return true;
-            } while (i < curSize);
-            return false;
-        }
-
         public bool IsEquals(StringCustom strCustom)
         {
             if (iSize != strCustom.Size)

@@ -59,6 +59,7 @@ namespace SalesManagementApp.DataStructure
                 nFirstItem = nLastItem = newNode;
             else
             {
+                newNode.previous = nLastItem;
                 nLastItem.next = newNode;
                 nLastItem = nLastItem.next;
             }

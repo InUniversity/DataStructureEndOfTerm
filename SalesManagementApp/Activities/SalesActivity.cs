@@ -1,6 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using SalesManagementApp.Database;
 using SalesManagementApp.DataStructure;
+using SalesManagementApp.DataStructure.Base;
 using SalesManagementApp.Models;
 using SalesManagementApp.Utilities;
 namespace SalesManagementApp.Activities
@@ -14,6 +15,7 @@ namespace SalesManagementApp.Activities
             Bill bill = new Bill();
             StringCustom tempID;
             Product tempProduct;
+            Pair<Product, int> quantity;
             int choose = 18, tempMonth, tempYear;
             while (true)
             {
@@ -59,7 +61,7 @@ namespace SalesManagementApp.Activities
                         bill.Print();
                         break;
                     case 4:
-                        Console.Write("Enter id:");
+                        Console.Write("Enter id: ");
                         tempID = Console.ReadLine();
                         bill = billHash.GetValue(tempID);
                         if (bill == null)
@@ -74,13 +76,16 @@ namespace SalesManagementApp.Activities
                         tempMonth = Convert.ToInt32(Console.ReadLine());
                         Console.Write("Years: ");
                         tempYear = Convert.ToInt32(Console.ReadLine());
-                        tempProduct = billHash.FindBestSellingProducts(tempMonth, tempYear);
-                        if (tempProduct == null)
+                        quantity = billHash.FindBestSellingProducts(tempMonth, tempYear);
+                        if (quantity == null || quantity.key == null)
                         {
                             Console.WriteLine(Constant.NOT_FOUND_MESSAGE);
                             break;
                         }
+                        tempProduct = quantity.key;
                         tempProduct.Print();
+                        Console.WriteLine("-> Quantity sold: " + quantity.value);
+
                         break;
                     case 6:
                         Console.Write("Months: ");
@@ -100,8 +105,7 @@ namespace SalesManagementApp.Activities
                     default:
                         return Constant.EXIT_APPLICATION;
                 }
-                Console.WriteLine("Enter To Continue...");
-                Console.ReadKey();
+                Printer.Pause();
             }
         }
     }

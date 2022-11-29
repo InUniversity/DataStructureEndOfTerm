@@ -43,7 +43,7 @@ namespace SalesManagementApp.Models
         public override void Input()
         {
             base.Input();
-            Console.WriteLine("Salary: "); this.iSalary = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Salary: "); this.iSalary = Convert.ToInt32(Console.ReadLine());
         }
 
         public override void Print()
