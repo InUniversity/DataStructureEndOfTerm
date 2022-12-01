@@ -16,6 +16,7 @@ namespace SalesManagementApp.Activities
             Sale temp = new Sale();
             SaleList tempList = new  SaleList(employeeList.Capacity);
             Date Time = new Date();
+            string id;
             int index;
             int choose = -100;
             while (true)
@@ -30,8 +31,10 @@ namespace SalesManagementApp.Activities
                 Console.WriteLine("|  4. Print the list of employees with the highest num sales |");
                 Console.WriteLine("|  5. Print the list of employees with the highest sales     |");
                 Console.WriteLine("|  6. Sort sales employee by birthday                        |");
-                Console.WriteLine("|  7. Back                                                   |");
-                Console.WriteLine("|  8. Quit app                                               |");
+                Console.WriteLine("|  7. Sale of employee by time                               |");
+                Console.WriteLine("|  8. Bill of employee                                       |");
+                Console.WriteLine("|  9. Back                                                   |");
+                Console.WriteLine("|  10. Quit app                                               |");
                 Console.WriteLine("=============================MENU=============================");
                 Console.Write("Choose: "); 
                 
@@ -116,8 +119,28 @@ namespace SalesManagementApp.Activities
                         Console.WriteLine(".................................................................................");
                         break;
                     case 7:
+                        Console.WriteLine(".........................................Sale of employee by time.........................................");
+                        Console.WriteLine("Insert time: ");
+                        Time = new Date();
+                        Console.Write("Month: "); Time.Month = Convert.ToInt32(Console.ReadLine());
+                        Console.Write("Year : "); Time.Year = Convert.ToInt32(Console.ReadLine());
+                        employeeList.NoSaleOfMonth(Time);
+                        Console.WriteLine("..........................................................................................................");
+                        break;
+                    case 8:
+                        Console.WriteLine(".........................Bill of employee.........................");
+                        Console.WriteLine("Insert id of employee");
+                        id = Console.ReadLine();
+                        Console.WriteLine("Insert time: ");
+                        Time = new Date();
+                        Console.Write("Month: "); Time.Month = Convert.ToInt32(Console.ReadLine());
+                        Console.Write("Year : "); Time.Year = Convert.ToInt32(Console.ReadLine());
+                        employeeList.BillOfSaleByTime(id,Time);
+                        Console.WriteLine("..................................................................");
+                        break;
+                    case 9:
                         return Constant.MAIN_ACTIVITY;
-                    case 8: 
+                    case 10: 
                         return Constant.EXIT_APPLICATION;
                     default:
                         break;
