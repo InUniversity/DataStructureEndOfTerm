@@ -7,15 +7,17 @@ namespace SalesManagementApp
 {
     class HomeController
     {
-        CustomerHash customerHash = CustomerData.customerHash;
-        SaleList saleList = SaleData.saleList;
-        ProductList productList = ProductData.productList;
-        BillHash billHash = BillData.billHash;
-        AccountList saleAccounts = AccountData.accountList;
-        SaleAccount saleAccount = AccountData.currentAccount; 
 
         static void Main(string[] args)
         {
+            // init data
+            CustomerHash customerHash = CustomerData.customerHash;
+            SaleList saleList = SaleData.saleList;
+            ProductList productList = ProductData.productList;
+            BillHash billHash = BillData.billHash;
+            AccountList saleAccounts = AccountData.accountList;
+            SaleAccount saleAccount = AccountData.currentAccount;
+
             int activityOrder = Constant.SIGNIN_ACTIVITY;
             while (true)
             {
@@ -48,6 +50,7 @@ namespace SalesManagementApp
                         // save file after run program
                         CustomerData.SaveFile();
                         AccountData.SaveFile();
+                        SaleData.SaveFile();
                         BillData.SaveFile();
                         Console.ReadKey();
                         return;

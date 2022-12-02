@@ -94,13 +94,16 @@ namespace SalesManagementApp.Models
         {
             Console.WriteLine("ID: " + sID);
             Console.WriteLine("Name: " + sName);
-            Console.WriteLine("Sex: " + sGender);
+            Console.WriteLine("Gender: " + sGender);
             Console.WriteLine("Birhday: " + dBirthday);
             Console.WriteLine("Address: " + sAddress);
             Console.WriteLine("Phone number: " + iPhoneNumber);
         }
 
-        public abstract bool IsEquals(Person person);
+        public bool IsEquals(Person person)
+        {
+            return this.ID == person.ID;
+        }
     }
 }
 

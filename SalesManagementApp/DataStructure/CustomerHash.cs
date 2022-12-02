@@ -56,20 +56,23 @@ namespace SalesManagementApp.DataStructure
                         customer.PhoneNumber, // 5
                         customer.Point, // 6
                         customer.TypeOfMember); // 7
-                        
+
                         purchasedOrders = customer.PurchasedOrders;
-                        headPurchasedOrders = purchasedOrders.FirstItem;
-                        while (headPurchasedOrders.next != null)
-                        {
-                            sw.Write("{0},", headPurchasedOrders.item);    
-                            headPurchasedOrders = headPurchasedOrders.next;
-                        }
-                        if (headPurchasedOrders != null)
-                            sw.Write("{0}", headPurchasedOrders.item);
+                        if (purchasedOrders.IsEmpty())
+                            sw.Write(Constant.EMPTY_VALUE);
                         else
-                            sw.Write(" ");
+                        {
+                            headPurchasedOrders = purchasedOrders.FirstItem;
+                            while (headPurchasedOrders.next != null)
+                            {
+                                sw.Write("{0},", headPurchasedOrders.item);    
+                                headPurchasedOrders = headPurchasedOrders.next;
+                            }
+                            if (headPurchasedOrders != null)
+                                sw.Write("{0}", headPurchasedOrders.item);
+                        }
+
                         sw.WriteLine();
-                        
                         head = head.next;
                     }
                 }
@@ -125,12 +128,15 @@ namespace SalesManagementApp.DataStructure
             customer.TypeOfMember = temp.GetItem(7);
 
             tempStr = temp.GetItem(8);
-            tempBills = tempStr.Split(',');
-            head = tempBills.FirstItem;
-            while (head != null)
+            if (tempStr != Constant.EMPTY_VALUE)
             {
-                customer.PurchasedOrders.AddLast(head.item);
-                head = head.next;
+                tempBills = tempStr.Split(',');
+                head = tempBills.FirstItem;
+                while (head != null)
+                {
+                    customer.PurchasedOrders.AddLast(head.item);
+                    head = head.next;
+                }
             }
             return customer;
         }

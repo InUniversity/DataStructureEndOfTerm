@@ -10,13 +10,13 @@ namespace SalesManagementApp
         public const int ENTER_KEY = 13;
         public const char LINE_SYMBOL = (char)9552;
 
+        public const string EMPTY_VALUE = "0";
         public const string FULL_MESSAGE = "-> List is Full!!!";
         public const string EMPTY_MESSAGE = "-> List is Empty!!!";
         public const string NOT_FOUND_MESSAGE = "-> Not found!!!";
         public const string DUPLICATED_MESSAGE = "-> Duplicated!!!";
         public const string SUCCESS_MESSAGE = "-> Success!!!";
         public const string NOT_VALID_MESSAGE = "-> Not valid!!!";
-
         public const string NOT_FOUND_PRODUCT_MESSAGE = "-> No products found!!!";
         public const string NOT_OUT_OF_TIME_PRODUCT_MESSAGE = "-> No products are out of date!!!";
         public const string QUIT_APP_MESSAGE = "-> Quit app, Goodbye!!!";
