@@ -61,9 +61,9 @@ namespace SalesManagementApp.Activities
                     case 2:
                         tempProduct = new Product();
                         tempProduct.Input();
-                        if (productList.Duplicate(tempProduct) == false)
+                        if (productList.ItemAlreadyExists(tempProduct) == true)
                         {
-                            Console.WriteLine("ID already exists");
+                            productList.Print();
                         }
                         else
                         {
@@ -190,6 +190,10 @@ namespace SalesManagementApp.Activities
                             Console.WriteLine(Constant.SUCCESS_MESSAGE);
                             productList.Print();
                         }
+                        break;
+
+                    case 22:
+                        
                         break;
                     case 15:
                         return Constant.MAIN_ACTIVITY;

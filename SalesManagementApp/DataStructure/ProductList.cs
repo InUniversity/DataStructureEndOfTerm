@@ -99,7 +99,6 @@ namespace SalesManagementApp.DataStructure
                 }
             }
             return temp;
-            
         }
 
         public ProductList DeleteByProductNumber(Product tempproduct, int n)
@@ -118,18 +117,18 @@ namespace SalesManagementApp.DataStructure
             return templist;
         }
 
-        public bool Duplicate(Product item)
+        public bool ItemAlreadyExists(Product item)
         {
             ProductList temp = new ProductList(100);
             for (int i = 0; i < base.iSize; i++)
             {
                 if (item.IsEqual(base.list_[i]))
                 {
-                    return false;
+                    base.list_[i].NumberOfProduct+=item.NumberOfProduct;
+                   return true;
                 }
             }
-            return true;
-
+            return false;
         }
 
         public ProductList SearchItemByName(StringCustom name)
