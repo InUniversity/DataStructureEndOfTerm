@@ -53,13 +53,7 @@ namespace SalesManagementApp.Models
         }
         public int Salary()
         {
-            BillHash TEMP = BillData.billHash;
-            for(int i = 0; i<lOrdersSold.Size; i++)
-            {
-                int temp = TEMP.GetValue(lOrdersSold.GetItem(i)).Price;
-                iSalary += Convert.ToInt32(temp * 0.01);
-            }    
-            return iSalary;
+            return this.iSalary;
         }
 
         public override bool IsEquals(Person person)
@@ -67,6 +61,19 @@ namespace SalesManagementApp.Models
             if(this.ID == person.ID)
                 return true;
             return false;
+        }
+        public int SalaryMonth(int month, int year)
+        {
+            int price = this.Salary();
+            BillHash temp = BillData.billHash;
+            for(int i = 0; i<this.lOrdersSold.Size; i++)
+            {
+                
+                 Bill temp2 = temp.GetValue(this.lOrdersSold.GetItem(i));
+                if(temp2 != null && temp2.PurchaseDate.Month == month && temp2.PurchaseDate.Year == year)
+                    price += Convert.ToInt32(temp2.Price*0.01); 
+            }
+            return price;
         }
     }
 }

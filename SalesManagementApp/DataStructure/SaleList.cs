@@ -6,6 +6,7 @@ using System.Collections.Specialized;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -79,27 +80,24 @@ namespace SalesManagementApp.DataStructure
         //In danh sách nhân viên
         public override void Print()
         {
-            Console.WriteLine("|{0, -8}|{1, -25}|{2, -4}|{3, -10}|{4, -25}|{5, -12}|{6, -9}|",
+            Console.WriteLine("|{0, -8}|{1, -25}|{2, -4}|{3, -10}|{4, -25}|{5, -12}|",
                 "ID",//0
                 "Name",//1
                 "Sex",//2
                 "Birthday",//3
                 "Address",//4
-                "Phone number",//5
-                "Salary",//6
-                "Order Number" //7
+                "Phone number" //5
             );
             for (int i = 0; i < this.iSize; i++)
             {
-                Console.WriteLine("|{0, -8}|{1, -25}|{2, -4}|{3, -10}|{4, -25}|{5, -12}|{6, -9}|",
+                Console.WriteLine("|{0, -8}|{1, -25}|{2, -4}|{3, -10}|{4, -25}|{5, -12}|",
 
                 this.list_[i].ID, // 0
                 this.list_[i].Name, // 1
                 this.list_[i].Gender, // 2
                 this.list_[i].Birthday, // 3
                 this.list_[i].Address, // 4
-                this.list_[i].PhoneNumber, // 5
-                this.list_[i].Salary()); // 6
+                this.list_[i].PhoneNumber);//5
             }
         }
 
@@ -180,7 +178,7 @@ namespace SalesManagementApp.DataStructure
         {
             int max = MaxNoSale(this, month, year);
             SaleList temp = new SaleList(this.iCapacity);
-            for(int i = 0; i<this   .iSize; i++)
+            for(int i = 0; i<this.iSize; i++)
             {
                 if (NumberSale(this.Get(i), month, year) == max)
                     temp.AddLast(this.Get(i));
@@ -239,5 +237,59 @@ namespace SalesManagementApp.DataStructure
             if(i<right)
                 QuickSort(lSale, i, right);
         }
+        public void NoSaleOfMonth(Date item)
+        {
+           Console.WriteLine("|{0, -8}|{1, -25}|{2, -4}|{3, -10}|{4, -25}|{5, -12}|{6, -9}|{7, -10}|{8, -10}|",
+               "ID",//0
+               "Name",//1
+               "Sex",//2
+               "Birthday",//3
+               "Address",//4
+               "Phone number",//5
+               "Salary",//6 
+               "No Sale", //7
+               "Price"
+           );
+           for (int i = 0; i < this.iSize; i++)
+            {
+                Console.WriteLine("|{0, -8}|{1, -25}|{2, -4}|{3, -10}|{4, -25}|{5, -12}|{6, -9}|{7, -10}|{8, -10}|",
+                this.list_[i].ID, // 0
+                this.list_[i].Name, // 1
+                this.list_[i].Gender, // 2
+                this.list_[i].Birthday, // 3
+                this.list_[i].Address, // 4
+                this.list_[i].PhoneNumber, // 5
+                this.list_[i].SalaryMonth(item.Month, item.Year), // 6
+                this.NumberSale(this.Get(i), item.Month, item.Year), //7
+                this.PriceSale(this.Get(i), item.Month, item.Year)
+                );
+            }
+        }
+        public void BillOfSaleByTime(StringCustom id, Date time_)
+        {
+            Console.WriteLine("Bill of " + id);
+            Sale temp = new Sale();
+            BillHash TEMP = BillData.billHash;
+            temp.ID = id;
+            int index = this.IndexOf(temp);
+            if (index >= 0 && index < this.iSize)
+            {
+                int count = 0;
+                for (int i = 0; i < this.list_[index].OrdersSold.Size; i++)
+                {
+                    Bill temp2 = TEMP.GetValue(this.list_[index].OrdersSold.GetItem(i));
+                    if (temp2 != null && temp2.PurchaseDate.Month == time_.Month && temp2.PurchaseDate.Year == time_.Year)
+                    {
+                        Console.WriteLine(".........................................");
+                        count++;
+                        temp2.Print();
+                    }
+                    if(count == 0) Console.WriteLine(Constant.EMPTY_MESSAGE);
+                }
+            }
+            else
+                Console.WriteLine(Constant.EMPTY_MESSAGE);
+        }
+        
     }
 }
