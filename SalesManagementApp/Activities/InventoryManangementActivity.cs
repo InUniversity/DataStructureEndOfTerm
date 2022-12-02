@@ -191,10 +191,6 @@ namespace SalesManagementApp.Activities
                             productList.Print();
                         }
                         break;
-
-                    case 22:
-                        
-                        break;
                     case 15:
                         return Constant.MAIN_ACTIVITY;
                     default:

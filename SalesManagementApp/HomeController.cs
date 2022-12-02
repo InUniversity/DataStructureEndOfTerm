@@ -52,6 +52,7 @@ namespace SalesManagementApp
                         AccountData.SaveFile();
                         SaleData.SaveFile();
                         BillData.SaveFile();
+                        ProductData.SaveFile();
                         Console.ReadKey();
                         return;
                 }

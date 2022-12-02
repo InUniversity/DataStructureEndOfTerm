@@ -282,6 +282,49 @@ namespace SalesManagementApp.DataStructure
             return sum;
         }
 
+        public bool AddFromFile(StringCustom fileName)
+        {
+            StringCustom path = Directory.GetCurrentDirectory();
+            path += "/../../../Database/" + fileName;
+            try
+            {
+                Product product = new Product();
+                // read the whole file
+                string[] lines = File.ReadAllLines(path);
+
+                foreach (string str in lines)
+                {
+                    product = GetProductFromFile(new StringCustom(str));
+                    if (SearchItem(product) == null)
+                        AddLast(product);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+            return true;
+        }
+
+        private Product GetProductFromFile(StringCustom data)
+        {
+            StringCustom tempStr;
+            LinkedLst<StringCustom> tempBills = new LinkedLst<StringCustom>();
+            Node<StringCustom>? head;
+            LinkedLst<StringCustom> temp = data.Split(';');
+
+            Product product = new Product();
+            product.ID = temp.GetItem(0);
+            product.Name = temp.GetItem(1);
+            product.NumberOfProduct = temp.GetItem(2).ToInt();
+            product.DayStartedUsing = (Date) temp.GetItem(3);
+            product.DateExpires = (Date)temp.GetItem(4);
+            product.Price = temp.GetItem(5).ToInt();
+
+            return product;
+        }
+
         public bool WriteFile(StringCustom fileName)
         {
             StringCustom path = Directory.GetCurrentDirectory();
@@ -289,16 +332,17 @@ namespace SalesManagementApp.DataStructure
             try
             {
                 StreamWriter sw = new StreamWriter(path);
-
+                Product product;
                 for (int i = 0; i < base.iSize; i++)
                 {
-                    sw.WriteLine("{0};{1};{2};{3};{4}",
-                    list_[i].ID, //0
-                    list_[i].Name, //1
-                    list_[i].NumberOfProduct,//2
-                    list_[i].DayStartedUsing,//3
-                    list_[i].DateExpires);//4
-
+                    product = list_[i];
+                    sw.WriteLine("{0};{1};{2};{3};{4};{5}",
+                    product.ID, //0
+                    product.Name, //1
+                    product.NumberOfProduct,//2
+                    product.DayStartedUsing.GetDateTime(),//3
+                    product.DateExpires.GetDateTime(), // 4
+                    product.Price); //5
                 }
                 sw.Close();
             }
@@ -334,16 +378,16 @@ namespace SalesManagementApp.DataStructure
 
         public override void Print()
         {
-            Console.WriteLine("|{0, 8}|{1, -25}|{2, -16}|{3, -22}|{4, -20}|{5,8}|",
+            Console.WriteLine("|{0, 8}|{1, -25}|{2, -16}|{3, -20}|{4, -20}|{5,8}|",
                    "ID ", "Name", "NumberOfProduct", "DayStartedUsing", "DateExpires", "Price");
             for (int i = 0; i < base.iSize; i++)
             {
-                Console.WriteLine("|{0, 8}|{1, -25}|{2, -16}|{3, -22}|{4, -20}|{5,8}|",
+                Console.WriteLine("|{0, 8}|{1, -25}|{2, -16}|{3, -20}|{4, -20}|{5,8}|",
                     list_[i].ID,
                     list_[i].Name,
                     list_[i].NumberOfProduct,
-                    list_[i].DayStartedUsing,
-                    list_[i].DateExpires,
+                    list_[i].DayStartedUsing.GetDateTime(),
+                    list_[i].DateExpires.GetDateTime(),
                     list_[i].Price);
             }
         }
