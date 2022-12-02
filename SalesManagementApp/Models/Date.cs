@@ -234,6 +234,13 @@ namespace SalesManagementApp.Models
             return false;
         }
 
+        public override bool Equals(object? obj)
+        {
+            if (!(obj is Date))
+                throw new ArgumentException();
+            return this == obj;
+        }
+
         public override string ToString()
         {
             return this;

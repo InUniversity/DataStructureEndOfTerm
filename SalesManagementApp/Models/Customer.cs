@@ -100,11 +100,6 @@ namespace SalesManagementApp.Models
                 head = head.next;
             }
         }
-
-        public override bool IsEquals(Person person)
-        {
-            return base.sID == person.ID;
-        }
     }
 }
 

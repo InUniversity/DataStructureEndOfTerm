@@ -16,6 +16,11 @@ namespace SalesManagementApp.Models
         private LinkedLst<StringCustom> lOrdersSold;
   
         //properties
+        public int Salary
+        {
+            get => iSalary;
+            set => iSalary = value;
+        }
        
         public LinkedLst<StringCustom> OrdersSold
         {
@@ -28,9 +33,10 @@ namespace SalesManagementApp.Models
         {
             this.lOrdersSold = new LinkedLst<StringCustom>();
         }
-        public Sale(StringCustom id, StringCustom name, StringCustom sex, Date birthday, 
+
+        public Sale(StringCustom id, StringCustom name, StringCustom gender, Date birthday, 
             StringCustom address, StringCustom phoneno, int salary, 
-            LinkedLst<StringCustom> ordersSold) :base(id,name,sex,birthday,address, phoneno)
+            LinkedLst<StringCustom> ordersSold) :base(id,name,gender,birthday,address, phoneno)
         {
             this.iSalary = salary;
             this.lOrdersSold = ordersSold;
@@ -51,24 +57,13 @@ namespace SalesManagementApp.Models
             base.Print();
             Console.WriteLine("Salary: " + this.iSalary);
         }
-        public int Salary()
-        {
-            return this.iSalary;
-        }
 
-        public override bool IsEquals(Person person)
-        {
-            if(this.ID == person.ID)
-                return true;
-            return false;
-        }
         public int SalaryMonth(int month, int year)
         {
-            int price = this.Salary();
+            int price = iSalary;
             BillHash temp = BillData.billHash;
             for(int i = 0; i<this.lOrdersSold.Size; i++)
             {
-                
                  Bill temp2 = temp.GetValue(this.lOrdersSold.GetItem(i));
                 if(temp2 != null && temp2.PurchaseDate.Month == month && temp2.PurchaseDate.Year == year)
                     price += Convert.ToInt32(temp2.Price*0.01); 
