@@ -12,6 +12,7 @@ namespace SalesManagementApp.Activities
         public static int RunActivity()
         {
             BillHash billHash = BillData.billHash;
+            ProductList productList = ProductData.productList;
             Bill bill = new Bill();
             StringCustom tempID;
             Product tempProduct;
@@ -28,7 +29,8 @@ namespace SalesManagementApp.Activities
                 Console.Write("| 4. Find bill by id                                    |\n");
                 Console.Write("| 5. Find Best selling products                         |\n");
                 Console.Write("| 6. Find the product that sells the least              |\n");
-                Console.Write("| 7. Back to Main activity                              |\n");
+                Console.Write("| 7. Print the number of products sold in the month     |\n");
+                Console.Write("| 8. Back to Main activity                              |\n");
                 Console.Write("|any key. Quit app                                      |\n");
                 Console.Write("==========================MENU===========================\n");
                 Console.Write("Choose: ");
@@ -85,7 +87,6 @@ namespace SalesManagementApp.Activities
                         tempProduct = quantity.key;
                         tempProduct.Print();
                         Console.WriteLine("-> Quantity sold: " + quantity.value);
-
                         break;
                     case 6:
                         Console.Write("Months: ");
@@ -101,6 +102,13 @@ namespace SalesManagementApp.Activities
                         tempProduct.Print();
                         break;
                     case 7:
+                        Console.Write("Months: ");
+                        tempMonth = Convert.ToInt32(Console.ReadLine());
+                        Console.Write("Years: ");
+                        tempYear = Convert.ToInt32(Console.ReadLine());
+                        billHash.PrintNumberOfProductsSold(tempMonth, tempYear);
+                        break;
+                    case 8:
                         return Constant.MAIN_ACTIVITY;
                     default:
                         return Constant.EXIT_APPLICATION;

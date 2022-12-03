@@ -1,5 +1,0 @@
-/Users/vanantran/Documents/DataStructureEndOfTerm/SalesManagementApp/obj/Debug/net6.0/SalesManagementApp.csproj.AssemblyReference.cache
-/Users/vanantran/Documents/DataStructureEndOfTerm/SalesManagementApp/obj/Debug/net6.0/SalesManagementApp.GeneratedMSBuildEditorConfig.editorconfig
-/Users/vanantran/Documents/DataStructureEndOfTerm/SalesManagementApp/obj/Debug/net6.0/SalesManagementApp.AssemblyInfoInputs.cache
-/Users/vanantran/Documents/DataStructureEndOfTerm/SalesManagementApp/obj/Debug/net6.0/SalesManagementApp.AssemblyInfo.cs
-/Users/vanantran/Documents/DataStructureEndOfTerm/SalesManagementApp/obj/Debug/net6.0/SalesManagementApp.csproj.CoreCompileInputs.cache

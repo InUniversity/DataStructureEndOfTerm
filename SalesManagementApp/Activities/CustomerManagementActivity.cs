@@ -15,7 +15,6 @@ namespace SalesManagementApp.Activities
             CustomerHash tempHash;
             Customer tempCustomer;
             StringCustom tempStr, tempStr1;
-            Date date;
             int months, years;
             int choose = 10;
             while (true)

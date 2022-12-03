@@ -1,39 +1,32 @@
 ﻿<Properties StartupConfiguration="{8F89EBCE-3FD9-4D5B-8B2C-3F97127119AE}|Default">
   <MonoDevelop.Ide.ItemProperties.SalesManagementApp PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.DataStructureEndOfTermTest PreferredExecutionTarget="MonoDevelop.Default" FirstBuild="True" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.DataStructureEndOfTermTest FirstBuild="True" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="SalesManagementApp/Activities/SaleProductActivity.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SalesManagementApp/Database/AccountData.txt">
     <Files>
-      <File FileName="SalesManagementApp/DataStructure/SaleList.cs" Line="72" Column="18" />
-      <File FileName="SalesManagementApp/Database/SaleData.cs" Line="19" Column="42" />
-      <File FileName="SalesManagementApp/DataStructure/Base/StackCustom.cs" Line="13" Column="6" />
-      <File FileName="SalesManagementApp/HomeController.cs" Line="34" Column="84" />
-      <File FileName="SalesManagementApp/Utilities/Constant.cs" Line="31" Column="52" />
-      <File FileName="SalesManagementApp/Activities/ProductManangementActivity.cs" Line="1" Column="1" />
-      <File FileName="SalesManagementApp/Activities/SaleProductActivity.cs" Line="64" Column="2" />
-      <File FileName="SalesManagementApp/Activities/CustomerManagementActivity.cs" Line="1" Column="1" />
-      <File FileName="SalesManagementApp/Activities/MainActivity.cs" Line="1" Column="1" />
+      <File FileName="SalesManagementApp/Database/AccountData.txt" Line="5" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="DataStructureEndOfTerm" expanded="True">
             <Node name="SalesManagementApp" expanded="True">
-              <Node name="Activities" expanded="True">
-                <Node name="SaleProductActivity.cs" selected="True" />
+              <Node name="Activities" expanded="True" />
+              <Node name="Database" expanded="True">
+                <Node name="AccountData.txt" selected="True" />
               </Node>
-              <Node name="DataStructure" expanded="True">
-                <Node name="Base" expanded="True" />
-              </Node>
+              <Node name="DataStructure" expanded="True" />
+              <Node name="Models" expanded="True" />
+              <Node name="Utilities" expanded="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

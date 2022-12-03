@@ -125,7 +125,7 @@ namespace SalesManagementApp.DataStructure
                 if (item.IsEqual(base.list_[i]))
                 {
                     base.list_[i].NumberOfProduct+=item.NumberOfProduct;
-                   return true;
+                    return true;
                 }
             }
             return false;
@@ -390,18 +390,6 @@ namespace SalesManagementApp.DataStructure
                     list_[i].DateExpires.GetDateTime(),
                     list_[i].Price);
             }
-        }
-
-        public Product Bill(Product temp ,int n)
-        {
-            Product a = new Product();
-            a.ID = temp.ID;
-            a.Name = temp.Name;
-            a.DayStartedUsing = temp.DayStartedUsing;
-            a.DateExpires = temp.DateExpires;
-            a.Price = temp.Price;
-            a.NumberOfProduct = n;
-            return a;
         }
     }
 }

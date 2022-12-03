@@ -133,45 +133,10 @@ namespace SalesManagementApp.DataStructure
         
         public Pair<Product, int> FindBestSellingProducts(int months, int years)
         {
-            ProductList _productList = ProductData.productList;
-            LinkedLst<Pair<Product, int>> saleList = new LinkedLst<Pair<Product, int>>();
+            LinkedLst<Pair<Product, int>> saleList = GetListOfProductsSoldInTheMonth(months, years);
             Node<Pair<Product, int>>? headSaleList;
             Product bestSellingProducts;
             int theMostSoldQuantity;
-            // instance
-            for (int i = 0; i < _productList.Size; i++)
-                saleList.AddLast(new Pair<Product, int>(_productList.Get(i), 0));
-
-            // get quantity
-            Node<Pair<StringCustom, Bill>>? head = null;
-            for (int i = 0; i < BUCKET; i++)
-            {
-                head = table[i].FirstItem;
-                while (head != null)
-                {
-                    if (head.item.value.PurchaseDate.Month == months && head.item.value.PurchaseDate.Year == years)
-                    {
-                        Node<Pair<StringCustom, int>>? headProductList = head.item.value.Products.FirstItem;
-                        while (headProductList != null)
-                        {
-
-                            headSaleList = saleList.FirstItem;
-                            while (headSaleList != null)
-                            {
-                                if (headSaleList.item.key.ID.IsEquals(headProductList.item.key))
-                                {
-                                    headSaleList.item.value += headProductList.item.value;
-                                    break;
-                                }
-                                headSaleList = headSaleList.next;
-                            }
-                            
-                            headProductList = headProductList.next;
-                        }
-                    }
-                    head = head.next;
-                }
-            }
             
             // find max
             bestSellingProducts = null;
@@ -192,45 +157,10 @@ namespace SalesManagementApp.DataStructure
 
         public Product FindProductThatSellsTheLeast(int months, int years)
         {
-            ProductList _productList = ProductData.productList;
-            LinkedLst<Pair<Product, int>> saleList = new LinkedLst<Pair<Product, int>>();
+            LinkedLst<Pair<Product, int>> saleList = GetListOfProductsSoldInTheMonth(months, years);
             Node<Pair<Product, int>>? headSaleList;
             int minimumQuantitySold;
             Product salesTheLeast;
-            // instance
-            for (int i = 0; i < _productList.Size; i++)
-                saleList.AddLast(new Pair<Product, int>(_productList.Get(i), 0));
-
-            // get quantity
-            Node<Pair<StringCustom, Bill>>? head = null;
-            for (int i = 0; i < BUCKET; i++)
-            {
-                head = table[i].FirstItem;
-                while (head != null)
-                {
-                    if (head.item.value.PurchaseDate.Month == months && head.item.value.PurchaseDate.Year == years)
-                    {
-                        Node<Pair<StringCustom, int>>? headProductList = head.item.value.Products.FirstItem;
-                        while (headProductList != null)
-                        {
-
-                            headSaleList = saleList.FirstItem;
-                            while (headSaleList != null)
-                            {
-                                if (headSaleList.item.key.ID.IsEquals(headProductList.item.key))
-                                {
-                                    headSaleList.item.value += headProductList.item.value;
-                                    break;
-                                }
-                                headSaleList = headSaleList.next;
-                            }
-                            
-                            headProductList = headProductList.next;
-                        }
-                    }
-                    head = head.next;
-                }
-            }
             
             // find min
             salesTheLeast = null;
@@ -303,6 +233,77 @@ namespace SalesManagementApp.DataStructure
                 bill.CustomerID = customer.ID;
             }
             customer.PurchasedOrders.AddLast(bill.ID);
+        }
+
+        public LinkedLst<Pair<Product, int>> GetListOfProductsSoldInTheMonth(int months, int years)
+        {
+            ProductList _productList = ProductData.productList;
+            LinkedLst<Pair<Product, int>> saleList = new LinkedLst<Pair<Product, int>>();
+            LinkedLst<Pair<Product, int>> result = new LinkedLst<Pair<Product, int>>();
+            Node<Pair<Product, int>>? headSaleList;
+            int quantitySold;
+            // instance products sold
+            for (int i = 0; i < _productList.Size; i++)
+                saleList.AddLast(new Pair<Product, int>(_productList.Get(i), 0));
+
+            // get quantity
+            Node<Pair<StringCustom, Bill>>? head = null;
+            for (int i = 0; i < BUCKET; i++)
+            {
+                head = table[i].FirstItem;
+                while (head != null)
+                {
+                    if (head.item.value.PurchaseDate.Month == months && head.item.value.PurchaseDate.Year == years)
+                    {
+                        Node<Pair<StringCustom, int>>? headProductList = head.item.value.Products.FirstItem;
+                        while (headProductList != null)
+                        {
+                            headSaleList = saleList.FirstItem;
+                            quantitySold = headProductList.item.value;
+                            while (headSaleList != null)
+                            {
+                                if (headSaleList.item.key.ID.IsEquals(headProductList.item.key))
+                                {
+                                    headSaleList.item.value += quantitySold;
+                                    break;
+                                }
+                                headSaleList = headSaleList.next;
+                            }
+
+                            headProductList = headProductList.next;
+                        }
+                    }
+                    head = head.next;
+                }
+            }
+
+            return saleList;
+        }
+
+        public void PrintNumberOfProductsSold(int months, int years)
+        {
+            LinkedLst<Pair<Product, int>> saleList = GetListOfProductsSoldInTheMonth(months, years);
+            Node<Pair<Product, int>>? head;
+            Product tempProduct;
+            int quantitySold;
+
+            Console.WriteLine("|{0, 8}|{1, -25}|{2, -16}|{3, -20}|{4, -20}|{5,8}|{6, 15}|",
+                   "ID ", "Name", "NumberOfProduct", "DayStartedUsing", "DateExpires", "Price", "Quatity sold");
+            head = saleList.FirstItem;
+            while (head != null)
+            {
+                tempProduct = head.item.key;
+                quantitySold = head.item.value;
+                Console.WriteLine("|{0, 8}|{1, -25}|{2, -16}|{3, -20}|{4, -20}|{5,8}|{6, 15}|",
+                    tempProduct.ID,
+                    tempProduct.Name,
+                    tempProduct.NumberOfProduct,
+                    tempProduct.DayStartedUsing.GetDateTime(),
+                    tempProduct.DateExpires.GetDateTime(),
+                    tempProduct.Price,
+                    quantitySold);
+                head = head.next;
+            }
         }
 
         public void Print()
