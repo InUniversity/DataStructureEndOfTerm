@@ -1,4 +1,4 @@
-﻿using SalesManagementApp.DataStructure;
+using SalesManagementApp.DataStructure;
 
 namespace SalesManagementApp.Models
 {
