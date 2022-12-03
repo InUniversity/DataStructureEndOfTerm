@@ -1,18 +1,6 @@
 ﻿using SalesManagementApp.Database;
 using SalesManagementApp.DataStructure.Base;
 using SalesManagementApp.Models;
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Drawing;
-using System.Linq;
-using System.Net.Sockets;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-
-
 
 namespace SalesManagementApp.DataStructure
 {
