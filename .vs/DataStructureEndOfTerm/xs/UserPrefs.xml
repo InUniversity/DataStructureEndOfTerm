@@ -1,0 +1,32 @@
+﻿<Properties StartupConfiguration="{8F89EBCE-3FD9-4D5B-8B2C-3F97127119AE}|Default">
+  <MonoDevelop.Ide.ItemProperties.SalesManagementApp PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.DataStructureEndOfTermTest PreferredExecutionTarget="MonoDevelop.Default" FirstBuild="True" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="SalesManagementApp/Database/AccountData.txt">
+    <Files>
+      <File FileName="SalesManagementApp/Database/AccountData.txt" Line="5" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="DataStructureEndOfTerm" expanded="True">
+            <Node name="SalesManagementApp" expanded="True">
+              <Node name="Activities" expanded="True" />
+              <Node name="Database" expanded="True">
+                <Node name="AccountData.txt" selected="True" />
+              </Node>
+              <Node name="DataStructure" expanded="True" />
+              <Node name="Models" expanded="True" />
+              <Node name="Utilities" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+</Properties>
