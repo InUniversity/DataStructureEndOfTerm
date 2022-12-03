@@ -64,6 +64,11 @@ namespace SalesManagementApp.Models
             this.iPrice=iPrice;
         }
 
+        public int GetQuantitySoldInMonth(int months, int years)
+        {
+            return 0;
+        }
+
         public bool IsEqual(Product item)
         {
             if (this.sID.ToInt() == item.ID.ToInt()) return true;
